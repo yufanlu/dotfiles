@@ -5,8 +5,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'               " let Vundle manage Vundle, required
+
 Plugin 'mhartington/oceanic-next'           " Color scheme
 Plugin 'altercation/vim-colors-solarized'   " 
+Plugin 'whatyouhide/vim-gotham'             " 
 
 Plugin 'majutsushi/tagbar'                  " Layout
 Plugin 'scrooloose/nerdcommenter'           " 
@@ -17,6 +19,10 @@ Plugin 'tpope/vim-repeat'                   " Behavior
 Plugin 'tpope/vim-surround'                 " 
 Plugin 'Raimondi/delimitMate'               " 
 Plugin 'terryma/vim-multiple-cursors'       " 
+Plugin 'kshenoy/vim-signature'              " 
+Plugin 'vim-scripts/matchit.zip'            " 
+Plugin 'godlygeek/tabular'                  " 
+
 
 Plugin 'ctrlpvim/ctrlp.vim'                 " File system
 Plugin 'scrooloose/nerdtree'                " 
@@ -24,8 +30,7 @@ Plugin 'scrooloose/nerdtree'                "
 Plugin 'tpope/vim-fugitive'                 " Git
 Plugin 'airblade/vim-gitgutter'             " 
 
-Plugin 'scrooloose/syntastic'           
-Plugin 'gilligan/vim-lldb'                  " Debugger
+Plugin 'scrooloose/syntastic'               " static syntax check 
 
 Plugin 'OmniSharp/omnisharp-vim'            " OmniSharp
 Plugin 'oranget/vim-csharp'                 " 
@@ -86,6 +91,8 @@ set ruler                                   " show 'line #', 'col #', etc
 set history=700                             " command history
 set wrap                                    " Wrap lines
 set mouse=a                                 " enable mouse action
+"set guifont=Sauce\ Code\ Powerline\ Light:h11
+set guifont=Sauce\ Code\ Powerline:h11
 
 " ------------------------------
 " Navigation key configuration
@@ -116,16 +123,15 @@ set si                                      " Smart indent
 " ------------------------------
 set laststatus=2
 set encoding=utf-8
-"set guifont=Sauce\ Code\ Powerline\ Light:h11
-set guifont=Sauce\ Code\ Powerline:h11
 set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts = 1
+let g:airline_theme='gotham256'
 "let g:airline_theme='solarized'
-let g:airline_theme='oceanicnext'
-let g:airline#extensions#tabline#enabled = 1     " Enable the list of buffers
+"let g:airline_theme='oceanicnext'
+let g:airline#extensions#tabline#enabled   = 1     " Enable the list of buffers
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
+let g:airline#extensions#tagbar#enabled    = 1
+let g:airline#extensions#tabline#fnamemod  = ':t'  " Show just the filename
 
 " ------------------------------
 " Colorscheme configuration
@@ -133,7 +139,8 @@ let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme OceanicNext
+colorscheme gotham256
+"colorscheme OceanicNext
 "let g:solarized_termcolors=256
 "colorscheme solarized
 
@@ -161,5 +168,6 @@ nmap <F8> :TagbarToggle<CR>
 " ------------------------------
 " You Complete Me
 " ------------------------------
+let g:ycm_python_binary_path = '/usr/local/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:syntastic_always_populate_loc_list = 1
