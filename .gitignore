@@ -1,0 +1,4 @@
+
+# ignore emacs packages
+emacs.d/elpa
+emacs.d/auto-save-list
