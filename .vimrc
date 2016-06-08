@@ -3,224 +3,281 @@
 " by Yufan Lu
 " ==================================
 
+set nocompatible
+
 " Plugins {{{
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'               " let Vundle manage Vundle, required
+call plug#begin('~/.vim/plugged')
 
-Plugin 'whatyouhide/vim-gotham'             " Color scheme
-Plugin 'mhartington/oceanic-next'           " 
-Plugin 'altercation/vim-colors-solarized'   " 
+" UI
+Plug 'whatyouhide/vim-gotham'
+Plug 'mhartington/oceanic-next'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'majutsushi/tagbar'                  " Layout
-Plugin 'vim-airline/vim-airline'            " 
-Plugin 'scrooloose/nerdcommenter'           " 
-Plugin 'vim-airline/vim-airline-themes'     " 
+" Behavior
+Plug 'tpope/vim-repeat'
+Plug 'majutsushi/tagbar'
+"Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+Plug 'Raimondi/delimitMate'
+Plug 'kshenoy/vim-signature'
+Plug 'takac/vim-commandcaps'
+Plug 'vim-scripts/matchit.zip'
+Plug 'scrooloose/nerdcommenter'
+"Plug 'dhruvasagar/vim-table-mode'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ntpeters/vim-better-whitespace'
 
-Plugin 'tpope/vim-repeat'                   " Behavior
-Plugin 'godlygeek/tabular'                  " 
-Plugin 'tpope/vim-surround'                 " 
-Plugin 'Raimondi/delimitMate'               " 
-Plugin 'kshenoy/vim-signature'              " toggle marks
-Plugin 'vim-scripts/matchit.zip'            " 
-Plugin 'terryma/vim-multiple-cursors'       " 
-Plugin 'ervandew/supertab'
+" Search
+Plug 'mileszs/ack.vim'
+Plug 'haya14busa/incsearch.vim'
 
-Plugin 'ctrlpvim/ctrlp.vim'                 " File system
-Plugin 'scrooloose/nerdtree'                " 
+" File system
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-Plugin 'tpope/vim-fugitive'                 " Git
-Plugin 'airblade/vim-gitgutter'             " 
+" Fuzzy Search
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
 
-Plugin 'scrooloose/syntastic'               " static syntax check 
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-Plugin 'SirVer/ultisnips'                   " Snippets
-Plugin 'honza/vim-snippets'                 " 
+" static syntax check
+Plug 'scrooloose/syntastic'
 
-Plugin 'Valloric/YouCompleteMe'             " Autocomplete
-Plugin 'tpope/vim-dispatch'                 " 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-Plugin 'octol/vim-cpp-enhanced-highlight'   " C++ 
-Plugin 'vim-jp/vim-cpp'                     " 
+" Autocomplete
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
-Plugin 'vim-latex/vim-latex'                " Latex
-Plugin 'hdima/python-syntax'                " Python
-Plugin 'davidhalter/jedi-vim'               " 
-Plugin 'Yggdroot/indentLine'                " 
+" Asynchronous
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
-Plugin 'krisajenkins/vim-pipe'              " Database
-Plugin 'vim-scripts/dbext.vim'              " 
+"Plug 'krisajenkins/vim-pipe'                      " Database
+"Plug 'vim-scripts/dbext.vim'                      "
 
-"Plugin 'fsharp/vim-fsharp'                  " F#
-"Plugin 'oranget/vim-csharp'                 " C#
-"Plugin 'OmniSharp/omnisharp-vim'            " OmniSharp
+""Plug 'fsharp/vim-fsharp'                         " F#
+""Plug 'oranget/vim-csharp'                        " C#
+""Plug 'OmniSharp/omnisharp-vim'                   " OmniSharp
 
-Plugin 'sheerun/vim-polyglot'               " Languages syntax packages
-Plugin 'xuhdev/SingleCompile'               " Compile single source file
+" Languages {{{
+Plug 'sheerun/vim-polyglot'
 
-Plugin 'dhruvasagar/vim-table-mode'         " table mode
+" C++
+Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
-call vundle#end()
+" Latex
+Plug 'vim-latex/vim-latex', {'for': 'tex'}
+Plug 'matze/vim-tex-fold', {'for': 'tex' } "{{{
+let g:tex_fold_additional_envs = ['tikzpicture']
+"}}}
+
+" Python
+Plug 'hdima/python-syntax' , {'for': 'python'}
+Plug 'tmhedberg/SimpylFold', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+
+" Html
+Plug 'mattn/emmet-vim', {'for': 'html'}
+" }}}
+
+" new plugins
+"Plug 'reedes/vim-wordy'
+Plug 'ledger/vim-ledger'
+
+call plug#end()
+
+syntax on
 filetype plugin indent on
 " }}}
 
-" Vim Behavior configuration {{{
-" ------------------------------
-set autoread        " auto reload file
-" ------------------------------
+" UI configuration {{{
+set wrap                                            " Wrap lines
+set ruler                                           " show 'line #', 'col #', etc
+set number                                          " line number
+set mouse=a                                         " enable mouse action
+set history=200                                     " command history
+set showcmd                                         " show command in bottom bar
+set lazyredraw                                      " redraw only when we need to.
+set noshowmatch                                     " np highlight matching [{()}]
+set relativenumber
+set guifont=Sauce\ Code\ Powerline\ Light:h11       " font face/size
+"set guifont=Sauce\ Code\ Powerline:h11
+
+"colorscheme gotham256                              " colorscheme
+colorscheme OceanicNext
+"let g:solarized_termcolors=256
+"colorscheme solarized
+
+" turn off scroll bar if using MacVim
+if has("gui_running")
+   set fuoptions=maxvert,maxhorz
+   set guioptions=gm
+end
+
+" Status Line configuration
+set t_Co=256
+syntax enable
+set laststatus=2
+set encoding=utf-8
+set background=dark
+set fillchars+=stl:\ ,stlnc:\
 " }}}
 
-" keyboard configuration {{{
-" ------------------------------
+" General Config {{{
+
+" Turn off sound
+set vb
+set t_vb=
+
+" Turn off backup
+set nobackup
+set noswapfile
+set nowritebackup
+
+" Auto reload file
+set autoread
+
+" use comma as leader key
 let mapleader   = ","
 let g:mapleader = ","
+
+" Navigation key configuration
 map j gj
 map k gk
-map <F2> :set nowrap! <CR> 
+set whichwrap+=<,>,h,l
+set backspace=eol,start,indent
+
+nmap <F2> :set nowrap! <CR>
 nmap <C-s> :w!<CR>
 nmap <leader>w :w!<CR>
 nmap <leader>e :NERDTreeToggle<CR>
 nnoremap <leader><space> :nohlsearch<CR>
-" ------------------------------
-" }}}
 
-" Buffer {{{
-" ------------------------------
-set hidden
-nmap \bl :ls<CR>                     " Show all open buffers and their status
-nmap \T :enew<CR>                    " To open a new empty buffer
-nmap \l :bnext<CR>                   " Move to the next buffer
-nmap \p :bprevious<CR>               " Move to the previous buffer
-nmap \q :bp <BAR> bd #<CR>          " Close current buffer and move to previous one
-" ------------------------------
-" }}}
+" Search configuration
+set ignorecase                                      " ignore case when searching
+set smartcase                                       " turn on smartcase
+set hlsearch                                        " highlight search
+set incsearch                                       " incremental search (search as type)
 
-" UI configuration {{{
-" ------------------------------
-set wrap                                    " Wrap lines
-set ruler                                   " show 'line #', 'col #', etc
-set number                                  " line number
-set mouse=a                                 " enable mouse action
-set history=200                             " command history
-set showcmd                                 " show command in bottom bar
-set lazyredraw                              " redraw only when we need to.
-set noshowmatch                             " np highlight matching [{()}]
-set relativenumber 
-"set guifont=Sauce\ Code\ Powerline\ Light:h11
-set guifont=Sauce\ Code\ Powerline:h11
-" ------------------------------
-" }}}
-
-" Folding {{{
-" ------------------------------
-set foldenable                              " enable folding
-set foldnestmax=10                          " max 10 depth
-set foldmethod=indent                       " fold based on indent level
-set foldlevelstart=10                       " start with fold level of 1
-nnoremap <space> za                         " space open/closes folds
-" ------------------------------
-" }}}
-
-" Navigation key configuration {{{
-" ------------------------------
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l  
-" ------------------------------
-" }}}
-
-" Search configuration {{{
-" ------------------------------
-set ignorecase
-set smartcase
-set hlsearch                                " highlight search
-set incsearch                               " incremental search (search as type)
-" ------------------------------
-" }}}
-
-" Tab and Indent configuration {{{
-" ------------------------------
-set ai                                      " Auto indent
-set si                                      " Smart indent
+" Tab and Indent configuration
+set ai                                              " Auto indent
+set si                                              " Smart indent
 set tabstop=4
 set expandtab
 set shiftwidth=4
-" ------------------------------
+
+" buffer
+set hidden
+
+" Folding
+set foldenable                                      " enable folding
+set foldnestmax=10                                  " max 10 depth
+set foldmethod=indent                               " fold based on indent level
+set foldlevelstart=10                               " start with fold level of 1
+nnoremap <space> za                                 " space open/closes folds
+
 " }}}
 
-" Status Line configuration {{{
-" ------------------------------
-" Plugin: vim-airline
-" ------------------------------
-set laststatus=2
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
+" Tagbar {{{
+nmap <F8> :TagbarToggle<CR>
+" }}}
+
+" vim-airline {{{
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='gotham256'
 "let g:airline_theme='solarized'
 let g:airline_theme='oceanicnext'
-let g:airline#extensions#tabline#enabled   = 1     " Enable the list of buffers
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tagbar#enabled    = 1
-let g:airline#extensions#tabline#fnamemod  = ':t'  " Show just the filename
-" ------------------------------
+
+let g:airline_extensions = ['tabline', 'branch', 'hunks', 'syntastic', 'tagbar', 'quickfix', 'ycm']
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
+
+" tabline
+let g:airline#extensions#tabline#left_sep       = ''
+let g:airline#extensions#tabline#left_alt_sep   = ''
+let g:airline#extensions#tabline#right_sep      = ''
+let g:airline#extensions#tabline#right_alt_sep  = ''
+let g:airline#extensions#tabline#fnamemod       = ':t'       " Show just the filename
+
+" quickfix
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix' " configure the title text for quickfix buffers
+let g:airline#extensions#quickfix#location_text = 'Location' " configure the title text for location list buffers
+
+" ycm
+let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count prefix
+let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
 " }}}
 
-" Colorscheme configuration {{{
-" ------------------------------
-syntax enable
-set t_Co=256
-set background=dark
-"colorscheme gotham256
-colorscheme OceanicNext
-"let g:solarized_termcolors=256
-"colorscheme solarized
-" ------------------------------
+" Unite {{{
+nnoremap <C-b> :Unite buffer<CR>
+nnoremap <C-p> :Unite -start-insert file_rec/async<CR>
+"nnoremap <C-p> :Unite -start-insert file<CR>
+nnoremap <C-f> :Unite -start-insert grep:.<CR>
+let g:unite_source_grep_command = 'ag'
 " }}}
 
-" Latex configuration {{{
-" ------------------------------
-" Plugin: vim-latex
-" ------------------------------
+" Fugitive {{{
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>gr :Gremove<CR>
+"autocmd BufReadPost fugitive://* set bufhidden=delete
+" }}}
+
+" YCM {{{
+let g:ycm_python_binary_path = '/usr/bin/python'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:ycm_complete_in_comments_and_strings = 1
+
+set omnifunc=syntaxcomplete#Complete
+let g:ycm_filetype_specific_completion_to_disable = {
+\  'tex': 1,
+\  'gitcommit': 1
+\}
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+" key bindings for UltiSnipsExpandTrigger
+"let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
+
+" vim-Latex {{{
 set shellslash
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_TreatMacViewerAsUNIX = 1
-"let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
-autocmd filetype tex call IMAP ('BB', "\{\\bf <++>\}<++>", "tex")
-" ------------------------------
-" }}}
+"autocmd filetype tex call IMAP ('BB', "\{\\bf <++>\}<++>", "tex")
 
-" Tagbar {{{
-" ------------------------------
-nmap <F8> :TagbarToggle<CR>
-" ------------------------------
-" }}}
+" fix auto-indent conflict introduced by YCM
+if exists("g:loaded_fix_indentkeys")
+   finish
+endif
 
-" You Complete Me {{{
-" ------------------------------
-let g:ycm_python_binary_path = '/usr/bin/python'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:syntastic_always_populate_loc_list = 1
-" ------------------------------
-" }}}
- 
-" SuperTab {{{
-" ------------------------------
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:loaded_fix_indentkeys = 1
 
-" better key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" ------------------------------
+" You may add more filetypes if necessary.
+autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
 " }}}
 
 " Customize function {{{
@@ -234,21 +291,6 @@ function! DayMode()
     colorscheme oceanicnext
     AirlineTheme oceanicnext
 endfunction
-" ------------------------------
-" }}}
-
-" Customize Key binding {{{
-" ------------------------------
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
 " ------------------------------
 " }}}
 
