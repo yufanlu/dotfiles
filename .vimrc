@@ -59,6 +59,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
+" Writing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 "Plug 'krisajenkins/vim-pipe'                      " Database
 "Plug 'vim-scripts/dbext.vim'                      "
 
@@ -74,7 +78,8 @@ Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
-Plug 'vim-latex/vim-latex', {'for': 'tex'}
+"Plug 'vim-latex/vim-latex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'matze/vim-tex-fold', {'for': 'tex' } "{{{
 let g:tex_fold_additional_envs = ['tikzpicture']
 "}}}
@@ -217,10 +222,9 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <C-b> :Unite buffer<CR>
-nnoremap <C-p> :Unite -start-insert file_rec/async<CR>
-"nnoremap <C-p> :Unite -start-insert file<CR>
-nnoremap <C-f> :Unite -start-insert grep:.<CR>
+nnoremap <C-b> :Unite -winheight=15 buffer<CR>
+nnoremap <C-p> :Unite -start-insert -direction=belowright file_rec/async<CR>
+nnoremap <C-f> :Unite -start-insert -direction=belowright grep:.<CR>
 let g:unite_source_grep_command = 'ag'
 " }}}
 
@@ -237,11 +241,12 @@ nnoremap <silent> <leader>gr :Gremove<CR>
 " }}}
 
 " YCM {{{
-let g:ycm_python_binary_path = '/usr/bin/python'
+let g:ycm_python_binary_path    = '/usr/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-"let g:ycm_global_ycm_extra_conf = 0
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list   = 1
 let g:ycm_complete_in_comments_and_strings = 1
+"let g:ycm_autoclose_preview_window_after_insertion  = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
 
 set omnifunc=syntaxcomplete#Complete
 let g:ycm_filetype_specific_completion_to_disable = {
@@ -249,35 +254,60 @@ let g:ycm_filetype_specific_completion_to_disable = {
 \  'gitcommit': 1
 \}
 
-" make YCM compatible with UltiSnips (using supertab)
+" make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger  = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 " }}}
 
-" vim-Latex {{{
-set shellslash
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_TreatMacViewerAsUNIX = 1
-let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
-"autocmd filetype tex call IMAP ('BB', "\{\\bf <++>\}<++>", "tex")
+"" vim-Latex {{{
+"set shellslash
+"set grepprg=grep\ -nH\ $*
+"let g:tex_flavor='latex'
+"let g:Tex_DefaultTargetFormat='pdf'
+"let g:Tex_TreatMacViewerAsUNIX = 1
+"let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
+""autocmd filetype tex call IMAP ('BB', "\{\\bf <++>\}<++>", "tex")
 
-" fix auto-indent conflict introduced by YCM
-if exists("g:loaded_fix_indentkeys")
-   finish
+"" fix auto-indent conflict introduced by YCM
+"if exists("g:loaded_fix_indentkeys")
+   "finish
+"endif
+
+"let g:loaded_fix_indentkeys = 1
+
+"" You may add more filetypes if necessary.
+"autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
+"" }}}
+
+" vimtex {{{
+"let g:vimtex_fold_enabled = 1
+inoremap <silent> __ __<c-r>=UltiSnips#Anon('_{$1}$0', '__', '', 'i')<cr>
+inoremap <silent> ^^ ^^<c-r>=UltiSnips#Anon('^{$1}$0', '^^', '', 'i')<cr>
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
 endif
 
-let g:loaded_fix_indentkeys = 1
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+    \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+    \ 're!\\hyperref\[[^]]*',
+    \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+    \ 're!\\(include(only)?|input){[^}]*',
+    \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+    \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ ]
+" }}}
 
-" You may add more filetypes if necessary.
-autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
+" Goyo and Limelight {{{
+let g:goyo_width = '65%'
+let g:limelight_conceal_ctermfg = 240     " Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB color
 " }}}
 
 " Customize function {{{
