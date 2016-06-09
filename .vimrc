@@ -25,9 +25,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'kshenoy/vim-signature'
 Plug 'takac/vim-commandcaps'
+Plug 'tpope/vim-speeddating'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'dhruvasagar/vim-table-mode'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -54,23 +54,19 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Writing
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim', {'for': 'markdown'}
+Plug 'junegunn/limelight.vim', {'for': 'markdown'}
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+"Plug 'reedes/vim-wordy'
 
-"Plug 'krisajenkins/vim-pipe'                      " Database
-"Plug 'vim-scripts/dbext.vim'                      "
-
-""Plug 'fsharp/vim-fsharp'                         " F#
-""Plug 'oranget/vim-csharp'                        " C#
-""Plug 'OmniSharp/omnisharp-vim'                   " OmniSharp
-
-" Languages {{{
+" language packs
 Plug 'sheerun/vim-polyglot'
 
 " C++
@@ -91,11 +87,18 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 " Html
 Plug 'mattn/emmet-vim', {'for': 'html'}
-" }}}
 
-" new plugins
-"Plug 'reedes/vim-wordy'
-Plug 'ledger/vim-ledger'
+" Database
+"Plug 'krisajenkins/vim-pipe'
+"Plug 'vim-scripts/dbext.vim'
+
+" OmniSharp
+"Plug 'OmniSharp/omnisharp-vim'
+
+
+" plugins to learn
+"Plug 'ledger/vim-ledger'
+"Plug 'wellle/targets.vim'
 
 call plug#end()
 
@@ -123,8 +126,9 @@ colorscheme OceanicNext
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
-   set fuoptions=maxvert,maxhorz
+   set linespace=1
    set guioptions=gm
+   set fuoptions=maxvert,maxhorz
 end
 
 " Status Line configuration
@@ -185,7 +189,7 @@ set hidden
 " Folding
 set foldenable                                      " enable folding
 set foldnestmax=10                                  " max 10 depth
-set foldmethod=indent                               " fold based on indent level
+set foldmethod=syntax                               " fold based on indent level
 set foldlevelstart=10                               " start with fold level of 1
 nnoremap <space> za                                 " space open/closes folds
 
@@ -222,10 +226,11 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <C-b> :Unite -winheight=15 buffer<CR>
-nnoremap <C-p> :Unite -start-insert -direction=belowright file_rec/async<CR>
-nnoremap <C-f> :Unite -start-insert -direction=belowright grep:.<CR>
-let g:unite_source_grep_command = 'ag'
+nnoremap <C-x><C-o> :Unite outline<CR>
+nnoremap <C-x><C-b> :Unite -winheight=15 buffer bookmark<CR>
+nnoremap <C-x><C-p> :Unite -start-insert -direction=belowright file_rec/async<CR>
+"nnoremap <C-x><C-f> :Unite -start-insert -direction=belowright grep:.<CR>
+"let g:unite_source_grep_command = 'ag'
 " }}}
 
 " Fugitive {{{
@@ -308,6 +313,11 @@ let g:ycm_semantic_triggers.tex = [
 let g:goyo_width = '65%'
 let g:limelight_conceal_ctermfg = 240     " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB color
+" }}}
+
+" Markdown {{{
+let g:vim_markdown_conceal = 0                        " disable conceal
+au FileType markdown let b:delimitMate_autoclose = 0
 " }}}
 
 " Customize function {{{
