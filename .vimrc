@@ -1,8 +1,8 @@
 " ==================================
 " vimrc
-" by Yufan Lu
-" ==================================
 
+" ==================================
+"
 set nocompatible
 
 " Plugins {{{
@@ -11,15 +11,16 @@ call plug#begin('~/.vim/plugged')
 " UI
 Plug 'whatyouhide/vim-gotham'
 Plug 'mhartington/oceanic-next'
-Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Behavior
 Plug 'tpope/vim-repeat'
+Plug 'wincent/terminus'
 Plug 'majutsushi/tagbar'
-"Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
+Plug 'mhinz/vim-startify'
+Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
@@ -54,16 +55,22 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Writing
+Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
+Plug 'kannokanno/previm', {'for': 'markdown'} " {{{
+let g:previm_enable_realtime=1
+" }}}
+Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'junegunn/limelight.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+
 "Plug 'reedes/vim-wordy'
 
 " language packs
@@ -74,8 +81,8 @@ Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
-"Plug 'vim-latex/vim-latex', {'for': 'tex'}
 Plug 'lervag/vimtex', {'for': 'tex'}
+"Plug 'vim-latex/vim-latex', {'for': 'tex'}
 Plug 'matze/vim-tex-fold', {'for': 'tex' } "{{{
 let g:tex_fold_additional_envs = ['tikzpicture']
 "}}}
@@ -107,7 +114,7 @@ filetype plugin indent on
 " }}}
 
 " UI configuration {{{
-set wrap                                            " Wrap lines
+set nowrap                                          " no wrap lines
 set ruler                                           " show 'line #', 'col #', etc
 set number                                          " line number
 set mouse=a                                         " enable mouse action
@@ -119,10 +126,10 @@ set relativenumber
 set guifont=Sauce\ Code\ Powerline\ Light:h11       " font face/size
 "set guifont=Sauce\ Code\ Powerline:h11
 
-"colorscheme gotham256                              " colorscheme
+" colorscheme
+set t_Co=256
+"colorscheme gotham256
 colorscheme OceanicNext
-"let g:solarized_termcolors=256
-"colorscheme solarized
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -132,7 +139,6 @@ if has("gui_running")
 end
 
 " Status Line configuration
-set t_Co=256
 syntax enable
 set laststatus=2
 set encoding=utf-8
@@ -195,6 +201,19 @@ nnoremap <space> za                                 " space open/closes folds
 
 " }}}
 
+" Behavior  {{{
+
+" H & L to EOL
+map H ^
+map L $
+
+" Don't go to Ex mode
+nnoremap Q <nop>
+
+" F5 to compile
+map <F5> :make!<CR>
+" }}}
+
 " Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
 " }}}
@@ -202,7 +221,6 @@ nmap <F8> :TagbarToggle<CR>
 " vim-airline {{{
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='gotham256'
-"let g:airline_theme='solarized'
 let g:airline_theme='oceanicnext'
 
 let g:airline_extensions = ['tabline', 'branch', 'hunks', 'syntastic', 'tagbar', 'quickfix', 'ycm']
@@ -228,7 +246,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " Unite {{{
 nnoremap <C-x><C-o> :Unite outline<CR>
 nnoremap <C-x><C-b> :Unite -winheight=15 buffer bookmark<CR>
-nnoremap <C-x><C-p> :Unite -start-insert -direction=belowright file_rec/async<CR>
+nnoremap <C-x><C-p> :Unite -start-insert file_rec/async<CR>
 "nnoremap <C-x><C-f> :Unite -start-insert -direction=belowright grep:.<CR>
 "let g:unite_source_grep_command = 'ag'
 " }}}
@@ -254,10 +272,6 @@ let g:ycm_complete_in_comments_and_strings = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
 
 set omnifunc=syntaxcomplete#Complete
-let g:ycm_filetype_specific_completion_to_disable = {
-\  'tex': 1,
-\  'gitcommit': 1
-\}
 
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -269,44 +283,46 @@ let g:UltiSnipsJumpForwardTrigger  = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 " }}}
 
-"" vim-Latex {{{
+" vim-Latex {{{
 "set shellslash
 "set grepprg=grep\ -nH\ $*
 "let g:tex_flavor='latex'
+"let g:tex_conceal = ""
 "let g:Tex_DefaultTargetFormat='pdf'
 "let g:Tex_TreatMacViewerAsUNIX = 1
 "let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
-""autocmd filetype tex call IMAP ('BB', "\{\\bf <++>\}<++>", "tex")
 
 "" fix auto-indent conflict introduced by YCM
-"if exists("g:loaded_fix_indentkeys")
-   "finish
+"if !exists("g:loaded_fix_indentkeys")
+   "let g:loaded_fix_indentkeys = 1
 "endif
 
-"let g:loaded_fix_indentkeys = 1
-
 "" You may add more filetypes if necessary.
-"autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
+"" autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
 "" }}}
 
 " vimtex {{{
-"let g:vimtex_fold_enabled = 1
+let g:tex_flavor = 'latex'
+let g:vimtex_fold_enabled = 1
+let g:tex_conceal = ""
 inoremap <silent> __ __<c-r>=UltiSnips#Anon('_{$1}$0', '__', '', 'i')<cr>
 inoremap <silent> ^^ ^^<c-r>=UltiSnips#Anon('^{$1}$0', '^^', '', 'i')<cr>
 if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
+   let g:ycm_semantic_triggers = {}
 endif
 
 let g:ycm_semantic_triggers.tex = [
-    \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-    \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-    \ 're!\\hyperref\[[^]]*',
-    \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-    \ 're!\\(include(only)?|input){[^}]*',
-    \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-    \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ ]
+   \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+   \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+   \ 're!\\hyperref\[[^]]*',
+   \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+   \ 're!\\(include(only)?|input){[^}]*',
+   \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+   \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+   \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+   \ ]
+
+" maybe add some insert mode mappings
 " }}}
 
 " Goyo and Limelight {{{
@@ -328,7 +344,7 @@ function! NightMode()
 endfunction
 
 function! DayMode()
-    colorscheme oceanicnext
+    colorscheme OceanicNext
     AirlineTheme oceanicnext
 endfunction
 " ------------------------------
