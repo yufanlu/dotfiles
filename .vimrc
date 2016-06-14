@@ -63,9 +63,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Writing
 Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
-Plug 'kannokanno/previm', {'for': 'markdown'} " {{{
-let g:previm_enable_realtime=1
-" }}}
+Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'junegunn/limelight.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -114,16 +112,16 @@ filetype plugin indent on
 " }}}
 
 " UI configuration {{{
-set nowrap                                          " no wrap lines
-set ruler                                           " show 'line #', 'col #', etc
-set number                                          " line number
-set mouse=a                                         " enable mouse action
-set history=200                                     " command history
-set showcmd                                         " show command in bottom bar
-set lazyredraw                                      " redraw only when we need to.
-set noshowmatch                                     " np highlight matching [{()}]
+set wrap                                      " wrap lines
+set ruler                                     " show 'line #', 'col #', etc
+set number                                    " line number
+set mouse=a                                   " enable mouse action
+set history=200                               " command history
+set showcmd                                   " show command in bottom bar
+set lazyredraw                                " redraw only when we need to.
+set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
-set guifont=Sauce\ Code\ Powerline\ Light:h11       " font face/size
+set guifont=Sauce\ Code\ Powerline\ Light:h11 " font face/size
 "set guifont=Sauce\ Code\ Powerline:h11
 
 " colorscheme
