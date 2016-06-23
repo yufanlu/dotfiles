@@ -1,0 +1,181 @@
+#clearsnippets
+priority 1
+
+# documentclass {{{
+
+snippet art "\documentclass{article}" b
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage[${1:margin=1.2in}]{geometry}
+\title{${2:title}}
+\author{${3:Yufan Lu}}
+\setlength\parindent{0pt}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}{Claim}[section]
+\begin{document}
+\maketitle
+$4
+\end{document}
+endsnippet
+
+# }}}
+
+# pair {{{ #
+snippet $$ "$$" iA
+\$${1:${VISUAL:content}}\$
+endsnippet
+
+snippet || "||" iA
+|${1:${VISUAL:content}}|
+endsnippet
+
+snippet () "()" iA
+(${1:${VISUAL:content}})
+endsnippet
+
+snippet \( "\( \)" iA
+\(${1:${VISUAL:content}}\)
+endsnippet
+
+snippet (( "\left(...\right)" iA
+\left(${1:${VISUAL:content}}\right)
+endsnippet
+
+snippet [] "[]" iA
+[${1:${VISUAL:content}}]
+endsnippet
+
+snippet \[ "\[ \]" iA
+\[
+	${1:${VISUAL:content}}
+\]
+endsnippet
+
+snippet [[ "\left[...\right]" iA
+\left[${1:${VISUAL:content}}\right]
+endsnippet
+
+snippet \{ "\{ \}" iA
+\\{${1:${VISUAL:content}}\\}
+endsnippet
+
+# }}} pair #
+
+# arrow {{{ #
+snippet -> "\to" iA
+\to
+endsnippet
+# }}} arrow #
+
+snippet tt "\text{}" i
+\text{ ${1:${VISUAL}}}
+endsnippet
+
+snippet emp "\emph{}" i
+\emph{${1:${VISUAL}}}
+endsnippet
+
+snippet bf "\textbf{}" i
+\textbf{${1:${VISUAL}}}
+endsnippet
+
+snippet ... "\dots" iA
+\dots
+endsnippet
+
+# math {{{
+snippet <= "\le" iA
+\le
+endsnippet
+
+snippet >= "\ge" iA
+\ge
+endsnippet
+
+snippet __ "__" iA
+_{${1:${VISUAL}}}
+endsnippet
+
+snippet ^^ "^^" iA
+^{${1:${VISUAL}}}
+endsnippet
+# }}}
+
+snippet ubr "\underbrace" i
+\underbrace{${1:${VISUAL}}}_{$2}
+endsnippet
+
+snippet "" "quote" iA
+\`\`${1:${VISUAL}}''
+endsnippet
+
+snippet == "&=" wA
+&=
+endsnippet
+
+snippet &== "&=" wA
+&=&
+endsnippet
+
+snippet thm "theorem" b
+\begin{theorem}[${1:name}]
+    ${2:${VISUAL}}
+\end{theorem}
+endsnippet
+
+snippet cor "corollary" b
+\begin{corollary}
+    ${2:${VISUAL}}
+\end{corollary}
+endsnippet
+
+snippet lem "lemma" b
+\begin{lemma}
+    ${2:${VISUAL}}
+\end{lemma}
+endsnippet
+
+snippet proof "\begin{proof}" b
+\begin{proof}
+    ${1:${VISUAL}}
+\end{proof}
+endsnippet
+
+snippet cla "\begin{claim}" b
+\begin{claim}
+    ${1:${VISUAL}}
+\end{claim}
+endsnippet
+
+snippet def "\begin{definition}" b
+\begin{definition}[$1]
+    ${2:${VISUAL}}
+\end{definition}
+endsnippet
+
+snippet mc "\mathcal{}" i
+\mathcal{${1:${VISUAL}}}
+endsnippet
+
+snippet mb "\mathbb{}" i
+\mathbb{${1:${VISUAL}}}
+endsnippet
+
+snippet \\m "\\[mm]" iA
+\\\\[${1:2mm}]
+endsnippet
+
+snippet enumr "enumerate with resume" b
+\begin{enumerate}[resume]
+	\item $1
+\end{enumerate}
+endsnippet
+
+## vim:foldmethod=marker:foldlevel=0

@@ -1,4 +1,3 @@
-" ==================================
 " vimrc
 
 " ==================================
@@ -16,25 +15,25 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Behavior
 Plug 'tpope/vim-repeat'
-Plug 'wincent/terminus'
-Plug 'majutsushi/tagbar'
+"Plug 'wincent/terminus'
+Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
-Plug 'Raimondi/delimitMate'
-Plug 'kshenoy/vim-signature'
+Plug 'Raimondi/delimitMate',  { 'for': ['cpp', 'python'] }
+Plug 'kshenoy/vim-signature', { 'for': ['cpp', 'python'] }
 Plug 'takac/vim-commandcaps'
-Plug 'tpope/vim-speeddating'
+"Plug 'tpope/vim-speeddating'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Search
-Plug 'mileszs/ack.vim'
-Plug 'haya14busa/incsearch.vim'
+"Plug 'mileszs/ack.vim'
+"Plug 'haya14busa/incsearch.vim'
 
 " File system
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -48,7 +47,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -65,7 +64,6 @@ Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
-Plug 'junegunn/limelight.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 
@@ -80,18 +78,21 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
-"Plug 'vim-latex/vim-latex', {'for': 'tex'}
-Plug 'matze/vim-tex-fold', {'for': 'tex' } "{{{
-let g:tex_fold_additional_envs = ['tikzpicture']
-"}}}
+Plug 'matze/vim-tex-fold', {'for': 'tex' }
 
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+"Plug 'glench/vim-jinja2-syntax', {'for': 'html'}
+Plug 'lepture/vim-jinja', {'for': 'html'}
 
-" Html
+" Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+Plug 'mhartington/vim-typings', {'for': 'typescript'}
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+
 
 " Database
 "Plug 'krisajenkins/vim-pipe'
@@ -145,6 +146,8 @@ set fillchars+=stl:\ ,stlnc:\
 " }}}
 
 " General Config {{{
+set ttimeout
+set ttimeoutlen=100
 
 " Turn off sound
 set vb
@@ -201,9 +204,12 @@ nnoremap <space> za                                 " space open/closes folds
 
 " Behavior  {{{
 
-" H & L to EOL
-map H ^
-map L $
+" H & L
+vnoremap H ^
+vnoremap L $
+
+" m
+vnoremap m %
 
 " Don't go to Ex mode
 nnoremap Q <nop>
@@ -220,8 +226,6 @@ nmap <F8> :TagbarToggle<CR>
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='gotham256'
 let g:airline_theme='oceanicnext'
-
-let g:airline_extensions = ['tabline', 'branch', 'hunks', 'syntastic', 'tagbar', 'quickfix', 'ycm']
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
 
@@ -242,7 +246,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <C-x><C-o> :Unite outline<CR>
+nnoremap <C-x><C-o> :Unite -direction=aboveleft outline<CR>
 nnoremap <C-x><C-b> :Unite -winheight=15 buffer bookmark<CR>
 nnoremap <C-x><C-p> :Unite -start-insert file_rec/async<CR>
 "nnoremap <C-x><C-f> :Unite -start-insert -direction=belowright grep:.<CR>
@@ -261,14 +265,17 @@ nnoremap <silent> <leader>gr :Gremove<CR>
 "autocmd BufReadPost fugitive://* set bufhidden=delete
 " }}}
 
-" YCM {{{
-let g:ycm_python_binary_path    = '/usr/bin/python'
+" Syntastic {{{
+let g:syntastic_tex_checkers = 0
+let g:syntastic_always_populate_loc_list = 1
+" }}}
+
+" YCM and UltiSnips {{{
+let g:ycm_python_binary_path    = '/usr/local/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:syntastic_always_populate_loc_list   = 1
 let g:ycm_complete_in_comments_and_strings = 1
 "let g:ycm_autoclose_preview_window_after_insertion  = 1
 "let g:ycm_autoclose_preview_window_after_completion = 1
-
 set omnifunc=syntaxcomplete#Complete
 
 " make YCM compatible with UltiSnips
@@ -276,35 +283,37 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsExpandTrigger = "<TAB>"
 let g:UltiSnipsJumpForwardTrigger  = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+
+let g:UltiSnipsEditSplit = "vertical"
 " }}}
 
-" vim-Latex {{{
-"set shellslash
-"set grepprg=grep\ -nH\ $*
-"let g:tex_flavor='latex'
-"let g:tex_conceal = ""
-"let g:Tex_DefaultTargetFormat='pdf'
-"let g:Tex_TreatMacViewerAsUNIX = 1
-"let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
-
-"" fix auto-indent conflict introduced by YCM
-"if !exists("g:loaded_fix_indentkeys")
-   "let g:loaded_fix_indentkeys = 1
-"endif
-
-"" You may add more filetypes if necessary.
-"" autocmd FileType tex,plaintex execute "setlocal indentkeys=" . &indentkeys
-"" }}}
+" delimitMate {{{
+au FileType tex let b:loaded_delimitMate = 0
+au FileType markdown let b:delimitMate_autoclose = 0
+" }}}
 
 " vimtex {{{
-let g:tex_flavor = 'latex'
-let g:vimtex_fold_enabled = 1
-let g:tex_conceal = ""
-inoremap <silent> __ __<c-r>=UltiSnips#Anon('_{$1}$0', '__', '', 'i')<cr>
-inoremap <silent> ^^ ^^<c-r>=UltiSnips#Anon('^{$1}$0', '^^', '', 'i')<cr>
+let g:tex_flavor  = 'latex'
+let g:tex_conceal = 'mg'
+let g:vimtex_latexmk_continuous  = 0
+let g:vimtex_latexmk_background  = 1
+
+let g:tex_fold_override_foldtext = 1
+let g:tex_fold_additional_envs = [
+    \ 'proof',
+    \ 'theorem',
+    \ 'definition',
+    \ 'tikzpicture']
+
+nnoremap <leader>lv :VimtexView<CR>
+nnoremap <leader>lc :VimtexClean<CR>
+nnoremap <leader>le :VimtexError<CR>
+nnoremap <leader>ll :VimtexCompileSS<CR>
+nnoremap <leader>lt :call ToggleConcealCursor()<CR>
+
 if !exists('g:ycm_semantic_triggers')
    let g:ycm_semantic_triggers = {}
 endif
@@ -320,7 +329,19 @@ let g:ycm_semantic_triggers.tex = [
    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
    \ ]
 
-" maybe add some insert mode mappings
+let g:tex_conceal_cursor_toggled = 0
+function! ToggleConcealCursor()
+    if (&ft=='tex')
+        if (g:tex_conceal_cursor_toggled == 0)
+            set concealcursor=c
+            let g:tex_conceal_cursor_toggled = 1
+        else
+            set concealcursor=inc
+            let g:tex_conceal_cursor_toggled = 0
+        endif
+    endif
+endfunction
+
 " }}}
 
 " Goyo and Limelight {{{
@@ -331,21 +352,6 @@ let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB
 
 " Markdown {{{
 let g:vim_markdown_conceal = 0                        " disable conceal
-au FileType markdown let b:delimitMate_autoclose = 0
-" }}}
-
-" Customize function {{{
-" ------------------------------
-function! NightMode()
-    colorscheme gotham256
-    AirlineTheme gotham256
-endfunction
-
-function! DayMode()
-    colorscheme OceanicNext
-    AirlineTheme oceanicnext
-endfunction
-" ------------------------------
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
