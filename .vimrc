@@ -293,6 +293,7 @@ let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = "~/dotfiles/snips"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 " }}}
 
@@ -362,21 +363,21 @@ let g:vim_markdown_conceal = 0                        " disable conceal
 " }}}
 
 " cheatsheet 40 {{{
-let g:cheat40_use_default = 1
+let g:cheat40_use_default = 0
 nnoremap <c-e><c-e> :call EditCheatSheet()<cr>
 
 function! EditCheatSheet()
-    botright 40vnew ~/dotfiles/vim-cheatsheet.txt
-    setlocal fileencoding=utf-8 filetype=cheat40 
+    botright 45vnew ~/dotfiles/vim-cheatsheet.txt
+    setlocal fileencoding=utf-8 filetype=cheat40
     setlocal colorcolumn=25,40 winfixwidth expandtab nonumber norelativenumber nospell nowrap textwidth=40
     nnoremap <silent> <buffer> q :q<cr>
     nnoremap <silent> <buffer> ? :call ShowDefaultCheatSheet()<cr>
 endfunction
 
 function! ShowDefaultCheatSheet()
-   below sp ~/.vim/plugged/vim-cheat40/cheat40.txt
+    below sp ~/.vim/plugged/vim-cheat40/cheat40.txt
     setlocal expandtab nonumber norelativenumber nospell nowrap textwidth=40
-    setlocal fileencoding=utf-8 filetype=cheat40 
+    setlocal fileencoding=utf-8 filetype=cheat40
     nnoremap <silent> <buffer> q :q<cr>
 endfunction
 " }}}

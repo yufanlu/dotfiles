@@ -1,4 +1,5 @@
-Window Redraw {{{1
+
+window redraw {{{1
 with height              z{height}<CR> N
 with cursor at center    zz            N
 }}}
