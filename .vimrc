@@ -26,6 +26,7 @@ Plug 'Raimondi/delimitMate',  { 'for': ['cpp', 'python'] }
 Plug 'kshenoy/vim-signature', { 'for': ['cpp', 'python'] }
 Plug 'takac/vim-commandcaps'
 "Plug 'tpope/vim-speeddating'
+Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
@@ -171,11 +172,11 @@ map k gk
 set whichwrap+=<,>,h,l
 set backspace=eol,start,indent
 
-nmap <F2> :set nowrap! <CR>
-nmap <C-s> :w!<CR>
-nmap <leader>w :w!<CR>
-nmap <leader>e :NERDTreeToggle<CR>
-nnoremap <leader><space> :nohlsearch<CR>
+nmap <F2> :set nowrap! <cr>
+nmap <c-s> :w!<cr>
+nmap <leader>w :w!<cr>
+nmap <leader>e :NERDTreeToggle<cr>
+nnoremap <leader><space> :nohlsearch<cr>
 
 " Search configuration
 set ignorecase                                      " ignore case when searching
@@ -215,11 +216,15 @@ vnoremap m %
 nnoremap Q <nop>
 
 " F5 to compile
-map <F5> :make!<CR>
+map <F5> :make!<cr>
+
+" Editing/Loading .vimrc
+nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
+nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 " }}}
 
 " Tagbar {{{
-nmap <F8> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<cr>
 " }}}
 
 " vim-airline {{{
@@ -246,22 +251,22 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <C-x><C-o> :Unite -direction=aboveleft outline<CR>
-nnoremap <C-x><C-b> :Unite -winheight=15 buffer bookmark<CR>
-nnoremap <C-x><C-p> :Unite -start-insert file_rec/async<CR>
-"nnoremap <C-x><C-f> :Unite -start-insert -direction=belowright grep:.<CR>
+nnoremap <c-e><c-o> :Unite -direction=aboveleft outline<cr>
+nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
+nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
+"nnoremap <c-e><c-f> :Unite -start-insert -direction=belowright grep:.<cr>
 "let g:unite_source_grep_command = 'ag'
 " }}}
 
 " Fugitive {{{
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>gr :Gremove<CR>
+nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gd :Gdiff<cr>
+nnoremap <silent> <leader>gc :Gcommit<cr>
+nnoremap <silent> <leader>gb :Gblame<cr>
+nnoremap <silent> <leader>gl :Glog<cr>
+nnoremap <silent> <leader>gp :Git push<cr>
+nnoremap <silent> <leader>gw :Gwrite<cr>
+nnoremap <silent> <leader>gr :Gremove<cr>
 "autocmd BufReadPost fugitive://* set bufhidden=delete
 " }}}
 
@@ -279,15 +284,16 @@ let g:ycm_complete_in_comments_and_strings = 1
 set omnifunc=syntaxcomplete#Complete
 
 " make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
 " key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<TAB>"
-let g:UltiSnipsJumpForwardTrigger  = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 let g:UltiSnipsEditSplit = "vertical"
+nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 " }}}
 
 " delimitMate {{{
@@ -300,6 +306,7 @@ let g:tex_flavor  = 'latex'
 let g:tex_conceal = 'mg'
 let g:vimtex_latexmk_continuous  = 0
 let g:vimtex_latexmk_background  = 1
+let g:vimtex_imaps_disabled = [']]']
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
@@ -308,11 +315,11 @@ let g:tex_fold_additional_envs = [
     \ 'definition',
     \ 'tikzpicture']
 
-nnoremap <leader>lv :VimtexView<CR>
-nnoremap <leader>lc :VimtexClean<CR>
-nnoremap <leader>le :VimtexError<CR>
-nnoremap <leader>ll :VimtexCompileSS<CR>
-nnoremap <leader>lt :call ToggleConcealCursor()<CR>
+nnoremap <leader>lv :VimtexView<cr>
+nnoremap <leader>lc :VimtexClean<cr>
+nnoremap <leader>le :VimtexError<cr>
+nnoremap <leader>ll :VimtexCompileSS<cr>
+nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
 if !exists('g:ycm_semantic_triggers')
    let g:ycm_semantic_triggers = {}
@@ -352,6 +359,26 @@ let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB
 
 " Markdown {{{
 let g:vim_markdown_conceal = 0                        " disable conceal
+" }}}
+
+" cheatsheet 40 {{{
+let g:cheat40_use_default = 1
+nnoremap <c-e><c-e> :call EditCheatSheet()<cr>
+
+function! EditCheatSheet()
+    botright 40vnew ~/dotfiles/vim-cheatsheet.txt
+    setlocal fileencoding=utf-8 filetype=cheat40 
+    setlocal colorcolumn=25,40 winfixwidth expandtab nonumber norelativenumber nospell nowrap textwidth=40
+    nnoremap <silent> <buffer> q :q<cr>
+    nnoremap <silent> <buffer> ? :call ShowDefaultCheatSheet()<cr>
+endfunction
+
+function! ShowDefaultCheatSheet()
+   below sp ~/.vim/plugged/vim-cheat40/cheat40.txt
+    setlocal expandtab nonumber norelativenumber nospell nowrap textwidth=40
+    setlocal fileencoding=utf-8 filetype=cheat40 
+    nnoremap <silent> <buffer> q :q<cr>
+endfunction
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

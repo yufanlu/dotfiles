@@ -1,0 +1,26 @@
+Window Redraw {{{1
+with height              z{height}<CR> N
+with cursor at center    zz            N
+}}}
+vimtex {{{1
+env-delete               dse           N
+env-delete-math          ds$           N
+env-change               cse           N
+env-toggle-star          tse           N
+delim-toggle-modifier    tsd          NC
+cmd-create               <F7>         NI
+delim-close              ]]            I
+ac                       ac          NCO
+ic                       ic          NCO
+ad                       ad          NCO
+id                       id          NCO
+ae                       ae          NCO
+ie                       ie          NCO
+a$                       a$          NCO
+i$                       i$          NCO
+%                        %           NCO
+]]                       ]]          NCO
+][                       ][          NCO
+[]                       []          NCO
+[[                       [[          NCO
+}}}
