@@ -15,7 +15,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Behavior
 Plug 'tpope/vim-repeat'
-"Plug 'wincent/terminus'
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify'
@@ -29,6 +28,7 @@ Plug 'takac/vim-commandcaps'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -37,7 +37,9 @@ Plug 'ntpeters/vim-better-whitespace'
 "Plug 'haya14busa/incsearch.vim'
 
 " File system
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
+
 
 " Fuzzy Search
 Plug 'Shougo/unite.vim'
@@ -55,7 +57,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -85,7 +87,7 @@ Plug 'matze/vim-tex-fold', {'for': 'tex' }
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-"Plug 'glench/vim-jinja2-syntax', {'for': 'html'}
+Plug 'glench/vim-jinja2-syntax', {'for': 'html'}
 Plug 'lepture/vim-jinja', {'for': 'html'}
 
 " Web Dev
@@ -175,7 +177,8 @@ set backspace=eol,start,indent
 nmap <F2> :set nowrap! <cr>
 nmap <c-s> :w!<cr>
 nmap <leader>w :w!<cr>
-nmap <leader>e :NERDTreeToggle<cr>
+"nmap <leader>e :NERDTreeToggle<cr>
+nmap <leader>e :VimFilerExplorer<cr>
 nnoremap <leader><space> :nohlsearch<cr>
 
 " Search configuration
@@ -214,6 +217,10 @@ vnoremap m %
 
 " Don't go to Ex mode
 nnoremap Q <nop>
+inoremap <c-h> <Nop>
+inoremap <c-j> <Nop>
+inoremap <c-k> <Nop>
+inoremap <c-l> <Nop>
 
 " F5 to compile
 map <F5> :make!<cr>
@@ -231,8 +238,8 @@ nmap <F8> :TagbarToggle<cr>
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='gotham256'
 let g:airline_theme='oceanicnext'
-let g:airline_left_sep  = ''
-let g:airline_right_sep = ''
+"let g:airline_left_sep  = ''
+"let g:airline_right_sep = ''
 
 " tabline
 let g:airline#extensions#tabline#left_sep       = ''
@@ -251,9 +258,9 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <c-e><c-o> :Unite -direction=aboveleft outline<cr>
-nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
+nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
+nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
 "nnoremap <c-e><c-f> :Unite -start-insert -direction=belowright grep:.<cr>
 "let g:unite_source_grep_command = 'ag'
 " }}}
@@ -304,38 +311,49 @@ au FileType markdown let b:delimitMate_autoclose = 0
 
 " vimtex {{{
 let g:tex_flavor  = 'latex'
-let g:tex_conceal = 'mg'
-let g:vimtex_latexmk_continuous  = 0
-let g:vimtex_latexmk_background  = 1
-let g:vimtex_imaps_disabled = [']]']
+let g:tex_conceal = 'dbmg'
+"let g:tex_conceal = ''
+"let g:vimtex_latexmk_continuous  = 0
+"let g:vimtex_latexmk_background  = 1
+"let g:vimtex_imaps_disabled = [']]']
+let g:tex_no_error = 1
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
-    \ 'proof',
-    \ 'theorem',
-    \ 'definition',
-    \ 'tikzpicture']
+            \ 'cases',
+            \ 'claim',
+            \ 'lemma',
+            \ 'proof',
+            \ 'itemize',
+            \ 'theorem',
+            \ 'example',
+            \ 'corollary',
+            \ 'enumerate',
+            \ 'definition',
+            \ 'tikzpicture']
 
 nnoremap <leader>lv :VimtexView<cr>
 nnoremap <leader>lc :VimtexClean<cr>
 nnoremap <leader>le :VimtexError<cr>
-nnoremap <leader>ll :VimtexCompileSS<cr>
+nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
+au FileType tex setlocal spell linebreak norelativenumber
+
 if !exists('g:ycm_semantic_triggers')
-   let g:ycm_semantic_triggers = {}
+    let g:ycm_semantic_triggers = {}
 endif
 
 let g:ycm_semantic_triggers.tex = [
-   \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-   \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-   \ 're!\\hyperref\[[^]]*',
-   \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-   \ 're!\\(include(only)?|input){[^}]*',
-   \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-   \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-   \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-   \ ]
+            \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+            \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+            \ 're!\\hyperref\[[^]]*',
+            \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+            \ 're!\\(include(only)?|input){[^}]*',
+            \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+            \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+            \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+            \ ]
 
 let g:tex_conceal_cursor_toggled = 0
 function! ToggleConcealCursor()
@@ -381,5 +399,14 @@ function! ShowDefaultCheatSheet()
     nnoremap <silent> <buffer> q :q<cr>
 endfunction
 " }}}
+
+" Vimfiler {{{ "
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+" }}} Vimfiler "
 
 " vim:foldmethod=marker:foldlevel=0
