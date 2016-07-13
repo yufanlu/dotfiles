@@ -16,21 +16,21 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'tpope/vim-repeat'
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
-Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
-Plug 'Raimondi/delimitMate',  { 'for': ['cpp', 'python'] }
+Plug 'Raimondi/delimitMate'
 Plug 'kshenoy/vim-signature', { 'for': ['cpp', 'python'] }
 Plug 'takac/vim-commandcaps'
 "Plug 'tpope/vim-speeddating'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
+
+
 
 " Search
 "Plug 'mileszs/ack.vim'
@@ -50,14 +50,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --tern-completer'}
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -66,6 +66,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
+Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
@@ -73,27 +74,31 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 "Plug 'reedes/vim-wordy'
 
 " language packs
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot' (put it here as reference)
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
+Plug 'jeaye/color_coded', {'for': ['cpp', 'c'], 'do': 'cmake . && make && make install'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'matze/vim-tex-fold', {'for': 'tex' }
+Plug 'easymotion/vim-easymotion', { 'for': ['tex']}
 
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'glench/vim-jinja2-syntax', {'for': 'html'}
-Plug 'lepture/vim-jinja', {'for': 'html'}
+Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
+Plug 'glench/vim-jinja2-syntax', {'for': ['html', 'jinja']}
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-Plug 'mhartington/vim-typings', {'for': 'typescript'}
+Plug 'groenewege/vim-less', {'for': 'less'}
+
+Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+"Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+"Plug 'mhartington/vim-typings', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 
@@ -171,6 +176,10 @@ let g:mapleader = ","
 " Navigation key configuration
 map j gj
 map k gk
+map <c-j> <c-x>
+map <c-k> <c-a>
+nnoremap <c-h> g0
+nnoremap <c-l> g$
 set whichwrap+=<,>,h,l
 set backspace=eol,start,indent
 
@@ -212,8 +221,6 @@ nnoremap <space> za                                 " space open/closes folds
 vnoremap H ^
 vnoremap L $
 
-" m
-vnoremap m %
 
 " Don't go to Ex mode
 nnoremap Q <nop>
@@ -238,8 +245,8 @@ nmap <F8> :TagbarToggle<cr>
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='gotham256'
 let g:airline_theme='oceanicnext'
-"let g:airline_left_sep  = ''
-"let g:airline_right_sep = ''
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
 
 " tabline
 let g:airline#extensions#tabline#left_sep       = ''
@@ -334,6 +341,7 @@ let g:tex_fold_additional_envs = [
 
 nnoremap <leader>lv :VimtexView<cr>
 nnoremap <leader>lc :VimtexClean<cr>
+nnoremap <leader>lC :VimtexClean!<cr>
 nnoremap <leader>le :VimtexError<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>

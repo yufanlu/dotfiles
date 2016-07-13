@@ -1,0 +1,18 @@
+global !p
+def adjust_width(des, cmd, mode):
+	des_len = len(des)
+	cmd_mode_len = len(cmd) + len(mode)
+	if des_len > 25 or cmd_mode_len > 15:
+		return '\n'.join([des, cmd, mode])
+	else:
+		result = []
+		result.append(des + ' ' * (25 - des_len))
+		result.append(cmd + ' ' * (15 - cmd_mode_len))
+		result.append(mode)
+		return ''.join(result)
+endglobal
+
+snippet cs "Create cheat sheet" b
+`!p snip.rv = adjust_width(t[1], t[2], t[3])`
+Temp: ${1:desc} ${2:cmd} ${3:NCIV}${0}
+endsnippet

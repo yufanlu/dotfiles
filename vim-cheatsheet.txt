@@ -1,5 +1,12 @@
 
+delimitMate {{{
+jump over match          <S-TAB>       I
+}}}
+vim-emmet {{{
+trigger emmet            <c-y>,       NI
+}}}
 vimfiler {{{
+go to parent directory   <BS>          N
 copy-file                c             N
 detele-file              d             N
 rename-file              r             N

@@ -5,6 +5,19 @@ priority 1
 global !p
 def generate_label(text):
 	return text.lower().replace(' ', '_')
+
+def create_row_placeholders(snip):
+	# retrieving singlee line from current string and treat it like tabstops
+	# count
+	placeholders_amount = int(snip.buffer[snip.line].strip())
+
+	# erase current line
+	snip.buffer[snip.line] = ''
+
+	# create anonymous snippet with expected content and number of tabstops
+	anon_snippet_body = ' & '.join(['$' + str(i+1) for i in range(placeholders_amount)])
+	# expand anonymous snippet
+	snip.expand_anon(anon_snippet_body)
 endglobal
 # }}} some util functions #
 
@@ -20,11 +33,15 @@ snippet art "\documentclass{article}" b
 \author{${3:Yufan Lu}}
 \setlength\parindent{0pt}
 \newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{property}[theorem]{Property}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -42,6 +59,14 @@ endsnippet
 
 snippet || "||" iA
 |${1:${VISUAL:content}}|
+endsnippet
+
+snippet \| "||.||" iA
+||${1:${VISUAL:content}}||
+endsnippet
+
+snippet {} "{}" iA
+{${1:${VISUAL:content}}}
 endsnippet
 
 snippet () "()" iA
@@ -99,6 +124,10 @@ snippet tt "\text{}" i
 \text{ ${1:${VISUAL}} }
 endsnippet
 
+snippet ti "\text{}" i
+\textit{ ${1:${VISUAL}} }
+endsnippet
+
 snippet emp "\emph{}" i
 \emph{${1:${VISUAL}}}
 endsnippet
@@ -106,10 +135,18 @@ endsnippet
 snippet bf "\textbf{}" i
 \textbf{${1:${VISUAL}}}
 endsnippet
+
+snippet bs "\boldsymbol{}" i
+\boldsymbol{${1:${VISUAL}}}
+endsnippet
 # }}}
 
 snippet ... "\dots" iA
 \dots
+endsnippet
+
+snippet '. "\cdot" iA
+\cdot
 endsnippet
 
 # math {{{
@@ -146,9 +183,14 @@ snippet &== "&=" wA
 &=&
 endsnippet
 
+snippet +- "\pm" iA
+\pm
+endsnippet
+
 snippet thm "theorem" b
 \begin{theorem}[${1:name}]
-    ${2:${VISUAL}}
+	\label{def:${2:`!p snip.rv = generate_label(t[1])`}}
+    ${3:${VISUAL}}
 \end{theorem}
 endsnippet
 
@@ -174,6 +216,12 @@ snippet cla "\begin{claim}" b
 \begin{claim}
     ${1:${VISUAL}}
 \end{claim}
+endsnippet
+
+snippet pro "\begin{property}" b
+\begin{property}
+    ${1:${VISUAL}}
+\end{property}
 endsnippet
 
 snippet def "\begin{definition}" b
@@ -210,6 +258,65 @@ endsnippet
 
 snippet its "itemsep" i
 \itemsep -.5mm
+endsnippet
+
+snippet cas "\begin{case}" i
+\begin{cases}
+	${1:value}, &\textit{ if } ${2:cond} \\\\
+	${3:value}, &\textit{ otherwirse}
+\end{cases}
+endsnippet
+
+snippet `{ "\subset" iA
+\subset
+endsnippet
+
+post_jump "create_row_placeholders(snip)"
+snippet "tr(\d+)" "latex table row variable" br
+`!p snip.rv = match.group(1)`
+endsnippet
+
+snippet mcol "\multicols{}" b
+\begin{multicols}{${1:2}}
+	${2:${VISUAL:content}}
+	\columnbreak
+\end{multicols}
+endsnippet
+
+snippet us "\underset" i
+\underset{${1:under}}{${2:above}}
+endsnippet
+
+snippet hat "\hat{}" i
+\hat{${1:${VISUAL:content}}}
+endsnippet
+
+snippet `/ "\frac{}{}" iA
+\frac{${1:num}}{${2:denom}}
+endsnippet
+
+snippet sec "\section" b
+\section{${1:section}}
+\label{sec:${2:`!p snip.rv = generate_label(t[1])`}}
+% {{{
+${3:${VISUAL}}
+% }}}
+endsnippet
+
+snippet sub "\subsection" b
+\subsection{${1:subsection}}
+\label{sub:${2:`!p snip.rv = generate_label(t[1])`}}
+${3:${VISUAL}}
+endsnippet
+
+snippet ssub "\subsubsection" b
+\subsubsection{${1:subsubsection}}
+\label{ssub:${2:`!p snip.rv = generate_label(t[1])`}}
+${3:${VISUAL}}
+endsnippet
+
+snippet iff "iff" iw
+if and only if
 endsnippet
 
 ## vim:foldmethod=marker:foldlevel=0
