@@ -1,4 +1,7 @@
 
+vim-table mode {{{
+TableModeToggle          <leader>tm    N
+}}}
 delimitMate {{{
 jump over match          <S-TAB>       I
 }}}

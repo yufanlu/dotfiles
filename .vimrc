@@ -1,19 +1,22 @@
-" vimrc
 
+" vimrc
 " ==================================
-"
+
 set nocompatible
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 
 " UI
+Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
 Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Behavior
+Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
 Plug 'mhinz/vim-startify'
@@ -29,7 +32,6 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-
 
 
 " Search
@@ -76,13 +78,18 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 " language packs
 "Plug 'sheerun/vim-polyglot' (put it here as reference)
 
+" Debugger
+if has('nvim')
+    Plug 'critiqjo/lldb.nvim'
+endif
+
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'jeaye/color_coded', {'for': ['cpp', 'c'], 'do': 'cmake . && make && make install'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
-Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex' }
 Plug 'matze/vim-tex-fold', {'for': 'tex' }
 Plug 'easymotion/vim-easymotion', { 'for': ['tex']}
 
@@ -136,21 +143,34 @@ set guifont=Sauce\ Code\ Powerline\ Light:h11 " font face/size
 " colorscheme
 set t_Co=256
 "colorscheme gotham256
-colorscheme OceanicNext
+
+if has('nvim')
+   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+   colorscheme OceanicNext
+else
+   let base16colorspace=256
+   colorscheme base16-oceanicnext
+endif
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
    set linespace=1
    set guioptions=gm
    set fuoptions=maxvert,maxhorz
-end
+endif
 
 " Status Line configuration
 syntax enable
+set noshowmode
 set laststatus=2
 set encoding=utf-8
 set background=dark
 set fillchars+=stl:\ ,stlnc:\
+
+" True Color Support
+if (has("termguicolors"))
+    set termguicolors
+endif
 " }}}
 
 " General Config {{{
@@ -243,7 +263,6 @@ nmap <F8> :TagbarToggle<cr>
 
 " vim-airline {{{
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='gotham256'
 let g:airline_theme='oceanicnext'
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
@@ -313,7 +332,6 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 
 " delimitMate {{{
 au FileType tex let b:loaded_delimitMate = 0
-au FileType markdown let b:delimitMate_autoclose = 0
 " }}}
 
 " vimtex {{{
@@ -343,6 +361,7 @@ nnoremap <leader>lv :VimtexView<cr>
 nnoremap <leader>lc :VimtexClean<cr>
 nnoremap <leader>lC :VimtexClean!<cr>
 nnoremap <leader>le :VimtexError<cr>
+"nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
@@ -364,6 +383,7 @@ let g:ycm_semantic_triggers.tex = [
             \ ]
 
 let g:tex_conceal_cursor_toggled = 0
+
 function! ToggleConcealCursor()
     if (&ft=='tex')
         if (g:tex_conceal_cursor_toggled == 0)
