@@ -443,7 +443,7 @@ let g:vimfiler_marked_file_icon = '*'
 
 " vim-autoformat {{{
 noremap <F3> :Autoformat<CR>
-let g:formatdef_google_style_cpp = '"clang-format --style=\"{IndentWidth: 4, BasedOnStyle: Google, AccessModifierOffset: -4}\""'
+let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
 let g:formatters_cpp = ['google_style_cpp']
 " }}}  "
 
