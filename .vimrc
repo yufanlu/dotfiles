@@ -78,10 +78,11 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 " language packs
 "Plug 'sheerun/vim-polyglot' (put it here as reference)
 
-" Debugger
-if has('nvim')
-    Plug 'critiqjo/lldb.nvim'
-endif
+
+" Debugger and formater
+"Plug 'idanarye/vim-vebugger'
+Plug 'Chiel92/vim-autoformat'
+
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
@@ -220,8 +221,11 @@ set incsearch                                       " incremental search (search
 set ai                                              " Auto indent
 set si                                              " Smart indent
 set tabstop=4
-set expandtab
 set shiftwidth=4
+set expandtab
+set cindent
+"set cinoptions+=L0
+set cinoptions+=g0
 
 " buffer
 set hidden
@@ -428,13 +432,19 @@ function! ShowDefaultCheatSheet()
 endfunction
 " }}}
 
-" Vimfiler {{{ "
+" Vimfiler {{{
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-" }}} Vimfiler "
+" }}}
+
+" vim-autoformat {{{
+noremap <F3> :Autoformat<CR>
+let g:formatdef_google_style_cpp = '"clang-format --style=\"{IndentWidth: 4, BasedOnStyle: Google, AccessModifierOffset: -4}\""'
+let g:formatters_cpp = ['google_style_cpp']
+" }}}  "
 
 " vim:foldmethod=marker:foldlevel=0
