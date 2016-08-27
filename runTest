@@ -1,0 +1,50 @@
+#!/bin/bash
+
+usage(){
+    echo "Usage: ${0} [-q|--quiet] suite-file program"
+}
+
+#if the number of input is not 2 or 3, display usage
+if [ ${#} -ne 2 -a ${#} -ne 3 ]; then
+    usage
+    exit 1
+elif [ ${#} -eq 2 ]; then
+    for test in `cat ${1}`; do
+        if [ ! -r ${test}.in -o ! -r ${test}.out ]; then
+            echo "missing or unreadable .in or .out files for test ${test}" >2
+            exit 2
+        fi
+
+        temp=`mktemp`
+        ${2} < ${test}.in > ${temp}
+        comp=`diff ${temp} ${test}.out`
+        if ! [ ${?} -eq 0 ]; then
+            echo Test failed: ${test}
+            echo Input:
+            echo `cat ${test}.in`
+            echo Expected:
+            echo `cat ${test}.out`
+            echo Actual:
+            echo `cat ${temp}`
+        fi
+        rm ${temp}
+    done
+else
+    if [ ${1} = "-q" -o ${1} = "--quiet" ];then
+        for test in `cat ${2}`; do
+            if [ ! -r ${test}.in -o ! -r ${test}.out ]; then
+                echo "missing or unreadable .in or .out files for test ${test}" >2
+                exit 2
+            else
+                temp=`mktemp`
+                ${3} < ${test}.in > ${temp}
+                comp=`diff ${temp} ${test}.out`
+                if ! [ ${?} -eq 0 ]; then
+                    echo Test failed: ${test}
+                fi
+            fi
+        done
+    else
+        usage
+    fi
+fi

@@ -1,0 +1,25 @@
+
+global !p
+def list_files():
+    files = []
+    for f in os.listdir('.'):
+        if f.endswith(('.cpp', '.h', '.cc')) and not f.startswith('.'):
+            files.append(f)
+    return ' '.join(files)
+endglobal
+
+snippet cm "sample cmake config" b
+cmake_minimum_required(VERSION 3.6)
+project(${1:`!v fnamemodify('.', ':p:h:t')`})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+set(SOURCE_FILES ${2:`!p snip.rv = list_files()`})
+add_executable(${3:$1} ${SOURCE_FILES})
+
+#files: `!p snip.rv = list_files()`
+endsnippet
+
+snippet fi "list source fiels" iw
+`!p snip.rv = list_files()`
+endsnippet

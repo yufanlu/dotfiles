@@ -86,3 +86,5 @@ fi
 alias hd="hexo clean; hexo g; hexo deploy"
 alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
+alias clion="/Applications/CLion.app/Contents/MacOS/clion"
+alias runTest="./dotfiles/runTest"

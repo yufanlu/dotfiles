@@ -8,7 +8,6 @@ def generate_label(text):
 
 def create_row_placeholders(snip):
 	# retrieving singlee line from current string and treat it like tabstops
-	# count
 	placeholders_amount = int(snip.buffer[snip.line].strip())
 
 	# erase current line
@@ -23,7 +22,8 @@ endglobal
 
 # documentclass {{{ # article
 snippet art "\documentclass{article}" b
-\documentclass[10pt,letter]{article}
+% {{{ Header
+\documentclass[10pt,letterpaper]{article}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -32,6 +32,7 @@ snippet art "\documentclass{article}" b
 \title{${2:title}}
 \author{${3:Yufan Lu}}
 \setlength\parindent{0pt}
+% {{{ theorem
 \newtheorem{theorem}{Theorem}[section]
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -42,6 +43,8 @@ snippet art "\documentclass{article}" b
 \newtheorem{property}[theorem]{Property}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+% }}}
+% }}}
 \begin{document}
 \maketitle
 $4
@@ -100,7 +103,6 @@ endsnippet
 snippet \< "||" iA
 \langle ${1:${VISUAL:content}} \rangle
 endsnippet
-
 # }}} pair #
 
 # arrow {{{ #
@@ -111,18 +113,15 @@ endsnippet
 snippet lra "\longrightarrow" i
 \longrightarrow
 endsnippet
-
-snippet os "\overset{}{}" i
-\overset{${1:above}}{${2:below}}
-endsnippet
 # }}} arrow #
+
 
 # text modifier {{{ #
 snippet tt "\text{}" i
 \text{ ${1:${VISUAL}} }
 endsnippet
 
-snippet ti "\text{}" i
+snippet ti "\textit{}" i
 \textit{ ${1:${VISUAL}} }
 endsnippet
 
@@ -134,7 +133,7 @@ snippet bf "\textbf{}" i
 \textbf{${1:${VISUAL}}}
 endsnippet
 
-snippet bs "\boldsymbol{}" i
+snippet bsy "\boldsymbol{}" i
 \boldsymbol{${1:${VISUAL}}}
 endsnippet
 # }}}
@@ -148,6 +147,14 @@ snippet '. "\cdot" iA
 endsnippet
 
 # math {{{
+snippet ubr "\underbrace" i
+\underbrace{${1:${VISUAL}}}_{$2}
+endsnippet
+
+snippet os "\overset{}{}" i
+\overset{${1:above}}{${2:below}}
+endsnippet
+
 snippet <= "\le" iA
 \le
 endsnippet
@@ -163,15 +170,6 @@ endsnippet
 snippet ^^ "^^" iA
 ^{${1:${VISUAL}}}
 endsnippet
-# }}}
-
-snippet ubr "\underbrace" i
-\underbrace{${1:${VISUAL}}}_{$2}
-endsnippet
-
-snippet "" "quote" iA
-\`\`${1:${VISUAL}}''
-endsnippet
 
 snippet == "&=" wA
 &=
@@ -184,7 +182,13 @@ endsnippet
 snippet +- "\pm" iA
 \pm
 endsnippet
+# }}}
 
+snippet "" "quote" iA
+\`\`${1:${VISUAL}}''
+endsnippet
+
+# math envir {{{ #
 snippet thm "theorem" b
 \begin{theorem}[${1:name}]
 	\label{def:${2:`!p snip.rv = generate_label(t[1])`}}
@@ -234,6 +238,7 @@ snippet exa "\begin{example}" b
     ${3:${VISUAL}}
 \end{example}
 endsnippet
+# }}}
 
 snippet mc "\mathcal{}" i
 \mathcal{${1:${VISUAL}}}
@@ -315,6 +320,14 @@ endsnippet
 
 snippet iff "iff" iw
 if and only if
+endsnippet
+
+snippet dp "\displaystyle" iw
+\displaystyle
+endsnippet
+
+snippet \= "\not=" iA
+\not=
 endsnippet
 
 ## vim:foldmethod=marker:foldlevel=0

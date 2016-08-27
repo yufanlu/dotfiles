@@ -18,6 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
@@ -26,13 +27,15 @@ Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'kshenoy/vim-signature', { 'for': ['cpp', 'python'] }
 Plug 'takac/vim-commandcaps'
-"Plug 'tpope/vim-speeddating'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
+if !has('nvim')
+    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
+endif
 
 " Search
 "Plug 'mileszs/ack.vim'
@@ -41,7 +44,6 @@ Plug 'ntpeters/vim-better-whitespace'
 " File system
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
-
 
 " Fuzzy Search
 Plug 'Shougo/unite.vim'
@@ -78,15 +80,11 @@ Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 " language packs
 "Plug 'sheerun/vim-polyglot' (put it here as reference)
 
-
 " Debugger and formater
-"Plug 'idanarye/vim-vebugger'
 Plug 'Chiel92/vim-autoformat'
-
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
-Plug 'jeaye/color_coded', {'for': ['cpp', 'c'], 'do': 'cmake . && make && make install'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
@@ -108,6 +106,10 @@ Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 "Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 "Plug 'mhartington/vim-typings', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+
+" Build System
+"Plug 'jalcine/cmake.vim'
+"Plug 'vhdirk/vim-cmake'
 
 
 " Database
@@ -439,7 +441,7 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-" }}}
+" " }}}}}
 
 " vim-autoformat {{{
 noremap <F3> :Autoformat<CR>
