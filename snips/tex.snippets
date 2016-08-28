@@ -51,6 +51,34 @@ $4
 \end{document}
 endsnippet
 
+snippet bea "\documentclass[10pt]{beamer}" b
+% {{{ Header
+\documentclass[10pt]{beamer}
+\usepackage{pgfpages}
+\usepackage{lmodern}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\setbeameroption{show notes on second screen}
+\newcounter{srcPage}
+\addtocounter{srcPage}{1}
+\newcommand{\srcFile}{1_src.pdf}
+\newcommand{\slide}[1]{
+    \begin{frame}
+        \includegraphics[page=\arabic{srcPage}, width=.75\paperwidth]{1_src.pdf}
+        \stepcounter{srcPage}
+        \note{\vspace{5mm}#1}
+    \end{frame}
+}
+\setbeamertemplate{note page}[plain]
+% }}}
+\begin{document}
+\slide{
+$1
+}
+\end{document}
+endsnippet
+
 # }}}
 
 # pairs {{{ # $|([{<

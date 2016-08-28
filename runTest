@@ -33,7 +33,7 @@ elif [ ${#} -eq 1 ]; then
         exit 1
     fi
 elif [ ${#} -eq 2 ]; then
-    for test in `cat ${TEST_ROOT}/${1}`; do
+    for test in `cat ${1}`; do
         if [ ! -r ${TEST_INPUT}/${test}.in -o ! -r ${TEST_OUTPUT}/${test}.out ]; then
             echo "missing or unreadable .in or .out files for test ${test}" >2
             exit 2
@@ -55,7 +55,7 @@ elif [ ${#} -eq 2 ]; then
     done
 else
     if [ ${1} = "-q" -o ${1} = "--quiet" ];then
-        for test in `cat ${TEST_ROOT}/${2}`; do
+        for test in `cat ${2}`; do
             if [ ! -r ${TEST_INPUT}/${test}.in -o ! -r ${TEST_OUTPUT}/${test}.out ]; then
                 echo "missing or unreadable .in or .out files for test ${test}" >2
                 exit 2

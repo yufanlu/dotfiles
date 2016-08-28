@@ -108,8 +108,7 @@ Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 " Build System
-"Plug 'jalcine/cmake.vim'
-"Plug 'vhdirk/vim-cmake'
+Plug 'vhdirk/vim-cmake'
 
 
 " Database
@@ -256,7 +255,7 @@ inoremap <c-k> <Nop>
 inoremap <c-l> <Nop>
 
 " F5 to compile
-map <F5> :make!<cr>
+map <F5> :Make!<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
@@ -448,5 +447,20 @@ noremap <F3> :Autoformat<CR>
 let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
 let g:formatters_cpp = ['google_style_cpp']
 " }}}  "
+
+function! CreateBuildDir()
+    if !isdirectory('build')
+        call mkdir('build')
+        echo 'build directory created'
+    else
+        echo 'build directory already exists'
+    endif
+endfunction
+
+command! CreateBuildDir call CreateBuildDir()
+
+" want to use shell aliases in command line
+" set shellcmdflag=-ic
+"autocmd FileType cpp let b:dispatch = 'runTest %'
 
 " vim:foldmethod=marker:foldlevel=0
