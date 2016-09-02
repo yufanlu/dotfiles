@@ -18,6 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
+Plug 'godlygeek/tabular'
 Plug 'tpope/vim-dispatch'
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
 Plug 'mhinz/vim-startify'
@@ -70,7 +71,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'reedes/vim-pencil', {'for': 'markdown'}
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 Plug 'kannokanno/previm', {'for': 'markdown'}
-Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
@@ -97,6 +97,9 @@ Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'glench/vim-jinja2-syntax', {'for': ['html', 'jinja']}
+
+" R
+Plug 'jalvesaq/Nvim-R' , {'for': 'r'}
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -256,6 +259,7 @@ inoremap <c-l> <Nop>
 
 " F5 to compile
 map <F5> :Make!<cr>
+map <c-b> :Make!<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
@@ -370,7 +374,7 @@ nnoremap <leader>le :VimtexError<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
-au FileType tex setlocal spell linebreak norelativenumber
+au FileType tex setlocal spell linebreak norelativenumber nonumber
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}

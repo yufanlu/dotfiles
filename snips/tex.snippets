@@ -51,7 +51,7 @@ $4
 \end{document}
 endsnippet
 
-snippet bea "\documentclass[10pt]{beamer}" b
+snippet slide "\documentclass[10pt]{beamer}" b
 % {{{ Header
 \documentclass[10pt]{beamer}
 \usepackage{pgfpages}
@@ -77,6 +77,24 @@ snippet bea "\documentclass[10pt]{beamer}" b
 $1
 }
 \end{document}
+endsnippet
+
+snippet bea "presentation" b
+% {{{ Header
+\documentclass[10pt]{beamer}
+\usepackage{pgfpages}
+\usepackage{lmodern}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\title{${1:title}}
+\author{${2:Yufan Lu}}
+% }}}
+\begin{document}
+\maketitle
+\begin{frame}
+$3
+\end{frame}
 endsnippet
 
 # }}}
@@ -214,6 +232,10 @@ endsnippet
 
 snippet "" "quote" iA
 \`\`${1:${VISUAL}}''
+endsnippet
+
+snippet `^ "\hat{}" iA
+\hat{$1}
 endsnippet
 
 # math envir {{{ #
@@ -356,6 +378,12 @@ endsnippet
 
 snippet \= "\not=" iA
 \not=
+endsnippet
+
+snippet note "\note" b
+\note{
+	$1
+}
 endsnippet
 
 ## vim:foldmethod=marker:foldlevel=0
