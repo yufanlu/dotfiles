@@ -38,6 +38,9 @@ if !has('nvim')
     Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
 endif
 
+" Tag
+Plug 'ludovicchabant/vim-gutentags'
+
 " Search
 "Plug 'mileszs/ack.vim'
 "Plug 'haya14busa/incsearch.vim'
@@ -46,9 +49,11 @@ endif
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 
-" Fuzzy Search
+" Unite and related plugins
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
+Plug 'tsukkee/unite-tag'
+Plug 'ujihisa/unite-colorscheme'
 
 " Git
 Plug 'tpope/vim-fugitive'
