@@ -8,7 +8,6 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " UI
-Plug 'mhartington/oceanic-next'
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
 Plug 'mhartington/oceanic-next'
@@ -20,13 +19,13 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-dispatch'
-Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python'] }
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
-Plug 'kshenoy/vim-signature', { 'for': ['cpp', 'python'] }
+Plug 'kshenoy/vim-signature'
 Plug 'takac/vim-commandcaps'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
@@ -60,7 +59,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'r'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -79,14 +78,10 @@ Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
-
 "Plug 'reedes/vim-wordy'
 
-" language packs
-"Plug 'sheerun/vim-polyglot' (put it here as reference)
-
 " Debugger and formater
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python'] }
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
@@ -100,8 +95,8 @@ Plug 'easymotion/vim-easymotion', { 'for': ['tex']}
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
-Plug 'glench/vim-jinja2-syntax', {'for': ['html', 'jinja']}
+"Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
+"Plug 'glench/vim-jinja2-syntax', {'for': ['html', 'jinja']}
 
 " R
 Plug 'jalvesaq/Nvim-R' , {'for': 'r'}
@@ -117,7 +112,6 @@ Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 " Build System
 Plug 'vhdirk/vim-cmake'
-
 
 " Database
 "Plug 'krisajenkins/vim-pipe'
@@ -157,6 +151,8 @@ set t_Co=256
 if has('nvim')
    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
    colorscheme OceanicNext
+   let g:oceanic_next_terminal_italic = 1
+   let g:oceanic_next_terminal_bold = 1
 else
    let base16colorspace=256
    colorscheme base16-oceanicnext
@@ -245,6 +241,9 @@ set foldnestmax=10                                  " max 10 depth
 set foldmethod=syntax                               " fold based on indent level
 set foldlevelstart=10                               " start with fold level of 1
 nnoremap <space> za                                 " space open/closes folds
+
+" Python Host Prog Setting
+let g:python_host_prog = '/usr/local/bin/python'
 
 " }}}
 
@@ -354,8 +353,8 @@ let g:tex_conceal = 'dbmg'
 "let g:tex_conceal = ''
 "let g:vimtex_latexmk_continuous  = 0
 "let g:vimtex_latexmk_background  = 1
-"let g:vimtex_imaps_disabled = [']]']
 let g:tex_no_error = 1
+let g:vimtex_fold_manual = 1
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
@@ -456,6 +455,10 @@ noremap <F3> :Autoformat<CR>
 let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
 let g:formatters_cpp = ['google_style_cpp']
 " }}}  "
+
+" {{{ FastFold
+let g:tex_fold_enabled = 1
+" }}}
 
 function! CreateBuildDir()
     if !isdirectory('build')
