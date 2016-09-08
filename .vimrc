@@ -62,7 +62,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'r'] }
 
 " Snippets
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips', { 'commit': 'e8c485e', 'frozen': 1 }
 Plug 'honza/vim-snippets'
 
 " Autocomplete
@@ -378,7 +378,7 @@ nnoremap <leader>le :VimtexError<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
-au FileType tex setlocal spell linebreak norelativenumber nonumber
+au FileType tex setlocal spell linebreak norelativenumber
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -470,9 +470,5 @@ function! CreateBuildDir()
 endfunction
 
 command! CreateBuildDir call CreateBuildDir()
-
-" want to use shell aliases in command line
-" set shellcmdflag=-ic
-"autocmd FileType cpp let b:dispatch = 'runTest %'
 
 " vim:foldmethod=marker:foldlevel=0
