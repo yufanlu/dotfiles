@@ -133,9 +133,7 @@ snippet [] "[]" iA
 endsnippet
 
 snippet \[ "\[ \]" iA
-% {{{ \[equation\]
 \[ ${1:${VISUAL:content}} \]
-% }}}
 endsnippet
 
 snippet [[ "\left[...\right]" iA
@@ -193,6 +191,10 @@ snippet '. "\cdot" iA
 endsnippet
 
 # math {{{
+snippet bin "\binom{n}{k}" i
+\binom{$1}{$2}
+endsnippet
+
 snippet ubr "\underbrace" i
 \underbrace{${1:${VISUAL}}}_{$2}
 endsnippet
@@ -384,5 +386,6 @@ snippet note "\note" b
 	$1
 }
 endsnippet
+
 
 ## vim:foldmethod=marker:foldlevel=0
