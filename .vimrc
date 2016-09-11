@@ -62,11 +62,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'r'] }
 
 " Snippets
-Plug 'SirVer/ultisnips', { 'commit': 'e8c485e', 'frozen': 1 }
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --tern-completer'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer'}
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
