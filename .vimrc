@@ -319,7 +319,6 @@ nnoremap <silent> <leader>gr :Gremove<cr>
 " Syntastic {{{
 let g:syntastic_tex_checkers = 0
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_cpp_compiler_options = " -std=c++11 "
 " }}}
 
 " YCM and UltiSnips {{{
