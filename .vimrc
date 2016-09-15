@@ -42,10 +42,8 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Search
 "Plug 'mileszs/ack.vim'
-"Plug 'haya14busa/incsearch.vim'
 
 " File system
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 
 " Unite and related plugins
@@ -78,7 +76,6 @@ Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
-"Plug 'reedes/vim-wordy'
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python'] }
@@ -95,35 +92,25 @@ Plug 'easymotion/vim-easymotion', { 'for': ['tex']}
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-"Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
-"Plug 'glench/vim-jinja2-syntax', {'for': ['html', 'jinja']}
-
-" R
-Plug 'jalvesaq/Nvim-R' , {'for': 'r'}
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'groenewege/vim-less', {'for': 'less'}
 
+" Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 "Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 "Plug 'mhartington/vim-typings', {'for': 'typescript'}
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 " Build System
 Plug 'vhdirk/vim-cmake'
 
-" Database
-"Plug 'krisajenkins/vim-pipe'
-"Plug 'vim-scripts/dbext.vim'
-
 " OmniSharp
 "Plug 'OmniSharp/omnisharp-vim'
 
-
 " plugins to learn
-"Plug 'ledger/vim-ledger'
-"Plug 'wellle/targets.vim'
+Plug 'ledger/vim-ledger'
 
 call plug#end()
 
