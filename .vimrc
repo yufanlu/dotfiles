@@ -34,7 +34,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
 if !has('nvim')
-    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
+    Plug 'bbchung/clighter8'
 endif
 
 " Tag
@@ -49,22 +49,20 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 " Unite and related plugins
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
-Plug 'tsukkee/unite-tag'
-Plug 'ujihisa/unite-colorscheme'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'r'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -87,7 +85,7 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
 Plug 'matze/vim-tex-fold', {'for': 'tex' }
-Plug 'easymotion/vim-easymotion', { 'for': ['tex']}
+Plug 'easymotion/vim-easymotion', { 'for': 'tex' }
 
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
@@ -345,6 +343,7 @@ let g:vimtex_fold_manual = 1
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
+            \ 'chapter',
             \ 'cases',
             \ 'claim',
             \ 'lemma',
@@ -446,6 +445,10 @@ let g:formatters_cpp = ['google_style_cpp']
 " {{{ FastFold
 let g:tex_fold_enabled = 1
 " }}}
+
+" Cligher {{{ "
+let g:clighter8_libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+" }}} Cligher "
 
 function! CreateBuildDir()
     if !isdirectory('build')
