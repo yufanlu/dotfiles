@@ -461,4 +461,11 @@ endfunction
 
 command! CreateBuildDir call CreateBuildDir()
 
+function! UseGotham()
+    colorscheme gotham256
+    AirlineTheme gotham256
+endfunction
+
+command! Gotham call UseGotham()
+
 " vim:foldmethod=marker:foldlevel=0
