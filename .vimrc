@@ -34,7 +34,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
 if !has('nvim')
-    Plug 'bbchung/clighter8'
+    "Plug 'bbchung/clighter8'
+    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
 endif
 
 " Tag
@@ -126,8 +127,8 @@ set showcmd                                   " show command in bottom bar
 set lazyredraw                                " redraw only when we need to.
 set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
-set guifont=Sauce\ Code\ Powerline\ Light:h11 " font face/size
-"set guifont=Sauce\ Code\ Powerline:h11
+"set guifont=Sauce\ Code\ Powerline\ Light:h11
+set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 
 " colorscheme
 set t_Co=256
@@ -253,6 +254,9 @@ map <c-b> :Make!<cr>
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <c-e><c-l> :so ~/.vimrc<cr>
+
+" Fold All but current
+nnoremap <leader>f zMzv
 " }}}
 
 " Tagbar {{{
@@ -364,7 +368,7 @@ nnoremap <leader>le :VimtexError<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
-au FileType tex setlocal spell linebreak norelativenumber
+au FileType tex setlocal spell linebreak "norelativenumber
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -446,9 +450,9 @@ let g:formatters_cpp = ['google_style_cpp']
 let g:tex_fold_enabled = 1
 " }}}
 
-" Cligher {{{ "
-let g:clighter8_libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-" }}} Cligher "
+"" Cligher {{{ "
+"let g:clighter8_libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+"" }}} Cligher "
 
 function! CreateBuildDir()
     if !isdirectory('build')
@@ -467,5 +471,7 @@ function! UseGotham()
 endfunction
 
 command! Gotham call UseGotham()
+
+nnoremap <leader>g :Gotham<cr>
 
 " vim:foldmethod=marker:foldlevel=0
