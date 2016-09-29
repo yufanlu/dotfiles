@@ -86,7 +86,6 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
 Plug 'matze/vim-tex-fold', {'for': 'tex' }
-Plug 'easymotion/vim-easymotion', { 'for': 'tex' }
 
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
@@ -99,8 +98,6 @@ Plug 'groenewege/vim-less', {'for': 'less'}
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-"Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-"Plug 'mhartington/vim-typings', {'for': 'typescript'}
 
 " Build System
 Plug 'vhdirk/vim-cmake'
