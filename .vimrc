@@ -349,8 +349,10 @@ let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
             \ 'chapter',
             \ 'matrix',
+            \ 'note',
             \ 'cases',
             \ 'claim',
+            \ 'remark',
             \ 'lemma',
             \ 'proof',
             \ 'itemize',
