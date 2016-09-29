@@ -348,6 +348,7 @@ let g:vimtex_fold_manual = 1
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
             \ 'chapter',
+            \ 'matrix',
             \ 'cases',
             \ 'claim',
             \ 'lemma',
