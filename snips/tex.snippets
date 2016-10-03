@@ -181,6 +181,10 @@ snippet bf "\textbf{}" i
 \textbf{${1:${VISUAL}}}
 endsnippet
 
+snippet mf "\mathbf{}" i
+\mathbf{${1:${VISUAL}}}
+endsnippet
+
 snippet bsy "\boldsymbol{}" i
 \boldsymbol{${1:${VISUAL}}}
 endsnippet
@@ -290,8 +294,11 @@ snippet def "\begin{definition}" b
 endsnippet
 
 snippet exa "\begin{example}" b
-\begin{example}${2:[${1:name}]}
-    ${3:${VISUAL}}
+\begin{example}
+    ${1:${VISUAL}}
+	\begin{solution}
+		$2
+	\end{solution}
 \end{example}
 endsnippet
 # }}}
