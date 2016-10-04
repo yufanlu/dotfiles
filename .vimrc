@@ -63,7 +63,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d' }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -77,7 +77,7 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 
 " Debugger and formater
-Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python'] }
+Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
