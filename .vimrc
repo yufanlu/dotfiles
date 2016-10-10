@@ -63,7 +63,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d', 'frozen': 1 }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -344,6 +344,7 @@ let g:vimtex_fold_manual = 1
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
+            \ 'center',
             \ 'chapter',
             \ 'matrix',
             \ 'note',
