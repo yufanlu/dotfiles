@@ -90,6 +90,8 @@ Plug 'matze/vim-tex-fold', {'for': 'tex' }
 " Python
 Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
+Plug 'klen/python-mode', {'for': 'python'}
+
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -312,7 +314,7 @@ let g:ycm_python_binary_path    = '/usr/local/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
 "let g:ycm_autoclose_preview_window_after_insertion  = 1
-"let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 set omnifunc=syntaxcomplete#Complete
 
 " make YCM compatible with UltiSnips
