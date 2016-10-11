@@ -63,7 +63,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d', 'frozen': 1 }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -126,6 +126,7 @@ set showcmd                                   " show command in bottom bar
 set lazyredraw                                " redraw only when we need to.
 set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
+set wildmenu
 "set guifont=Sauce\ Code\ Powerline\ Light:h11
 set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 
@@ -346,6 +347,7 @@ let g:vimtex_fold_manual = 1
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
+            \ 'center',
             \ 'chapter',
             \ 'matrix',
             \ 'note',
