@@ -124,6 +124,7 @@ set showcmd                                   " show command in bottom bar
 set lazyredraw                                " redraw only when we need to.
 set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
+set wildmenu
 "set guifont=Sauce\ Code\ Powerline\ Light:h11
 set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 
