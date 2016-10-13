@@ -248,8 +248,8 @@ inoremap <c-k> <Nop>
 inoremap <c-l> <Nop>
 
 " F5 to compile
-map <F5> :Make!<cr>
-map <c-b> :Make!<cr>
+map <F5> :Make<cr>
+map <c-b> :Make<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
