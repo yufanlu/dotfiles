@@ -1,11 +1,11 @@
-snippet yufan "assgnment header" b
-// Financial Computing 1, Fall 2016
-// Homework ${1:1.1}
-// File: ${2:`!v expand('%:t')`}
-// Authors: Yufan Lu and Shenchao Qiu
-// Andrew IDs: yufanl and shenchaq
-// Description: ${3}
-endsnippet
+#snippet yufan "assgnment header" b
+#// Financial Computing 1, Fall 2016
+#// Homework ${1:1.1}
+#// File: ${2:`!v expand('%:t')`}
+#// Authors: Yufan Lu and Shenchao Qiu
+#// Andrew IDs: yufanl and shenchaq
+#// Description: ${3}
+#endsnippet
 
 snippet std "use namespace std" b
 using namespace std;
@@ -24,4 +24,15 @@ public:
 private:
 	$3
 };
+endsnippet
+
+snippet mainn "int main()" b
+int main(){
+	$1
+	return 0;
+}
+endsnippet
+
+snippet part "-- part () --" w
+------- part(${1}) -------
 endsnippet
