@@ -33,10 +33,15 @@ int main(){
 }
 endsnippet
 
-snippet part "-- part () --" w
-------- part(${1}) -------
+snippet part "---- part () ----" w
+cout << "------- ${2:part(${1})} -------" << endl;
 endsnippet
 
 snippet cout "cout ... endl" b
 cout << $1 << endl;
 endsnippet
+
+snippet op "operator" w
+operator${1:==}
+endsnippet
+
