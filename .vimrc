@@ -63,7 +63,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'commit': 'f928f7d', 'frozen': 1 }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }

@@ -21,7 +21,7 @@ endglobal
 # }}} some util functions #
 
 # documentclass {{{ # article
-snippet art "\documentclass{article}" b
+snippet art "\documentclass[10pt]{article}" b
 % {{{ Header
 \documentclass[10pt,letterpaper]{article}
 \usepackage{amsthm}
@@ -50,56 +50,10 @@ snippet art "\documentclass{article}" b
 $4
 \end{document}
 endsnippet
-
-snippet slide "\documentclass[10pt]{beamer}" b
-% {{{ Header
-\documentclass[10pt]{beamer}
-\usepackage{pgfpages}
-\usepackage{lmodern}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\setbeameroption{show notes on second screen}
-\newcounter{srcPage}
-\addtocounter{srcPage}{1}
-\newcommand{\srcFile}{1_src.pdf}
-\newcommand{\slide}[1]{
-    \begin{frame}
-        \includegraphics[page=\arabic{srcPage}, width=.75\paperwidth]{1_src.pdf}
-        \stepcounter{srcPage}
-        \note{\vspace{5mm}#1}
-    \end{frame}
-}
-\setbeamertemplate{note page}[plain]
-% }}}
-\begin{document}
-\slide{
-$1
-}
-\end{document}
-endsnippet
-
-snippet bea "presentation" b
-% {{{ Header
-\documentclass[10pt]{beamer}
-\usepackage{pgfpages}
-\usepackage{lmodern}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\title{${1:title}}
-\author{${2:Yufan Lu}}
-% }}}
-\begin{document}
-\maketitle
-\begin{frame}
-$3
-\end{frame}
-endsnippet
-
 # }}}
 
-# pairs {{{ # $|([{<
+# pairs {{{
+
 snippet $$ "$$" iA
 \$${1:${VISUAL:content}}\$
 endsnippet
@@ -108,45 +62,34 @@ snippet || "||" iA
 |${1:${VISUAL:content}}|
 endsnippet
 
-snippet \| "||.||" iA
-||${1:${VISUAL:content}}||
-endsnippet
-
-snippet {} "{}" iA
-{${1:${VISUAL:content}}}
-endsnippet
-
 snippet () "()" iA
 (${1:${VISUAL:content}})
 endsnippet
 
-snippet \( "\( \)" iA
+snippet \( "\( \)" iw
 \(${1:${VISUAL:content}}\)
 endsnippet
 
-snippet (( "\left(...\right)" iA
+snippet (( "\left(...\right)" iw
 \left(${1:${VISUAL:content}}\right)
 endsnippet
 
-snippet [] "[]" iA
-[${1:${VISUAL:content}}]
-endsnippet
-
-snippet \[ "\[ \]" iA
+snippet \[ "\[ \]" iw
 \[ ${1:${VISUAL:content}} \]
 endsnippet
 
-snippet [[ "\left[...\right]" iA
+snippet [[ "\left[...\right]" iw
 \left[${1:${VISUAL:content}}\right]
 endsnippet
 
-snippet \{ "\{ \}" iA
+snippet \{ "\{ \}" iw
 \\{${1:${VISUAL:content}}\\}
 endsnippet
 
-snippet \< "||" iA
+snippet \< "||" iw
 \langle ${1:${VISUAL:content}} \rangle
 endsnippet
+
 # }}} pair #
 
 # arrow {{{ #
@@ -157,20 +100,16 @@ endsnippet
 snippet => "\to" iA
 \Rightarrow
 endsnippet
-
-snippet lra "\longrightarrow" i
-\longrightarrow
-endsnippet
 # }}} arrow #
 
+# text modifier {{{
 
-# text modifier {{{ #
 snippet tt "\text{}" i
-\text{ ${1:${VISUAL}} }
+\text{${1:${VISUAL}}}
 endsnippet
 
 snippet ti "\textit{}" i
-\textit{ ${1:${VISUAL}} }
+\textit{${1:${VISUAL}}}
 endsnippet
 
 snippet emp "\emph{}" i
@@ -185,20 +124,57 @@ snippet mf "\mathbf{}" i
 \mathbf{${1:${VISUAL}}}
 endsnippet
 
-snippet bsy "\boldsymbol{}" i
-\boldsymbol{${1:${VISUAL}}}
+snippet mc "\mathcal{}" i
+\mathcal{${1:${VISUAL}}}
 endsnippet
-# }}}
+
+snippet mb "\mathbb{}" i
+\mathbb{${1:${VISUAL}}}
+endsnippet
 
 snippet ... "\dots" iA
 \dots
+endsnippet
+
+snippet iff "iff" iw
+\textit{iff}
+endsnippet
+# }}}
+
+# math {{{
+
+snippet dp "\displaystyle" iw
+\displaystyle
+endsnippet
+
+snippet int "\int" iw
+\int^{$1}_{$2}
+endsnippet
+
+snippet b\ "\bigg|" iw
+\bigg|^{$1}_{$2}
+endsnippet
+
+snippet vv "\vv{}" iw
+\vv{$1}
+endsnippet
+
+snippet ot "\tilde{}" iw
+\tilde{$1}
+endsnippet
+
+snippet \= "\not=" iA
+\not=
+endsnippet
+
+snippet hat "\hat{}" i
+\hat{${1:${VISUAL:content}}}
 endsnippet
 
 snippet '. "\cdot" iA
 \cdot
 endsnippet
 
-# math {{{
 snippet bin "\binom{n}{k}" i
 \binom{$1}{$2}
 endsnippet
@@ -209,6 +185,10 @@ endsnippet
 
 snippet os "\overset{}{}" i
 \overset{${1:above}}{${2:below}}
+endsnippet
+
+snippet us "\underset" i
+\underset{${1:under}}{${2:above}}
 endsnippet
 
 snippet <= "\le" iA
@@ -231,12 +211,16 @@ snippet == "&=" wA
 &=
 endsnippet
 
-snippet &== "&=" wA
-&=&
-endsnippet
-
 snippet +- "\pm" iA
 \pm
+endsnippet
+
+snippet `{ "\subset" iw
+\subset
+endsnippet
+
+snippet `{= "\subseteq" iw
+\subseteq
 endsnippet
 # }}}
 
@@ -303,15 +287,7 @@ snippet exa "\begin{example}" b
 endsnippet
 # }}}
 
-snippet mc "\mathcal{}" i
-\mathcal{${1:${VISUAL}}}
-endsnippet
-
-snippet mb "\mathbb{}" i
-\mathbb{${1:${VISUAL}}}
-endsnippet
-
-snippet \\m "\\[mm]" iA
+snippet \\m "\\[mm]" iw
 \\\\[${1:2mm}]
 endsnippet
 
@@ -321,20 +297,13 @@ snippet enumr "enumerate with resume" b
 \end{enumerate}
 endsnippet
 
-snippet its "itemsep" i
-\itemsep -.5mm
-endsnippet
-
 snippet cas "\begin{case}" i
 \begin{cases}
 	${1:value}, &\textit{ if } ${2:cond} \\\\
-	${3:value}, &\textit{ otherwirse}
+	${3:value}, &\textit{ otherwirse }
 \end{cases}
 endsnippet
 
-snippet `{ "\subset" iA
-\subset
-endsnippet
 
 post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
@@ -346,18 +315,6 @@ snippet mcol "\multicols{}" b
 	${2:${VISUAL:content}}
 	\columnbreak
 \end{multicols}
-endsnippet
-
-snippet us "\underset" i
-\underset{${1:under}}{${2:above}}
-endsnippet
-
-snippet hat "\hat{}" i
-\hat{${1:${VISUAL:content}}}
-endsnippet
-
-snippet `/ "\frac{}{}" iA
-\frac{${1:num}}{${2:denom}}
 endsnippet
 
 snippet sec "\section" b
@@ -380,39 +337,10 @@ snippet ssub "\subsubsection" b
 ${3:${VISUAL}}
 endsnippet
 
-snippet iff "iff" iw
-\textit{iff}
-endsnippet
-
-snippet dp "\displaystyle" iw
-\displaystyle
-endsnippet
-
-snippet \= "\not=" iA
-\not=
-endsnippet
-
 snippet note "note envir" b
 \begin{note}
 	$1
 \end{note}
 endsnippet
 
-snippet int "\int" iw
-\int^{$1}_{$2}
-endsnippet
-
-snippet b\ "\bigg|" iw
-\bigg|^{$1}_{$2}
-endsnippet
-
-snippet vv "\vv{}" iw
-\vv{$1}
-endsnippet
-
-snippet ot "\tilde{}" iw
-\tilde{$1}
-endsnippet
-
-
-## vim:foldmethod=marker:foldlevel=0
+# vim:foldmethod=syntax:foldlevel=0
