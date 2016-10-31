@@ -256,11 +256,14 @@ nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
 " Fold All but current
-nnoremap <leader>f zMzv
+nnoremap <leader>f zMzvzz
 " }}}
 
 " Tagbar {{{
 nmap <F8> :TagbarToggle<cr>
+let g:tagbar_previewwin_pos = "aboveleft"
+let g:tagbar_width = 50
+let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
 " }}}
 
 " vim-airline {{{
@@ -458,6 +461,7 @@ let g:tex_fold_enabled = 1
 "let g:clighter8_libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 "" }}} Cligher "
 
+" Custom functions {{{ "
 function! CreateBuildDir()
     if !isdirectory('build')
         call mkdir('build')
@@ -477,5 +481,13 @@ endfunction
 command! Gotham call UseGotham()
 
 nnoremap <leader>g :Gotham<cr>
+
+"let g:num_cycle_status = 1
+
+"function! CycleNum()
+
+"endfunction
+
+" }}} Custom functions "
 
 " vim:foldmethod=marker:foldlevel=0
