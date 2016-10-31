@@ -33,11 +33,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
-if !has('nvim')
-    "Plug 'bbchung/clighter8'
-    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
-endif
-
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -82,6 +77,8 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
+
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
@@ -328,7 +325,6 @@ let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsSnippetsDir = "~/dotfiles/snips"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 " }}}
 
