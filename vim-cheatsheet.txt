@@ -2,9 +2,6 @@
 vim-table mode {{{
 TableModeToggle          <leader>tm    N
 }}}
-delimitMate {{{
-jump over match          <S-TAB>       I
-}}}
 vim-emmet {{{
 trigger emmet            <c-y>,       NI
 }}}
@@ -30,25 +27,16 @@ with height              z{height}<CR> N
 with cursor at center    zz            N
 }}}
 vimtex {{{1
-env-delete               dse           N
-env-delete-math          ds$           N
-env-change               cse           N
-env-change-math          cs$           N
 env-toggle-star          tse           N
-delim-toggle-modifier    tsd          NC
 cmd-create               <F7>         NI
-delim-close              ]]            I
-ac                       ac          NCO
-ic                       ic          NCO
-ad                       ad          NCO
-id                       id          NCO
-ae                       ae          NCO
-ie                       ie          NCO
-a$                       a$          NCO
-i$                       i$          NCO
-%                        %           NCO
-]]                       ]]          NCO
-][                       ][          NCO
-[]                       []          NCO
-[[                       [[          NCO
+
+Fugitive {{{
+git st                   Gstatus       N
+git diff                 Gdiff         N
+git commit               Gcommit       N
+git blame                Gblame        N
+git log                  Glog          N
+git push                 Git push      N
+git write                Gwrite        N
+git remove               Gremove       N
 }}}

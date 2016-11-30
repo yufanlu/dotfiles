@@ -20,18 +20,19 @@ Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-dispatch'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
-Plug 'kshenoy/vim-signature'
+"Plug 'kshenoy/vim-signature'
 Plug 'takac/vim-commandcaps'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'easymotion/vim-easymotion'
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
@@ -44,7 +45,7 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 
 " Unite and related plugins
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
+"Plug 'Shougo/unite-outline'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -70,6 +71,9 @@ Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for': ['pandoc', 'rmarkdown']}
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['pandoc', 'rmarkdown']}
+Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
@@ -131,15 +135,8 @@ set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 set t_Co=256
 "colorscheme gotham256
 
-if has('nvim')
-   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-   colorscheme OceanicNext
-   let g:oceanic_next_terminal_italic = 1
-   let g:oceanic_next_terminal_bold = 1
-else
-   let base16colorspace=256
-   colorscheme base16-oceanicnext
-endif
+let base16colorspace=256
+colorscheme base16-oceanicnext
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -183,10 +180,8 @@ let mapleader   = ","
 let g:mapleader = ","
 
 " Navigation key configuration
-map j gj
-map k gk
-map <c-j> <c-x>
-map <c-k> <c-a>
+"map j gj
+"map k gk
 nnoremap <c-h> g0
 nnoremap <c-l> g$
 set whichwrap+=<,>,h,l
@@ -236,7 +231,6 @@ let g:python_host_prog = '/usr/local/bin/python'
 vnoremap H ^
 vnoremap L $
 
-
 " Don't go to Ex mode
 nnoremap Q <nop>
 inoremap <c-h> <Nop>
@@ -245,7 +239,6 @@ inoremap <c-k> <Nop>
 inoremap <c-l> <Nop>
 
 " F5 to compile
-map <F5> :Make<cr>
 map <c-b> :Make<cr>
 
 " Editing/Loading .vimrc
@@ -257,7 +250,8 @@ nnoremap <leader>f zMzvzz
 " }}}
 
 " Tagbar {{{
-nmap <F8> :TagbarToggle<cr>
+nnoremap <F8> :TagbarToggle<cr>
+nnoremap <c-e><c-o> :TagbarToggle<cr>
 let g:tagbar_previewwin_pos = "aboveleft"
 let g:tagbar_width = 50
 let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
@@ -288,21 +282,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " Unite {{{
 nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
 nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
-nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
-"nnoremap <c-e><c-f> :Unite -start-insert -direction=belowright grep:.<cr>
-"let g:unite_source_grep_command = 'ag'
-" }}}
-
-" Fugitive {{{
-nnoremap <silent> <leader>gs :Gstatus<cr>
-nnoremap <silent> <leader>gd :Gdiff<cr>
-nnoremap <silent> <leader>gc :Gcommit<cr>
-nnoremap <silent> <leader>gb :Gblame<cr>
-nnoremap <silent> <leader>gl :Glog<cr>
-nnoremap <silent> <leader>gp :Git push<cr>
-nnoremap <silent> <leader>gw :Gwrite<cr>
-nnoremap <silent> <leader>gr :Gremove<cr>
-"autocmd BufReadPost fugitive://* set bufhidden=delete
+"nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
 " }}}
 
 " Syntastic {{{
@@ -453,9 +433,9 @@ let g:formatters_cpp = ['google_style_cpp']
 let g:tex_fold_enabled = 1
 " }}}
 
-"" Cligher {{{ "
-"let g:clighter8_libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-"" }}} Cligher "
+" pandoc {{{ "
+au BufRead,BufNewFile *.pdc set filetype=pandoc
+" }}} pandoc "
 
 " Custom functions {{{ "
 function! CreateBuildDir()
@@ -474,7 +454,13 @@ function! UseGotham()
     AirlineTheme gotham256
 endfunction
 
+function! UseOceanic()
+    colorscheme base16-oceanicnext
+    AirlineTheme oceanicnext
+endfunction
+
 command! Gotham call UseGotham()
+command! Oceanic call UseOceanic()
 
 nnoremap <leader>g :Gotham<cr>
 
