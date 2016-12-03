@@ -76,7 +76,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['pandoc', 'rmarkdown']}
 Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
 
 " Debugger and formater
-Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
+Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
@@ -84,9 +84,8 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
 
 " Ocaml
-Plug 'let-def/ocp-indent-vim', {'for': 'ocaml'}
-Plug 'rgrinberg/vim-ocaml', {'for': 'ocaml'}
-
+Plug '~/.opam/system/share/merlin', {'rtp': 'vim', 'for': 'ocaml'}
+Plug '~/.opam/system/share/ocp-indent', {'rtp': 'vim', 'for': 'ocaml'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
@@ -251,6 +250,10 @@ nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
 " Fold All but current
 nnoremap <leader>f zMzvzz
+" }}}
+
+" vim-Plug {{{
+command! PU PlugUpdate | PlugUpgrade
 " }}}
 
 " Tagbar {{{
@@ -432,17 +435,19 @@ let g:vimfiler_marked_file_icon = '*'
 noremap <F3> :Autoformat<CR>
 let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
 let g:formatters_cpp = ['google_style_cpp']
+let g:formatdef_ocp_indent_auto_formatter = '"ocp-indent"'
+let g:formatters_ocaml = ['ocp_indent_auto_formatter']
 " }}}  "
 
 " {{{ FastFold
 let g:tex_fold_enabled = 1
 " }}}
 
-" pandoc {{{ "
+" pandoc {{{
 au BufRead,BufNewFile *.pdc set filetype=pandoc
-" }}} pandoc "
+" }}}
 
-" Custom functions {{{ "
+" Custom functions {{{
 function! CreateBuildDir()
     if !isdirectory('build')
         call mkdir('build')
@@ -454,11 +459,7 @@ endfunction
 
 command! CreateBuildDir call CreateBuildDir()
 
-function! GetCMakeFile()
-    vs CMakeLists.txt
-endfunction
-
-command! GetCMakeFile call GetCMakeFile()
+au FileType cpp command! GetCMakeFile vs CMakeLists.txt
 
 function! UseGotham()
     colorscheme gotham256
@@ -473,16 +474,8 @@ endfunction
 command! Gotham call UseGotham()
 command! Oceanic call UseOceanic()
 
-nnoremap <leader>g :Gotham<cr>
-
 "endfunction
 
-" }}} Custom functions "
-
-" Ocaml {{{ "
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-"au FileType ocaml
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-" }}} Ocaml "
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
