@@ -96,3 +96,6 @@ alias fc2="cd ~/Documents/MSCF/M2/FC2/"
 alias pap="cd ~/Documents/MSCF/M2/MPAP"
 alias inf="cd ~/Documents/MSCF/M2/Inference"
 alias op="cd ~/Documents/MSCF/M2/Option"
+
+# OPAM configuration
+. /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
