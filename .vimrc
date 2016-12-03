@@ -65,8 +65,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Writing
-Plug 'reedes/vim-pencil', {'for': 'markdown'}
-Plug 'junegunn/goyo.vim', {'for': 'markdown'}
+Plug 'reedes/vim-pencil', {'for':['markdown', 'pandoc']}
+Plug 'junegunn/goyo.vim', {'for':['markdown', 'pandoc']}
 Plug 'kannokanno/previm', {'for': 'markdown'}
 Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -81,7 +81,7 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
+Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
 
 
 " Latex
@@ -103,13 +103,13 @@ Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 " Build System
-Plug 'vhdirk/vim-cmake'
+Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
 " OmniSharp
 "Plug 'OmniSharp/omnisharp-vim'
 
 " plugins to learn
-Plug 'ledger/vim-ledger'
+Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
 call plug#end()
 
@@ -295,7 +295,7 @@ let g:ycm_python_binary_path    = '/usr/local/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
 "let g:ycm_autoclose_preview_window_after_insertion  = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
 set omnifunc=syntaxcomplete#Complete
 
 " make YCM compatible with UltiSnips
