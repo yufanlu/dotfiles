@@ -236,13 +236,19 @@ vnoremap L $
 
 " Don't go to Ex mode
 nnoremap Q <nop>
-inoremap <c-h> <Nop>
-inoremap <c-j> <Nop>
-inoremap <c-k> <Nop>
-inoremap <c-l> <Nop>
+
+" Switching windows
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+" Stay in visual after shifting
+vmap < <gv
+vmap > >gv
 
 " F5 to compile
-map <c-b> :Make<cr>
+map <F5> :Make<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
@@ -254,6 +260,7 @@ nnoremap <leader>f zMzvzz
 
 " vim-Plug {{{
 command! PU PlugUpdate | PlugUpgrade
+command! PC PlugClean
 " }}}
 
 " Tagbar {{{
@@ -296,6 +303,12 @@ nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 let g:syntastic_tex_checkers = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_ocaml_checkers = ['merlin']
+"let g:syntastic_error_symbol='✗'
+"let g:syntastic_warning_symbol='⚠'
+"let g:syntastic_style_error_symbol = '✗'
+"let g:syntastic_style_warning_symbol = '⚠'
+"let g:syntastic_auto_loc_list=1
+"let g:syntastic_aggregate_errors = 1
 " }}}
 
 " YCM and UltiSnips {{{
