@@ -83,6 +83,10 @@ Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
 
+" Ocaml
+Plug 'let-def/ocp-indent-vim', {'for': 'ocaml'}
+Plug 'rgrinberg/vim-ocaml', {'for': 'ocaml'}
+
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
@@ -288,6 +292,7 @@ nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 " Syntastic {{{
 let g:syntastic_tex_checkers = 0
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_ocaml_checkers = ['merlin']
 " }}}
 
 " YCM and UltiSnips {{{
@@ -449,6 +454,12 @@ endfunction
 
 command! CreateBuildDir call CreateBuildDir()
 
+function! GetCMakeFile()
+    vs CMakeLists.txt
+endfunction
+
+command! GetCMakeFile call GetCMakeFile()
+
 function! UseGotham()
     colorscheme gotham256
     AirlineTheme gotham256
@@ -464,12 +475,14 @@ command! Oceanic call UseOceanic()
 
 nnoremap <leader>g :Gotham<cr>
 
-"let g:num_cycle_status = 1
-
-"function! CycleNum()
-
 "endfunction
 
 " }}} Custom functions "
+
+" Ocaml {{{ "
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+"au FileType ocaml
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" }}} Ocaml "
 
 " vim:foldmethod=marker:foldlevel=0
