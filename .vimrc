@@ -52,7 +52,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -86,6 +86,7 @@ Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp
 " Ocaml
 Plug '~/.opam/system/share/merlin', {'rtp': 'vim', 'for': 'ocaml'}
 Plug '~/.opam/system/share/ocp-indent', {'rtp': 'vim', 'for': 'ocaml'}
+Plug 'rgrinberg/vim-ocaml', {'for': 'ocaml'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex' }
