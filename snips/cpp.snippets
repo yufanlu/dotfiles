@@ -1,27 +1,25 @@
-snippet yufan "assgnment header" b
-// Financial Computing 2, Fall 2016
-// Homework ${1:1.1}
-// File: ${2:`!v expand('%:t')`}
-// Authors: Yufan Lu, Shenchao Qiu, Yan Yi, Dawei Zhang
-// Description: ${3}
-endsnippet
+#snippet yufan "assgnment header" b
+#// Financial Computing 2, Fall 2016
+#// Homework ${1:1.1}
+#// File: ${2:`!v expand('%:t')`}
+#// Authors: Yufan Lu, Shenchao Qiu, Yan Yi, Dawei Zhang
+#// Description: ${3}
+#endsnippet
 
 snippet std "use namespace std" b
 using namespace std;
 endsnippet
 
 snippet class "class" b
-class ${1:Class}{
+class ${1:Class} ${2:: public $3 }{
 public:
-	// constructors, asssignment, destructor
 	$1();
-	$1(const $1&);
-	$1& operator=(const $1&);
 	~$1();
-	$2
-
+	$4
 private:
-	$3
+	$5
+	$1(const $1&); // asssignment
+	$1& operator=(const $1&); // copy
 };
 endsnippet
 
@@ -36,8 +34,8 @@ snippet part "---- part () ----" w
 cout << "------- ${2:part(${1})} -------" << endl;
 endsnippet
 
-snippet cout "cout ... endl" b
-cout << $1 << endl;
+snippet cout "cout ... endl" w
+cout << $1 << "\n";
 endsnippet
 
 snippet op "operator" w
