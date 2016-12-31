@@ -72,7 +72,7 @@ Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-pandoc', {'for': ['pandoc', 'rmarkdown']}
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['pandoc', 'rmarkdown']}
+Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': ['pandoc', 'rmarkdown']}
 Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
 
 " Debugger and formater
@@ -97,10 +97,9 @@ Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'klen/python-mode', {'for': 'python'}
 
-
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'groenewege/vim-less', {'for': 'less'}
+"Plug 'groenewege/vim-less', {'for': 'less'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
@@ -371,7 +370,6 @@ nnoremap <leader>lC :VimtexClean!<cr>
 nnoremap <leader>le :VimtexError<cr>
 "nnoremap <leader>ll :VimtexCompileToggle<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
-nnoremap <leader>lt :call ToggleConcealCursor()<cr>
 
 au FileType tex setlocal spell linebreak "norelativenumber
 
@@ -389,21 +387,6 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
             \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
             \ ]
-
-let g:tex_conceal_cursor_toggled = 0
-
-function! ToggleConcealCursor()
-    if (&ft=='tex')
-        if (g:tex_conceal_cursor_toggled == 0)
-            set concealcursor=c
-            let g:tex_conceal_cursor_toggled = 1
-        else
-            set concealcursor=inc
-            let g:tex_conceal_cursor_toggled = 0
-        endif
-    endif
-endfunction
-
 " }}}
 
 " Goyo and Limelight {{{
@@ -413,7 +396,7 @@ let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB
 " }}}
 
 " Markdown {{{
-let g:vim_markdown_conceal = 0                        " disable conceal
+"let g:vim_markdown_conceal = 0                        " disable conceal
 " }}}
 
 " cheatsheet 40 {{{
@@ -458,7 +441,7 @@ let g:tex_fold_enabled = 1
 " }}}
 
 " pandoc {{{
-au BufRead,BufNewFile *.pdc set filetype=pandoc
+au BufRead,BufNewFile,BufEnter *.pdc set filetype=pandoc
 " }}}
 
 " Custom functions {{{
@@ -488,8 +471,21 @@ endfunction
 command! Gotham call UseGotham()
 command! Oceanic call UseOceanic()
 
-"endfunction
+let g:conceal_cursor_toggled = 0
 
+function! ToggleConcealCursor()
+    if (&ft=='tex'||&ft=='pandoc')
+        if (g:conceal_cursor_toggled == 0)
+            set concealcursor=c
+            let g:conceal_cursor_toggled = 1
+        else
+            set concealcursor=inc
+            let g:conceal_cursor_toggled = 0
+        endif
+    endif
+endfunction
+
+command! ToggleCursor call ToggleConcealCursor()
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

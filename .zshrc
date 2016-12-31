@@ -86,16 +86,12 @@ export EDITOR='vim'
 alias hd="hexo clean; hexo g; hexo deploy"
 alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
-alias clion="/Applications/CLion.app/Contents/MacOS/clion"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"
-alias m1="cd ~/Documents/MSCF/M1"
 alias pro="open ~/Documents/MSCF/M1/Prob/note/note.pdf"
+alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
-alias fc2="cd ~/Documents/MSCF/M2/FC2/"
-alias pap="cd ~/Documents/MSCF/M2/MPAP"
-alias inf="cd ~/Documents/MSCF/M2/Inference"
-alias op="cd ~/Documents/MSCF/M2/Option"
+alias m3="cd ~/Documents/MSCF/M3"
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
