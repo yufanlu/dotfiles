@@ -92,6 +92,7 @@ alias pro="open ~/Documents/MSCF/M1/Prob/note/note.pdf"
 alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
+alias m4="cd ~/Documents/MSCF/M4"
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

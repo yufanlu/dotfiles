@@ -59,7 +59,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 
 " Asynchronous
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -441,10 +441,14 @@ let g:tex_fold_enabled = 1
 " }}}
 
 " pandoc {{{
-au BufRead,BufNewFile,BufEnter *.pdc set filetype=pandoc
+let g:pandoc#formatting#equalprg = ''
+au BufRead,BufNewFile *.pdc set filetype=pandoc
+au FileType pandoc let b:delimitMate_quotes="\" '"
 " }}}
 
 " Custom functions {{{
+
+" Create Build Dir {{{
 function! CreateBuildDir()
     if !isdirectory('build')
         call mkdir('build')
@@ -455,9 +459,9 @@ function! CreateBuildDir()
 endfunction
 
 command! CreateBuildDir call CreateBuildDir()
+" }}}
 
-au FileType cpp command! GetCMakeFile vs CMakeLists.txt
-
+" Change colorscheme {{{
 function! UseGotham()
     colorscheme gotham256
     AirlineTheme gotham256
@@ -470,7 +474,9 @@ endfunction
 
 command! Gotham call UseGotham()
 command! Oceanic call UseOceanic()
+" }}}
 
+" Toggle Conceal Cursor {{{
 let g:conceal_cursor_toggled = 0
 
 function! ToggleConcealCursor()
@@ -487,5 +493,11 @@ endfunction
 
 command! ToggleCursor call ToggleConcealCursor()
 " }}}
+
+" }}}
+
+" }}}
+
+au FileType cpp command! GetCMakeFile vs CMakeLists.txt
 
 " vim:foldmethod=marker:foldlevel=0

@@ -1,7 +1,128 @@
+
+extends texmath
+
 snippet pdf "produce pdf" b
 ---
 title: "${1:title}"
 author: "${2:Yufan Lu}"
+toc: true
+geometry: margin=1.2in
 output: pdf_document
+<!--header-includes:-->
+<!--- \usepackage{TBD}-->
 ---
 endsnippet
+
+snippet cas "\begin{case}" i
+\begin{cases}
+	${1:value}, &\textit{ if } ${2:cond} \\\\
+	${3:value}, &\textit{ otherwirse }
+\end{cases}
+endsnippet
+
+snippet sum "\sum" i
+\sum^{$1}_{$2}
+endsnippet
+
+# text modifier {{{
+snippet `8 "\infty" iA
+\infty
+endsnippet
+
+snippet tt "\text{}" i
+\text{${1:${VISUAL}}}
+endsnippet
+
+snippet ti "\textit{}" i
+\textit{${1:${VISUAL}}}
+endsnippet
+
+snippet emp "\emph{}" i
+\emph{${1:${VISUAL}}}
+endsnippet
+
+snippet bf "\textbf{}" i
+\textbf{${1:${VISUAL}}}
+endsnippet
+
+snippet mf "\mathbf{}" i
+\mathbf{${1:${VISUAL}}}
+endsnippet
+
+snippet mc "\mathcal{}" i
+\mathcal{${1:${VISUAL}}}
+endsnippet
+
+snippet mb "\mathbb{}" i
+\mathbb{${1:${VISUAL}}}
+endsnippet
+
+snippet ... "\dots" iA
+\dots
+endsnippet
+
+snippet iff "iff" iw
+\textit{iff}
+endsnippet
+# }}}
+
+# Greeks {{{ #
+snippet `a "\alpha" iA
+\alpha
+endsnippet
+
+snippet `b "\beta" iA
+\beta
+endsnippet
+
+snippet `B "\Beta" iA
+\Beta
+endsnippet
+
+snippet `d "\delta" iA
+\delta
+endsnippet
+
+snippet `D "\Delta" iA
+\Delta
+endsnippet
+
+snippet `e "\varepsilon" iA
+\varepsilon
+endsnippet
+
+snippet `g "\gamma" iA
+\gamma
+endsnippet
+
+snippet `G "\Gamma" iA
+\Gamma
+endsnippet
+
+snippet `s "\sigma" iA
+\sigma
+endsnippet
+
+snippet `S "\Sigma" iA
+\Sigma
+endsnippet
+
+snippet `w "\omega" iA
+\omega
+endsnippet
+
+snippet `W "\Omega" iA
+\Omega
+endsnippet
+
+snippet `r "\rho" iA
+\rho
+endsnippet
+
+snippet `m "\mu" iA
+\mu
+endsnippet
+
+# }}} Greeks #
+
+# vim:foldmethod=syntax:foldlevel=0
