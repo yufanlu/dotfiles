@@ -18,13 +18,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-dispatch'
-Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
+Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 "Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 Plug 'Raimondi/delimitMate'
+"Plug 'jiangmiao/auto-pairs'
 "Plug 'kshenoy/vim-signature'
 Plug 'takac/vim-commandcaps'
 Plug 'lifepillar/vim-cheat40'
@@ -45,7 +46,7 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 
 " Unite and related plugins
 Plug 'Shougo/unite.vim'
-"Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite-outline', { 'for': ['pandoc', 'markdown'] }
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -62,7 +63,7 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 
 " Asynchronous
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Writing
 Plug 'reedes/vim-pencil', {'for':['markdown', 'pandoc']}
@@ -336,6 +337,10 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 au FileType tex let b:loaded_delimitMate = 0
 " }}}
 
+" AutoPair {{{
+"let g:AutoPairsShortcutJump = '<S-Tab>'
+" }}}
+
 " vimtex {{{
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = 'dbmg'
@@ -443,7 +448,10 @@ let g:tex_fold_enabled = 1
 " pandoc {{{
 let g:pandoc#formatting#equalprg = ''
 au BufRead,BufNewFile *.pdc set filetype=pandoc
-au FileType pandoc let b:delimitMate_quotes="\" '"
+au FileType pandoc let b:delimitMate_quotes="\" ' $ *"
+"au Filetype pandoc let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '$':'$'}
+"let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#filetypes#pandoc_markdown = 0
 " }}}
 
 " Custom functions {{{
