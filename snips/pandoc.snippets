@@ -13,6 +13,12 @@ output: pdf_document
 ---
 endsnippet
 
+snippet ali "\begin{align*}" i
+\begin{align*}
+	$1
+\end{align*}
+endsnippet
+
 snippet cas "\begin{case}" i
 \begin{cases}
 	${1:value}, &\textit{ if } ${2:cond} \\\\
@@ -119,10 +125,28 @@ snippet `r "\rho" iA
 \rho
 endsnippet
 
+snippet `l "\lambda" iA
+\lambda
+endsnippet
+
 snippet `m "\mu" iA
 \mu
 endsnippet
 
+snippet `p "\phi" iA
+\phi
+endsnippet
+
 # }}} Greeks #
+
+# arrow {{{ #
+snippet -> "\to" iA
+\to
+endsnippet
+
+snippet => "\to" iA
+\Rightarrow
+endsnippet
+# }}} arrow #
 
 # vim:foldmethod=syntax:foldlevel=0
