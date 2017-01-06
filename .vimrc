@@ -446,12 +446,13 @@ let g:tex_fold_enabled = 1
 " }}}
 
 " pandoc {{{
+let g:pandoc#folding#fdc = 0
 let g:pandoc#formatting#equalprg = ''
-au BufRead,BufNewFile *.pdc set filetype=pandoc
-au FileType pandoc let b:delimitMate_quotes="\" ' $ *"
-"au Filetype pandoc let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '$':'$'}
-"let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#filetypes#pandoc_markdown = 0
+au BufRead,BufNewFile *.pdc set filetype=pandoc
+au FileType pandoc let b:delimitMate_quotes="\" '"
+au FileType pandoc setlocal nonumber norelativenumber
+"let g:pandoc#modules#disabled = ["folding"]
 " }}}
 
 " Custom functions {{{
