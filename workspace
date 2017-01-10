@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# shell process to go into each folder in the watchlist
-# and push it to corresponding repo.
+# shell process to go into each folder in the watchlist and do
+# - push it to corresponding repo, or
+# - pull from corresponding repo
+
 usage(){
     echo "Usage:"
     echo " push [course]: push current works to repo"
@@ -81,5 +83,4 @@ elif [ ${#} -eq 2 ]; then
         exit 1
     fi
 fi
-
 
