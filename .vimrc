@@ -46,10 +46,10 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 
 " Unite and related plugins
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline', { 'for': ['pandoc', 'markdown'] }
+"Plug 'Shougo/unite-outline', { 'for': ['pandoc', 'markdown'] }
 
 " Git
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
