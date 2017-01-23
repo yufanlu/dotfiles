@@ -93,6 +93,10 @@ alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
+alias fp="cd ~/Documents/MSCF/M3/FP"
+alias ml="cd ~/Documents/MSCF/M3/ML1"
+alias econ="cd ~/Documents/MSCF/M3/ECON"
+alias scal="cd ~/Documents/MSCF/M3/SCAL"
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
