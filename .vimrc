@@ -334,7 +334,7 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 " }}}
 
 " delimitMate {{{
-au FileType tex let b:loaded_delimitMate = 0
+"au FileType tex let b:loaded_delimitMate = 0
 " }}}
 
 " AutoPair {{{
@@ -377,6 +377,8 @@ nnoremap <leader>le :VimtexError<cr>
 nnoremap <leader>ll :VimtexCompileToggle<cr>
 
 au FileType tex setlocal spell linebreak "norelativenumber
+au FileType tex setlocal conceallevel=2
+au FileType tex let b:delimitMate_quotes="\" '"
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
