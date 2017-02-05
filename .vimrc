@@ -17,7 +17,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', { 'for': ['pandoc', 'markdown'] }
 Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
 Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 "Plug 'mhinz/vim-startify'
@@ -33,7 +33,7 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', { 'for': ['pandoc', 'markdown', 'tex']}
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
@@ -94,9 +94,8 @@ Plug 'lervag/vimtex', {'for': 'tex' }
 Plug 'matze/vim-tex-fold', {'for': 'tex' }
 
 " Python
-Plug 'hdima/python-syntax' , {'for': 'python'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-Plug 'klen/python-mode', {'for': 'python'}
+"Plug 'klen/python-mode', {'for': 'python'}
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -184,8 +183,8 @@ let mapleader   = ","
 let g:mapleader = ","
 
 " Navigation key configuration
-"map j gj
-"map k gk
+map j gj
+map k gk
 nnoremap <c-h> g0
 nnoremap <c-l> g$
 set whichwrap+=<,>,h,l
@@ -400,10 +399,6 @@ let g:ycm_semantic_triggers.tex = [
 let g:goyo_width = '65%'
 let g:limelight_conceal_ctermfg = 240     " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB color
-" }}}
-
-" Markdown {{{
-"let g:vim_markdown_conceal = 0                        " disable conceal
 " }}}
 
 " cheatsheet 40 {{{
