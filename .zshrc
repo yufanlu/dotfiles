@@ -97,6 +97,8 @@ alias fp="cd ~/Documents/MSCF/M3/FP"
 alias ml="cd ~/Documents/MSCF/M3/ML1"
 alias econ="cd ~/Documents/MSCF/M3/ECON"
 alias scal="cd ~/Documents/MSCF/M3/SCAL"
+alias 601="cd ~/Documents/MSCF/601"
+
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
