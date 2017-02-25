@@ -60,7 +60,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml', 'tex'] }
 
 " Asynchronous
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }

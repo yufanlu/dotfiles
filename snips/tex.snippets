@@ -1,6 +1,8 @@
 #clearsnippets
 priority 1
 
+extends texmath
+
 # some util functions {{{ #
 global !p
 def generate_label(text):
@@ -25,6 +27,7 @@ snippet art "\documentclass[10pt]{article}" b
 % {{{ Header
 \documentclass[10pt,letterpaper]{article}
 \usepackage{amsthm}
+\usepackage{esvect}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{enumerate}
@@ -140,12 +143,13 @@ snippet ... "\dots" iA
 \dots
 endsnippet
 
-snippet iff "iff" iw
-\textit{iff}
+snippet hp "\hspace" iw
+\hspace{2mm}
 endsnippet
-# }}}
 
-# math {{{
+snippet vp "\vspace" iw
+\vspace{2mm}
+endsnippet
 # }}}
 
 snippet "" "quote" iA
