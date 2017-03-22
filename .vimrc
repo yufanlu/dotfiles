@@ -95,7 +95,10 @@ Plug 'matze/vim-tex-fold', {'for': 'tex' }
 
 " Python
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-"Plug 'klen/python-mode', {'for': 'python'}
+"Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'vim-python/python-syntax', {'for': 'python'}
+
+
 
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -226,7 +229,7 @@ set foldlevelstart=10                               " start with fold level of 1
 nnoremap <space> za                                 " space open/closes folds
 
 " Python Host Prog Setting
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/local/bin/python3'
 
 " }}}
 
@@ -315,12 +318,13 @@ let g:syntastic_ocaml_checkers = ['merlin']
 " }}}
 
 " YCM and UltiSnips {{{
-let g:ycm_python_binary_path    = '/usr/local/bin/python'
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
-"let g:ycm_autoclose_preview_window_after_insertion  = 1
-"let g:ycm_autoclose_preview_window_after_completion = 1
-set omnifunc=syntaxcomplete#Complete
+let g:ycm_autoclose_preview_window_after_insertion  = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+"set omnifunc=syntaxcomplete#Complete
 
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
@@ -333,6 +337,12 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
 let g:UltiSnipsEditSplit = "vertical"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
+
+" libclang
+let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
+if isdirectory(s:clang_library_path)
+    let g:clang_library_path=s:clang_library_path
+endif
 " }}}
 
 " delimitMate {{{
@@ -341,6 +351,10 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 
 " AutoPair {{{
 "let g:AutoPairsShortcutJump = '<S-Tab>'
+" }}}
+
+" python-syntax {{{
+let python_highlight_all = 1
 " }}}
 
 " vimtex {{{
