@@ -60,7 +60,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml', 'tex'] }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
 
 " Asynchronous
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -215,6 +215,8 @@ set cinoptions+=g0
 
 " buffer
 set hidden
+nnoremap <c-e><c-n> :bn<CR>
+nnoremap <c-e><c-p> :bN<CR>
 
 " Folding
 set foldenable                                      " enable folding
@@ -278,6 +280,7 @@ let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
 
 " tabline
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep       = ''
 let g:airline#extensions#tabline#left_alt_sep   = ''
 let g:airline#extensions#tabline#right_sep      = ''
@@ -294,7 +297,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Unite {{{
-nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
+"nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
 nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 "nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
 " }}}
@@ -344,7 +347,7 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = 'dbmg'
 "let g:tex_conceal = ''
-"let g:vimtex_latexmk_continuous  = 0
+let g:vimtex_latexmk_continuous = 1
 "let g:vimtex_latexmk_background  = 1
 let g:tex_no_error = 1
 let g:vimtex_fold_manual = 1
@@ -366,8 +369,7 @@ let g:tex_fold_additional_envs = [
             \ 'example',
             \ 'corollary',
             \ 'enumerate',
-            \ 'definition',
-            \ 'tikzpicture']
+            \ 'definition']
 
 nnoremap <leader>lv :VimtexView<cr>
 nnoremap <leader>lc :VimtexClean<cr>
@@ -394,6 +396,15 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
             \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
             \ ]
+
+let g:vimtex_quickfix_warnings = {
+            \ 'overfull' : 0,
+            \ 'underfull' : 0,
+            \ 'packages' : {
+            \   'hyperref' : 0,
+            \ },
+            \}
+
 " }}}
 
 " Goyo and Limelight {{{

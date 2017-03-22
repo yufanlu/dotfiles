@@ -83,6 +83,7 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="vim --servername VIM"
 alias hd="hexo clean; hexo g; hexo deploy"
 alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
@@ -93,10 +94,10 @@ alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
-alias fp="cd ~/Documents/MSCF/M3/FP"
-alias ml="cd ~/Documents/MSCF/M3/ML1"
-alias econ="cd ~/Documents/MSCF/M3/ECON"
-alias scal="cd ~/Documents/MSCF/M3/SCAL"
+alias ts="cd ~/Documents/MSCF/M4/TS"
+alias fc3="cd ~/Documents/MSCF/M4/FCIII"
+alias sim="cd ~/Documents/MSCF/M4/Simulation"
+alias scal="cd ~/Documents/MSCF/M4/SCAL"
 alias 601="cd ~/Documents/MSCF/601"
 
 
