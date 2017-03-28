@@ -6,7 +6,7 @@ export MONO_GAC_PREFIX="/usr/local"
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="af-magic"
+ZSH_THEME="jbergantine" # "af-magic"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -103,3 +103,5 @@ alias 601="cd ~/Documents/MSCF/601"
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
