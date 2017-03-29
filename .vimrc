@@ -48,6 +48,10 @@ Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
 Plug 'Shougo/unite.vim'
 "Plug 'Shougo/unite-outline', { 'for': ['pandoc', 'markdown'] }
 
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " Git
 "Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -98,8 +102,6 @@ Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 "Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 
-
-
 " Web Dev
 Plug 'mattn/emmet-vim', {'for': 'html'}
 "Plug 'groenewege/vim-less', {'for': 'less'}
@@ -139,10 +141,16 @@ set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 
 " colorscheme
 set t_Co=256
-"colorscheme gotham256
 
-let base16colorspace=256
-colorscheme base16-oceanicnext
+" Color scheme changing based on time
+if strftime("%H") < 18
+    let base16colorspace=256
+    colorscheme base16-oceanicnext
+    let g:airline_theme='oceanicnext'
+else
+    colorscheme gotham256
+    let g:airline_theme='gotham256'
+endif
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -278,7 +286,6 @@ let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
 
 " vim-airline {{{
 let g:airline_powerline_fonts = 1
-let g:airline_theme='oceanicnext'
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
 
