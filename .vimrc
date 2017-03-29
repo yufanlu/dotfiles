@@ -53,14 +53,14 @@ Plug 'Shougo/unite.vim'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex', 'typescript', 'ocaml'] }
 
 " Asynchronous
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -306,6 +306,8 @@ nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 " }}}
 
 " Syntastic {{{
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_tex_checkers = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_ocaml_checkers = ['merlin']
@@ -369,6 +371,7 @@ let g:vimtex_fold_manual = 1
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
             \ 'center',
+            \ 'equation',
             \ 'proposition',
             \ 'chapter',
             \ 'matrix',
@@ -418,6 +421,11 @@ let g:vimtex_quickfix_warnings = {
             \   'hyperref' : 0,
             \ },
             \}
+
+augroup MyVimtex
+  autocmd!
+  autocmd User VimtexEventQuit VimtexClean
+augroup END
 
 " }}}
 
