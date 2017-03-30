@@ -148,8 +148,8 @@ if strftime("%H") < 18
     colorscheme base16-oceanicnext
     let g:airline_theme='oceanicnext'
 else
-    colorscheme gotham256
-    let g:airline_theme='gotham256'
+    colorscheme gotham
+    let g:airline_theme='gotham'
 endif
 
 " turn off scroll bar if using MacVim
