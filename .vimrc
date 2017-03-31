@@ -421,7 +421,7 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
             \ ]
 
-let g:vimtex_quickfix_warnings = {
+let g:vimtex_quickfix_latexlog = {
             \ 'overfull' : 0,
             \ 'underfull' : 0,
             \ 'packages' : {
