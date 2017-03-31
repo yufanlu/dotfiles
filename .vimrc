@@ -399,8 +399,8 @@ nnoremap <leader>lv :VimtexView<cr>
 nnoremap <leader>lc :VimtexClean<cr>
 nnoremap <leader>lC :VimtexClean!<cr>
 nnoremap <leader>le :VimtexError<cr>
-"nnoremap <leader>ll :VimtexCompileToggle<cr>
-nnoremap <leader>ll :VimtexCompileToggle<cr>
+nnoremap <leader>ll :VimtexCompile<cr>
+nnoremap <leader>lt :VimtexTocToggle<cr>
 
 au FileType tex setlocal spell linebreak "norelativenumber
 au FileType tex setlocal conceallevel=2
