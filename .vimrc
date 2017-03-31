@@ -142,8 +142,8 @@ set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 " colorscheme
 set t_Co=256
 
-" Color scheme changing based on time
-if strftime("%H") < 18
+" Go to Gotham when it's really late
+if strftime("%H") < 22
     let base16colorspace=256
     colorscheme base16-oceanicnext
     let g:airline_theme='oceanicnext'
@@ -308,7 +308,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 
 " Unite {{{
 "nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
-nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
+"nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
 "nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
 " }}}
 
@@ -434,6 +434,13 @@ augroup MyVimtex
   autocmd User VimtexEventQuit VimtexClean
 augroup END
 
+" }}}
+
+" FZF {{{
+nnoremap <c-b> :Buffer<cr>
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " Goyo and Limelight {{{
