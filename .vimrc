@@ -17,43 +17,38 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-Plug 'godlygeek/tabular', { 'for': ['pandoc', 'markdown'] }
-Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
-Plug 'majutsushi/tagbar', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
-"Plug 'mhinz/vim-startify'
+"Plug 'godlygeek/tabular', { 'for': ['pandoc', 'markdown'] }
+"Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
-Plug 'Yggdroot/indentLine', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
+Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'kshenoy/vim-signature'
 Plug 'takac/vim-commandcaps'
 Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'easymotion/vim-easymotion', { 'for': ['pandoc', 'markdown', 'tex']}
+
+" Tmux
+Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
 
-" Search
-"Plug 'mileszs/ack.vim'
-
 " File system
-Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
-
-" Unite and related plugins
-Plug 'Shougo/unite.vim'
-"Plug 'Shougo/unite-outline', { 'for': ['pandoc', 'markdown'] }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
@@ -66,19 +61,16 @@ Plug 'honza/vim-snippets'
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex', 'typescript', 'ocaml'] }
 
-" Asynchronous
-"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
 " Writing
 Plug 'reedes/vim-pencil', {'for':['markdown', 'pandoc']}
 Plug 'junegunn/goyo.vim', {'for':['markdown', 'pandoc']}
-Plug 'kannokanno/previm', {'for': 'markdown'}
-Plug 'tyru/open-browser.vim', {'for': 'markdown'}
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+"Plug 'kannokanno/previm', {'for': 'markdown'}
+"Plug 'tyru/open-browser.vim', {'for': 'markdown'}
+"Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+"Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-pandoc', {'for': ['pandoc', 'rmarkdown']}
 Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': ['pandoc', 'rmarkdown']}
-Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
+"Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
@@ -142,15 +134,9 @@ set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 " colorscheme
 set t_Co=256
 
-" Go to Gotham when it's really late
-if strftime("%H") < 22
-    let base16colorspace=256
-    colorscheme base16-oceanicnext
-    let g:airline_theme='oceanicnext'
-else
-    colorscheme gotham
-    let g:airline_theme='gotham'
-endif
+let base16colorspace=256
+colorscheme base16-oceanicnext
+let g:airline_theme='oceanicnext'
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -165,7 +151,9 @@ set noshowmode
 set laststatus=2
 set encoding=utf-8
 set background=dark
-set fillchars+=stl:\ ,stlnc:\
+"set fillchars+=stl:\ ,stlnc:\
+set list
+set listchars=tab:▸\ ,eol:¬
 
 " True Color Support
 if (has("termguicolors"))
@@ -204,8 +192,7 @@ set backspace=eol,start,indent
 nmap <F2> :set nowrap! <cr>
 nmap <c-s> :w!<cr>
 nmap <leader>w :w!<cr>
-"nmap <leader>e :NERDTreeToggle<cr>
-nmap <leader>e :VimFilerExplorer<cr>
+nmap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader><space> :nohlsearch<cr>
 
 " Search configuration
@@ -250,18 +237,18 @@ vnoremap L $
 " Don't go to Ex mode
 nnoremap Q <nop>
 
-" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
+"" Switching windows
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
+"noremap <C-h> <C-w>h
 
 " Stay in visual after shifting
 vmap < <gv
 vmap > >gv
 
 " F5 to compile
-map <F5> :Make<cr>
+"map <F5> :Make<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
@@ -304,12 +291,6 @@ let g:airline#extensions#quickfix#location_text = 'Location' " configure the tit
 " ycm
 let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count prefix
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
-" }}}
-
-" Unite {{{
-"nnoremap <c-e><c-p> :Unite -start-insert file_rec/async<cr>
-"nnoremap <c-e><c-b> :Unite -winheight=15 buffer bookmark<cr>
-"nnoremap <c-e><c-o> :Unite -vertical -direction=botright -winwidth=45 outline<cr>
 " }}}
 
 " Syntastic {{{
@@ -392,6 +373,7 @@ let g:tex_fold_additional_envs = [
             \ 'theorem',
             \ 'example',
             \ 'corollary',
+            \ 'algorithm',
             \ 'enumerate',
             \ 'definition']
 
