@@ -1,11 +1,23 @@
 snippet yufan "assgnment header" b
-# Financial Computing 3, Spring 2017
+# Financial Computing 4, Spring 2017
 # Homework ${1:1.1}
 # File: ${2:`!v expand('%:t')`}
-# Authors: Yufan Lu, Shenchao Qiu, Dawei Zhang
+# Authors: Yufan Lu
 endsnippet
 
 snippet main "if name is main" b
 if __name__ == "__main__":
 	$1
+endsnippet
+
+snippet '' "single quote" iA
+'${1:${VISUAL:string}}'
+endsnippet
+
+snippet "" "single quote" iA
+"${1:${VISUAL:string}}"
+endsnippet
+
+snippet () "single bracket" iA
+(${1:${VISUAL:string}})
 endsnippet

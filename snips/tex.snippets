@@ -301,4 +301,25 @@ snippet ali* "align* envir" b
 \end{align*}
 endsnippet
 
+# {{{ algo snippets
+
+snippet algo "algo envir" b
+\begin{algorithm}
+	\floatname{algorithm}{\footnotesize Algorithm}
+	\caption{\footnotesize $1}
+	\begin{algorithmic}[1]
+		\State $2
+	\end{algorithmic}
+\end{algorithm}
+endsnippet
+
+snippet fun "fun under algorithmic" b
+\Function{${1:name}}{${2:param}}
+$3
+\State \Return $4
+\EndFunction
+endsnippet
+# }}}
+
+
 # vim:foldmethod=syntax:foldlevel=0
