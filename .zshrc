@@ -50,7 +50,7 @@ ZSH_THEME="jbergantine" # "af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew)
+plugins=(git brew tmux python)
 
 # User configuration
 export PATH="/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
@@ -63,11 +63,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
-#if [[ -n $SSH_CONNECTION ]]; then
-  #export EDITOR='vim'
-#else
-  #export EDITOR='mvim'
-#fi
+
+# tmux
+export TERM=xterm-256color
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -81,27 +79,27 @@ export EDITOR='vim'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
 alias vim="vim --servername VIM"
+alias doc="cd ~/Documents"
+alias dot="cd ~/dotfiles"
+alias wp="~/dotfiles/workspace"
+
+# hexo
 alias hd="hexo clean; hexo g; hexo deploy"
 alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
-alias dot="cd ~/dotfiles"
-alias wp="~/dotfiles/workspace"
+
+# files and folders
 alias pro="open ~/Documents/MSCF/M1/Prob/note/note.pdf"
 alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
-alias ts="cd ~/Documents/MSCF/M4/TS"
-alias fc3="cd ~/Documents/MSCF/M4/FCIII"
 alias sim="cd ~/Documents/MSCF/M4/Simulation"
-alias scal="cd ~/Documents/MSCF/M4/SCAL"
-alias 601="cd ~/Documents/MSCF/601"
-
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
