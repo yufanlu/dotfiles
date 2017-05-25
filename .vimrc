@@ -62,12 +62,12 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex', 'typescript', 'ocaml'] }
 
 " Writing
-Plug 'reedes/vim-pencil', {'for':['markdown', 'pandoc']}
-Plug 'junegunn/goyo.vim', {'for':['markdown', 'pandoc']}
+Plug 'reedes/vim-pencil', { 'for':['markdown', 'pandoc'] }
+Plug 'junegunn/goyo.vim', { 'for':['markdown', 'pandoc'] }
 "Plug 'kannokanno/previm', {'for': 'markdown'}
 "Plug 'tyru/open-browser.vim', {'for': 'markdown'}
 "Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-"Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+Plug 'dhruvasagar/vim-table-mode', { 'for': ['pandoc', 'markdown', 'rmarkdown'] }
 Plug 'vim-pandoc/vim-pandoc', {'for': ['pandoc', 'rmarkdown']}
 Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': ['pandoc', 'rmarkdown']}
 "Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
@@ -110,6 +110,7 @@ Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
 " plugins to learn
 Plug 'ledger/vim-ledger', {'for': 'ledger'}
+Plug 'beloglazov/vim-online-thesaurus'
 
 call plug#end()
 
