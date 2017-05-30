@@ -2,34 +2,10 @@
 vim-table mode {{{
 TableModeToggle          <leader>tm    N
 }}}
-vim-emmet {{{
-trigger emmet            <c-y>,       NI
-}}}
-vimfiler {{{
-go to parent directory   <BS>          N
-copy-file                c             N
-detele-file              d             N
-rename-file              r             N
-new-file                 n             N
-toggle-visible-ignore    .             N
-edit-file                e             N
-edit-split-file          E             N
-yank-full-path           yy            N
-toggle-safe-mode         gs            N
-cd_vim_current_dir       gc            N
-cd_to_input_driectory    I             N
-refreash-file-list       <c-l>         N
-expand-tree              t             N
-expand-tree-rec          T             N
-}}}
 window redraw {{{1
 with height              z{height}<CR> N
 with cursor at center    zz            N
 }}}
-vimtex {{{1
-env-toggle-star          tse           N
-cmd-create               <F7>         NI
-
 Fugitive {{{
 git st                   Gstatus       N
 git diff                 Gdiff         N

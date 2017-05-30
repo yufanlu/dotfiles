@@ -80,7 +80,7 @@ export TERM=xterm-256color
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-alias vim="vim --servername VIM"
+#alias vim="vim --servername VIM"
 alias doc="cd ~/Documents"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"

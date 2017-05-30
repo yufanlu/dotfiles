@@ -36,6 +36,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Tmux
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
@@ -52,14 +53,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+"Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+Plug 'w0rp/ale'
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex', 'typescript', 'ocaml'] }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for':['markdown', 'pandoc'] }
@@ -134,6 +136,7 @@ set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 
 " colorscheme
 set t_Co=256
+set t_ut=
 
 let base16colorspace=256
 colorscheme base16-oceanicnext
@@ -238,12 +241,6 @@ vnoremap L $
 " Don't go to Ex mode
 nnoremap Q <nop>
 
-"" Switching windows
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
-"noremap <C-l> <C-w>l
-"noremap <C-h> <C-w>h
-
 " Stay in visual after shifting
 vmap < <gv
 vmap > >gv
@@ -306,6 +303,10 @@ let g:syntastic_ocaml_checkers = ['merlin']
 "let g:syntastic_style_warning_symbol = '⚠'
 "let g:syntastic_auto_loc_list=1
 "let g:syntastic_aggregate_errors = 1
+" }}}
+
+" ale {{{
+let g:ale_lint_on_text_changed = 'normal'
 " }}}
 
 " YCM and UltiSnips {{{
@@ -497,6 +498,8 @@ let g:formatters_ocaml = ['ocp_indent_auto_formatter']
 
 " {{{ FastFold
 let g:tex_fold_enabled = 1
+let g:python_fold = 1
+let g:cpp_fold = 1
 " }}}
 
 " pandoc {{{
@@ -508,6 +511,16 @@ au FileType pandoc let b:delimitMate_quotes="\" '"
 au FileType pandoc setlocal nonumber norelativenumber
 "let g:pandoc#modules#disabled = ["folding"]
 " }}}
+
+" vimux {{{
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" }}}
+
 
 " Custom functions {{{
 
