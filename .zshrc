@@ -80,7 +80,7 @@ export TERM=xterm-256color
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-#alias vim="vim --servername VIM"
+alias mvim="vim --servername VIM"
 alias doc="cd ~/Documents"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"
@@ -96,7 +96,8 @@ alias m1="cd ~/Documents/MSCF/M1"
 alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
-alias sim="cd ~/Documents/MSCF/M4/Simulation"
+alias m5="cd ~/Documents/MSCF/M5"
+alias q="q/m32/q"
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

@@ -26,7 +26,7 @@ Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'takac/vim-commandcaps'
-Plug 'lifepillar/vim-cheat40'
+"Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
@@ -49,12 +49,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive', {'for':['cpp', 'typescript', 'ocaml', 'python']}
+Plug 'airblade/vim-gitgutter', {'for':['cpp', 'typescript', 'ocaml', 'python']}
 
 " static syntax check
 "Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -75,44 +75,32 @@ Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': ['pandoc', 'rmarkdown']}
 "Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
 
 " Debugger and formater
-Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript', 'ocaml'] }
+Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
 
-" Ocaml
-Plug '~/.opam/system/share/merlin', {'rtp': 'vim', 'for': 'ocaml'}
-Plug '~/.opam/system/share/ocp-indent', {'rtp': 'vim', 'for': 'ocaml'}
-Plug 'rgrinberg/vim-ocaml', {'for': 'ocaml'}
-
 " Latex
-Plug 'lervag/vimtex', {'for': 'tex' }
-Plug 'matze/vim-tex-fold', {'for': 'tex' }
+Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'matze/vim-tex-fold', {'for': 'tex'}
 
 " Python
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-"Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
-
-" Web Dev
-Plug 'mattn/emmet-vim', {'for': 'html'}
-"Plug 'groenewege/vim-less', {'for': 'less'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
+Plug 'digitaltoad/vim-pug', {'for': ['jade', 'pug']}
+
 " Build System
 Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
-" OmniSharp
-"Plug 'OmniSharp/omnisharp-vim'
-
 " plugins to learn
 Plug 'ledger/vim-ledger', {'for': 'ledger'}
-Plug 'beloglazov/vim-online-thesaurus'
 
 call plug#end()
 
@@ -227,9 +215,6 @@ set foldmethod=syntax                               " fold based on indent level
 set foldlevelstart=10                               " start with fold level of 1
 nnoremap <space> za                                 " space open/closes folds
 
-" Python Host Prog Setting
-let g:python_host_prog = '/usr/local/bin/python3'
-
 " }}}
 
 " Behavior  {{{
@@ -307,6 +292,9 @@ let g:syntastic_ocaml_checkers = ['merlin']
 
 " ale {{{
 let g:ale_lint_on_text_changed = 'normal'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " }}}
 
 " YCM and UltiSnips {{{
@@ -370,6 +358,7 @@ let g:tex_fold_additional_envs = [
             \ 'claim',
             \ 'remark',
             \ 'lemma',
+            \ 'warning',
             \ 'proof',
             \ 'itemize',
             \ 'theorem',
@@ -421,7 +410,7 @@ augroup END
 " }}}
 
 " FZF {{{
-nnoremap <c-b> :Buffer<cr>
+"nnoremap <c-b> :Buffer<cr>
 nnoremap <c-f> :Lines<cr>
 nnoremap <c-p> :Ag<cr>
 
@@ -503,7 +492,7 @@ let g:cpp_fold = 1
 " }}}
 
 " pandoc {{{
-let g:pandoc#folding#fdc = 0
+"let g:pandoc#folding#fdc = 0
 let g:pandoc#formatting#equalprg = ''
 let g:pandoc#filetypes#pandoc_markdown = 0
 au BufRead,BufNewFile *.pdc set filetype=pandoc
@@ -520,7 +509,6 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 " Inspect runner pane
 map <Leader>vi :VimuxInspectRunner<CR>
 " }}}
-
 
 " Custom functions {{{
 

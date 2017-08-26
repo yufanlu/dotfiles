@@ -8,9 +8,23 @@ author: "${2:Yufan Lu}"
 toc: true
 geometry: margin=1.2in
 output: pdf_document
-<!--header-includes:-->
-<!--- \usepackage{TBD}-->
+header-includes:
+- \usepackage{hyperref}
+- \usepackage[inline,shortlabels]{enumitem}
+- \usepackage{graphicx}
+- \usepackage[margin=1.2in]{geometry}
+- \usepackage{fancyhdr}
+- \usepackage{setspace}
 ---
+
+\setlength\parindent{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Yufan Lu (Pittsburgh)}
+\lhead{$1}
+\rfoot{Page \thepage}
+\singlespacing
+\newpage
 endsnippet
 
 snippet ali "\begin{align*}" i
