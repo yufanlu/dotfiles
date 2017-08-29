@@ -3,7 +3,7 @@ global !p
 def list_files():
     files = []
     for f in os.listdir('.'):
-        if f.endswith(('.cpp', '.h', '.cc')) and not f.startswith('.'):
+        if f.endswith(('.cpp', '.h', '.cc', '.hpp')) and not f.startswith('.'):
             files.append(f)
     return ' '.join(files)
 endglobal

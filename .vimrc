@@ -20,7 +20,7 @@ Plug 'tpope/vim-repeat'
 "Plug 'godlygeek/tabular', { 'for': ['pandoc', 'markdown'] }
 "Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
@@ -29,14 +29,14 @@ Plug 'takac/vim-commandcaps'
 "Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
 Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
-" Tmux
-Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
+"" Tmux
+"Plug 'edkolev/tmuxline.vim'
+"Plug 'christoomey/vim-tmux-navigator'
+"Plug 'benmills/vimux'
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
@@ -49,8 +49,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-Plug 'tpope/vim-fugitive', {'for':['cpp', 'typescript', 'ocaml', 'python']}
-Plug 'airblade/vim-gitgutter', {'for':['cpp', 'typescript', 'ocaml', 'python']}
+"Plug 'tpope/vim-fugitive', {'for':['cpp', 'typescript', 'ocaml', 'python']}
+"Plug 'airblade/vim-gitgutter', {'for':['cpp', 'typescript', 'ocaml', 'python']}
 
 " static syntax check
 "Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
@@ -80,7 +80,7 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
+"Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -219,6 +219,11 @@ nnoremap <space> za                                 " space open/closes folds
 
 " Behavior  {{{
 
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+
 " H & L
 vnoremap H ^
 vnoremap L $
@@ -231,7 +236,7 @@ vmap < <gv
 vmap > >gv
 
 " F5 to compile
-"map <F5> :Make<cr>
+map <F5> :Make<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
@@ -295,6 +300,10 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'cpp': ['clang'],
+\}
 " }}}
 
 " YCM and UltiSnips {{{

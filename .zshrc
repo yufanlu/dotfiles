@@ -97,6 +97,9 @@ alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
 alias m5="cd ~/Documents/MSCF/M5"
+alias fc4="cd ~/Documents/MSCF/M5/FC4/Course"
+alias algo="cd ~/Documents/MSCF/M5/algo_trade"
+alias risk="cd ~/Documents/MSCF/M5/risk"
 alias q="q/m32/q"
 
 # OPAM configuration
