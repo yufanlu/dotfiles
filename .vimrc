@@ -236,7 +236,7 @@ vmap < <gv
 vmap > >gv
 
 " F5 to compile
-map <F5> :Make<cr>
+map <F5> :make<cr>
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
