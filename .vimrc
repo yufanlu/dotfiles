@@ -61,7 +61,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python'] }
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for':['markdown', 'pandoc'] }
