@@ -53,8 +53,8 @@ Plug 'junegunn/fzf.vim'
 "Plug 'airblade/vim-gitgutter', {'for':['cpp', 'typescript', 'ocaml', 'python']}
 
 " static syntax check
-"Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
-Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+"Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -99,6 +99,9 @@ Plug 'digitaltoad/vim-pug', {'for': ['jade', 'pug']}
 " Build System
 Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
+" kdb/q
+Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
+
 " plugins to learn
 Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
@@ -121,6 +124,9 @@ set relativenumber
 set wildmenu
 "set guifont=Sauce\ Code\ Powerline\ Light:h11
 set guifont=Sauce\ Code\ Powerline:h11        " font face/size
+if has('nvim')
+    set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
+endif
 
 " colorscheme
 set t_Co=256
@@ -218,6 +224,7 @@ nnoremap <space> za                                 " space open/closes folds
 " }}}
 
 " Behavior  {{{
+set clipboard+=unnamedplus
 
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
@@ -242,7 +249,7 @@ map <F5> :make<cr>
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
-" Fold All but current
+"" Fold All but current
 nnoremap <leader>f zMzvzz
 " }}}
 
@@ -496,8 +503,7 @@ let g:formatters_ocaml = ['ocp_indent_auto_formatter']
 
 " {{{ FastFold
 let g:tex_fold_enabled = 1
-let g:python_fold = 1
-let g:cpp_fold = 1
+let g:fastfold_skip_filetypes = ['taglist']
 " }}}
 
 " pandoc {{{
@@ -517,6 +523,11 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 " Inspect runner pane
 map <Leader>vi :VimuxInspectRunner<CR>
+" }}}
+
+
+" q {{{
+au BufRead,BufNewFile *.q set filetype=q
 " }}}
 
 " Custom functions {{{
