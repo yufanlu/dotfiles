@@ -102,7 +102,7 @@ alias algo="cd ~/Documents/MSCF/M5/algo_trade"
 alias risk="cd ~/Documents/MSCF/M5/Risk/Homework"
 alias fe="cd ~/Documents/MSCF/M5/FE"
 alias opt="cd ~/Documents/MSCF/M5/opt"
-alias q='QHOME=~/q rlwrap -r ~/q/m32/q'
+alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

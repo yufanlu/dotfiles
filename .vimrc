@@ -17,26 +17,19 @@ Plug 'vim-airline/vim-airline-themes'
 " Behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-"Plug 'godlygeek/tabular', { 'for': ['pandoc', 'markdown'] }
-"Plug 'tpope/vim-dispatch', { 'for': ['cpp', 'python'] }
+Plug 'tpope/vim-sleuth'
 Plug 'majutsushi/tagbar'
-"Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'takac/vim-commandcaps'
-"Plug 'lifepillar/vim-cheat40'
 Plug 'vim-scripts/matchit.zip'
+Plug 'tpope/vim-projectionist'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-
-"" Tmux
-"Plug 'edkolev/tmuxline.vim'
-"Plug 'christoomey/vim-tmux-navigator'
-"Plug 'benmills/vimux'
 
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
@@ -49,12 +42,16 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-"Plug 'tpope/vim-fugitive', {'for':['cpp', 'typescript', 'ocaml', 'python']}
-"Plug 'airblade/vim-gitgutter', {'for':['cpp', 'typescript', 'ocaml', 'python']}
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
-"Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+if has('nvim')
+    Plug 'neomake/neomake'
+    Plug 'kassio/neoterm'
+else
+    Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+endif
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -64,15 +61,11 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python'] }
 
 " Writing
-Plug 'reedes/vim-pencil', { 'for':['markdown', 'pandoc'] }
-Plug 'junegunn/goyo.vim', { 'for':['markdown', 'pandoc'] }
-"Plug 'kannokanno/previm', {'for': 'markdown'}
-"Plug 'tyru/open-browser.vim', {'for': 'markdown'}
-"Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'dhruvasagar/vim-table-mode', { 'for': ['pandoc', 'markdown', 'rmarkdown'] }
-Plug 'vim-pandoc/vim-pandoc', {'for': ['pandoc', 'rmarkdown']}
-Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': ['pandoc', 'rmarkdown']}
-"Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
+Plug 'reedes/vim-pencil', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for': 'pandoc'}
+Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': 'pandoc'}
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
@@ -103,6 +96,7 @@ Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
 
 " plugins to learn
+Plug 'szw/vim-g'
 Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
 call plug#end()
@@ -156,6 +150,7 @@ set listchars=tab:▸\ ,eol:¬
 " True Color Support
 if (has("termguicolors"))
     set termguicolors
+    let NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 " }}}
 
@@ -255,6 +250,7 @@ nnoremap <leader>f zMzvzz
 
 " vim-Plug {{{
 command! PU PlugUpdate | PlugUpgrade
+command! PS PlugStatus
 command! PC PlugClean
 " }}}
 
@@ -345,10 +341,6 @@ endif
 "au FileType tex let b:loaded_delimitMate = 0
 " }}}
 
-" AutoPair {{{
-"let g:AutoPairsShortcutJump = '<S-Tab>'
-" }}}
-
 " python-syntax {{{
 let python_highlight_all = 1
 " }}}
@@ -356,7 +348,6 @@ let python_highlight_all = 1
 " vimtex {{{
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = 'dbmg'
-"let g:tex_conceal = ''
 let g:vimtex_latexmk_continuous = 1
 "let g:vimtex_latexmk_background  = 1
 let g:tex_no_error = 1
@@ -458,41 +449,6 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
-" Goyo and Limelight {{{
-let g:goyo_width = '65%'
-let g:limelight_conceal_ctermfg = 240     " Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_guifg = '#777777' " Color name (:help gui-colors) or RGB color
-" }}}
-
-" cheatsheet 40 {{{
-let g:cheat40_use_default = 0
-nnoremap <c-e><c-e> :call EditCheatSheet()<cr>
-
-function! EditCheatSheet()
-    botright 45vnew ~/dotfiles/vim-cheatsheet.txt
-    setlocal fileencoding=utf-8 filetype=cheat40
-    setlocal colorcolumn=25,40 winfixwidth expandtab nonumber norelativenumber nospell nowrap textwidth=40
-    nnoremap <silent> <buffer> q :q<cr>
-    nnoremap <silent> <buffer> ? :call ShowDefaultCheatSheet()<cr>
-endfunction
-
-function! ShowDefaultCheatSheet()
-    below sp ~/.vim/plugged/vim-cheat40/cheat40.txt
-    setlocal expandtab nonumber norelativenumber nospell nowrap textwidth=40
-    setlocal fileencoding=utf-8 filetype=cheat40
-    nnoremap <silent> <buffer> q :q<cr>
-endfunction
-" }}}
-
-" Vimfiler {{{
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-" " }}}}}
-
 " vim-autoformat {{{
 noremap <F3> :Autoformat<CR>
 let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
@@ -515,16 +471,6 @@ au FileType pandoc let b:delimitMate_quotes="\" '"
 au FileType pandoc setlocal nonumber norelativenumber
 "let g:pandoc#modules#disabled = ["folding"]
 " }}}
-
-" vimux {{{
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-" }}}
-
 
 " q {{{
 au BufRead,BufNewFile *.q set filetype=q
