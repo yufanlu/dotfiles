@@ -244,8 +244,13 @@ map <F5> :make<cr>
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
-"" Fold All but current
+" Fold All but current
 nnoremap <leader>f zMzvzz
+
+if has('nvim')
+  "let modifiable=1
+  tnoremap <Esc> <C-\><C-n>
+endif
 " }}}
 
 " vim-Plug {{{
