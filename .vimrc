@@ -42,8 +42,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
+Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
 " static syntax check
 if has('nvim')
@@ -112,7 +112,7 @@ set number                                    " line number
 set mouse=a                                   " enable mouse action
 set history=200                               " command history
 set showcmd                                   " show command in bottom bar
-set lazyredraw                                " redraw only when we need to.
+set nolazyredraw                                " redraw only when we need to.
 set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
 set wildmenu
@@ -252,6 +252,9 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 " }}}
+
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " vim-Plug {{{
 command! PU PlugUpdate | PlugUpgrade
