@@ -46,11 +46,11 @@ Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
 Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
 " static syntax check
+Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+
+" neoterm
 if has('nvim')
-    Plug 'neomake/neomake'
     Plug 'kassio/neoterm'
-else
-    Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 endif
 
 " Snippets
@@ -90,6 +90,7 @@ Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'digitaltoad/vim-pug', {'for': ['jade', 'pug']}
 
 " Build System
+Plug 'tpope/vim-dispatch', {'for': 'cpp'}
 Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
 " kdb/q
@@ -298,23 +299,6 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_tex_checkers = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_ocaml_checkers = ['merlin']
-"let g:syntastic_error_symbol='✗'
-"let g:syntastic_warning_symbol='⚠'
-"let g:syntastic_style_error_symbol = '✗'
-"let g:syntastic_style_warning_symbol = '⚠'
-"let g:syntastic_auto_loc_list=1
-"let g:syntastic_aggregate_errors = 1
-" }}}
-
-" ale {{{
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {
-\   'python': ['flake8'],
-\   'cpp': ['clang'],
-\}
 " }}}
 
 " YCM and UltiSnips {{{
@@ -346,7 +330,7 @@ endif
 " }}}
 
 " delimitMate {{{
-"au FileType tex let b:loaded_delimitMate = 0
+au FileType tex let b:loaded_delimitMate = 0
 " }}}
 
 " python-syntax {{{
@@ -423,6 +407,10 @@ augroup MyVimtex
 augroup END
 
 " }}}
+
+" vim-cmake {{{ "
+let g:cmake_usr_args='-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+" }}} vim-cmake "
 
 " FZF {{{
 "nnoremap <c-b> :Buffer<cr>
