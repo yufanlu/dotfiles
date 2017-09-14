@@ -472,6 +472,21 @@ au FileType pandoc setlocal nonumber norelativenumber
 au BufRead,BufNewFile *.q set filetype=q
 " }}}
 
+" projectionist {{{
+let g:projectionist_heuristics = {
+      \ "CMakeLists.txt": {
+      \     'Src/*.cpp': {
+      \       'alternate': '{}.hpp',
+      \       'type': 'source'
+      \     },
+      \     '*.hpp': {
+      \       'alternate': 'Src/{}.cpp',
+      \       'type': 'header'
+      \     },
+      \ }
+      \ }
+" }}}
+
 " Custom functions {{{
 
 " Create Build Dir {{{
