@@ -12,6 +12,7 @@ snippet cm "sample cmake config" b
 cmake_minimum_required(VERSION 3.6)
 project(${1:`!v fnamemodify('.', ':p:h:t')`})
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES ${2:`!p snip.rv = list_files()`})

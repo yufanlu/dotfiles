@@ -22,6 +22,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
+Plug 'Valloric/ListToggle'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'takac/vim-commandcaps'
@@ -45,8 +46,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
 Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
-" static syntax check
-Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+" syntax check
+"Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+Plug 'neomake/neomake'
 
 " neoterm
 if has('nvim')
@@ -58,7 +60,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python'] }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -207,8 +209,8 @@ set cinoptions+=g0
 
 " buffer
 set hidden
-nnoremap <c-e><c-n> :bn<CR>
-nnoremap <c-e><c-p> :bN<CR>
+"nnoremap <c-e><c-n> :bn<CR>
+"nnoremap <c-e><c-p> :bN<CR>
 
 " Folding
 set foldenable                                      " enable folding
@@ -238,9 +240,6 @@ nnoremap Q <nop>
 vmap < <gv
 vmap > >gv
 
-" F5 to compile
-map <F5> :make<cr>
-
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <c-e><c-l> :so ~/.vimrc<cr>
@@ -261,6 +260,10 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 command! PU PlugUpdate | PlugUpgrade
 command! PS PlugStatus
 command! PC PlugClean
+" }}}
+
+" NERDTree {{{
+let NERDTreeNaturalSort=1
 " }}}
 
 " Tagbar {{{
@@ -294,11 +297,11 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " Syntastic {{{
-let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_tex_checkers = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_ocaml_checkers = ['merlin']
+"let g:syntastic_python_python_exec = 'python3'
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_tex_checkers = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_ocaml_checkers = ['merlin']
 " }}}
 
 " YCM and UltiSnips {{{
@@ -308,7 +311,7 @@ let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion  = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-"set omnifunc=syntaxcomplete#Complete
+let g:ycm_always_populate_location_list = 1
 
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
@@ -367,12 +370,12 @@ let g:tex_fold_additional_envs = [
             \ 'enumerate',
             \ 'definition']
 
-nnoremap <leader>lv :VimtexView<cr>
-nnoremap <leader>lc :VimtexClean<cr>
-nnoremap <leader>lC :VimtexClean!<cr>
-nnoremap <leader>le :VimtexError<cr>
-nnoremap <leader>ll :VimtexCompile<cr>
-nnoremap <leader>lt :VimtexTocToggle<cr>
+au FileType tex nnoremap <leader>lv :VimtexView<cr>
+au FileType tex nnoremap <leader>lc :VimtexClean<cr>
+au FileType tex nnoremap <leader>lC :VimtexClean!<cr>
+au FileType tex nnoremap <leader>le :VimtexError<cr>
+au FileType tex nnoremap <leader>ll :VimtexCompile<cr>
+au FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
 
 au FileType tex setlocal spell linebreak "norelativenumber
 au FileType tex setlocal conceallevel=2
@@ -408,12 +411,7 @@ augroup END
 
 " }}}
 
-" vim-cmake {{{ "
-let g:cmake_usr_args='-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-" }}} vim-cmake "
-
 " FZF {{{
-"nnoremap <c-b> :Buffer<cr>
 nnoremap <c-f> :Lines<cr>
 nnoremap <c-p> :Ag<cr>
 
@@ -487,6 +485,11 @@ let g:projectionist_heuristics = {
       \ }
 " }}}
 
+" neoterm {{{
+let g:neoterm_size='10'
+map <leader>t :Ttoggle<cr>
+" }}}
+
 " Custom functions {{{
 
 " Create Build Dir {{{
@@ -540,5 +543,8 @@ command! ToggleCursor call ToggleConcealCursor()
 " }}}
 
 au FileType cpp command! GetCMakeFile vs CMakeLists.txt
+au FileType cpp nnoremap <F5> :Make<cr>
+au FileType cpp nnoremap <c-b> :Make<cr>
+au FileType c,cpp nested :TagbarOpen
 
 " vim:foldmethod=marker:foldlevel=0
