@@ -472,7 +472,7 @@ au BufRead,BufNewFile *.q set filetype=q
 
 " projectionist {{{
 let g:projectionist_heuristics = {
-      \ "CMakeLists.txt": {
+      \ "build/": {
       \     'Src/*.cpp': {
       \       'alternate': '{}.hpp',
       \       'type': 'source'
@@ -483,6 +483,10 @@ let g:projectionist_heuristics = {
       \     },
       \ }
       \ }
+" }}}
+
+" gutentags {{{
+let g:gutentags_project_root=['build']
 " }}}
 
 " neoterm {{{
