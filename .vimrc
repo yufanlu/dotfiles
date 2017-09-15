@@ -48,9 +48,9 @@ Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
 " syntax check
 "Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 
-" neoterm
 if has('nvim')
     Plug 'kassio/neoterm'
 endif
@@ -445,15 +445,27 @@ command! -bang -nargs=? -complete=dir Files
 
 " vim-autoformat {{{
 noremap <F3> :Autoformat<CR>
-let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4}''"'
+let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4, ColumnLimit: 100}''"'
 let g:formatters_cpp = ['google_style_cpp']
 let g:formatdef_ocp_indent_auto_formatter = '"ocp-indent"'
 let g:formatters_ocaml = ['ocp_indent_auto_formatter']
 " }}}  "
 
+" Ale {{{
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'cpp': ['clang'],
+\}
+" }}}
+
 " {{{ FastFold
 let g:tex_fold_enabled = 1
-let g:fastfold_skip_filetypes = ['taglist']
+let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
+let g:fastfold_fdmhook = 1
 " }}}
 
 " pandoc {{{
