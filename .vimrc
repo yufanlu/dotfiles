@@ -240,9 +240,9 @@ nnoremap Q <nop>
 vmap < <gv
 vmap > >gv
 
-" Editing/Loading .vimrc
+"" Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
-nnoremap <c-e><c-l> :so ~/.vimrc<cr>
+"nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
 " Fold All but current
 nnoremap <leader>f zMzvzz
@@ -268,10 +268,9 @@ let NERDTreeNaturalSort=1
 
 " Tagbar {{{
 nnoremap <F8> :TagbarToggle<cr>
-nnoremap <c-e><c-o> :TagbarToggle<cr>
+"let g:tagbar_width = 40
+"let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
 let g:tagbar_previewwin_pos = "aboveleft"
-let g:tagbar_width = 50
-let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
 " }}}
 
 " vim-airline {{{
@@ -333,7 +332,7 @@ endif
 " }}}
 
 " delimitMate {{{
-au FileType tex let b:loaded_delimitMate = 0
+"au FileType tex let b:loaded_delimitMate = 0
 " }}}
 
 " python-syntax {{{
@@ -480,6 +479,8 @@ au FileType pandoc setlocal nonumber norelativenumber
 
 " q {{{
 au BufRead,BufNewFile *.q set filetype=q
+au BufRead,BufNewFile *.q let g:neoterm_size='80'
+au BufRead,BufNewFile *.q let g:neoterm_position='vertical'
 " }}}
 
 " projectionist {{{
@@ -503,7 +504,11 @@ let g:gutentags_project_root=['build']
 
 " neoterm {{{
 let g:neoterm_size='10'
-map <leader>t :Ttoggle<cr>
+nnoremap <c-t> :Ttoggle<cr>
+"nnoremap <c-s> :TREPLSendLine<cr>
+nnoremap <c-s> :call SendLineOrClear()<cr>
+vnoremap <c-s> :TREPLSendSelection<cr>
+
 " }}}
 
 " Custom functions {{{
@@ -552,6 +557,18 @@ function! ToggleConcealCursor()
 endfunction
 
 command! ToggleCursor call ToggleConcealCursor()
+" }}}
+
+" Send line to neoterm or clearn {{{
+function! SendLineOrClear()
+  let current_line = getline('.')
+  if (current_line == '')
+    call neoterm#clear()
+  else
+    TREPLSendLine
+  endif
+endfunction
+
 " }}}
 
 " }}}
