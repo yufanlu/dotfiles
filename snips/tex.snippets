@@ -235,6 +235,13 @@ snippet enumr "enumerate with resume" b
 \end{enumerate}
 endsnippet
 
+snippet enumt "enumerate with counter" b
+\begin{enumerate}[resume]
+	\setcounter{enumi}{$1}
+	\item $2
+\end{enumerate}
+endsnippet
+
 snippet cas "\begin{case}" i
 \begin{cases}
 	${1:value}, &\textit{ if } ${2:cond} \\\\
@@ -250,13 +257,6 @@ endsnippet
 post_jump "create_col_placeholders(snip)"
 snippet "tc(\d+)" "latex table col variable" br
 `!p snip.rv = match.group(1)`
-endsnippet
-
-snippet mcol "\multicols{}" b
-\begin{multicols}{${1:2}}
-	${2:${VISUAL:content}}
-	\columnbreak
-\end{multicols}
 endsnippet
 
 snippet sec "\section" b
