@@ -49,7 +49,7 @@ Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 " syntax check
 "Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 "Plug 'neomake/neomake'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 
 if has('nvim')
     Plug 'kassio/neoterm'
@@ -337,6 +337,7 @@ endif
 
 " python-syntax {{{
 let python_highlight_all = 1
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 " }}}
 
 " vimtex {{{
@@ -479,8 +480,6 @@ au FileType pandoc setlocal nonumber norelativenumber
 
 " q {{{
 au BufRead,BufNewFile *.q set filetype=q
-au BufRead,BufNewFile *.q let g:neoterm_size='80'
-au BufRead,BufNewFile *.q let g:neoterm_position='vertical'
 " }}}
 
 " projectionist {{{
@@ -503,7 +502,9 @@ let g:gutentags_project_root=['build']
 " }}}
 
 " neoterm {{{
-let g:neoterm_size='10'
+let g:neoterm_size='80'
+let g:neoterm_position='vertical'
+let g:neoterm_repl_python='ipython3'
 nnoremap <c-t> :Ttoggle<cr>
 "nnoremap <c-s> :TREPLSendLine<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
