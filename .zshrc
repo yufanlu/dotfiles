@@ -97,11 +97,12 @@ alias m2="cd ~/Documents/MSCF/M2"
 alias m3="cd ~/Documents/MSCF/M3"
 alias m4="cd ~/Documents/MSCF/M4"
 alias m5="cd ~/Documents/MSCF/M5"
-alias fc4="cd ~/Documents/MSCF/M5/FC4/Course"
-alias algo="cd ~/Documents/MSCF/M5/algo_trade"
-alias risk="cd ~/Documents/MSCF/M5/Risk/Homework"
-alias fe="cd ~/Documents/MSCF/M5/FE"
-alias opt="cd ~/Documents/MSCF/M5/opt"
+alias m6="cd ~/Documents/MSCF/M6"
+alias am="cd ~/Documents/MSCF/M6/AM"
+alias nm="cd ~/Documents/MSCF/M6/NM"
+alias risk="cd ~/Documents/MSCF/M6/RiskII"
+alias sa="cd ~/Documents/MSCF/M6/SA"
+alias ml="cd ~/Documents/MSCF/M6/ML"
 alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 
 # OPAM configuration
