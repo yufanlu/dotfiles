@@ -125,13 +125,19 @@ if has('nvim')
     set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
 endif
 
+" True Color Support
+if (has("termguicolors"))
+    set termguicolors
+    let NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 " colorscheme
 set t_Co=256
 set t_ut=
 
 let base16colorspace=256
-colorscheme base16-oceanicnext
-let g:airline_theme='oceanicnext'
+colorscheme base16-monokai
+"let g:airline_theme='oceanicnext'
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -150,11 +156,6 @@ set background=dark
 set list
 set listchars=tab:▸\ ,eol:¬
 
-" True Color Support
-if (has("termguicolors"))
-    set termguicolors
-    let NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
 " }}}
 
 " General Config {{{
@@ -343,10 +344,18 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 " vimtex {{{
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = 'dbmg'
-let g:vimtex_latexmk_continuous = 1
-"let g:vimtex_latexmk_background  = 1
-let g:tex_no_error = 1
 let g:vimtex_fold_manual = 1
+let g:vimtex_latexmk_continuous = 1
+
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_automatic = 1
+
+let g:vimtex_toc_fold = 1
+let g:vimtex_format_enabled = 1
+
+if has('nvim')
+  let g:vimtex_compiler_progname = 'nvr'
+endif
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
