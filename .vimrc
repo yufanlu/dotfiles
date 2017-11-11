@@ -137,8 +137,8 @@ set t_Co=256
 set t_ut=
 
 let base16colorspace=256
-colorscheme base16-monokai
-"let g:airline_theme='oceanicnext'
+colorscheme base16-oceanicnext
+let g:airline_theme='oceanicnext'
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -507,8 +507,6 @@ let g:gutentags_project_root=['build']
 " }}}
 
 " neoterm {{{
-let g:neoterm_size='80'
-let g:neoterm_position='vertical'
 let g:neoterm_repl_python='ipython3'
 nnoremap <c-t> :Ttoggle<cr>
 "nnoremap <c-s> :TREPLSendLine<cr>
