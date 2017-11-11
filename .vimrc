@@ -19,6 +19,7 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'majutsushi/tagbar'
+Plug 'junegunn/vim-slash'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
@@ -241,7 +242,7 @@ nnoremap Q <nop>
 vmap < <gv
 vmap > >gv
 
-"" Editing/Loading .vimrc
+" Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 "nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
@@ -249,7 +250,6 @@ nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
 nnoremap <leader>f zMzvzz
 
 if has('nvim')
-  "let modifiable=1
   tnoremap <Esc> <C-\><C-n>
 endif
 " }}}
