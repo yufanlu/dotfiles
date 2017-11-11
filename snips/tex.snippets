@@ -70,19 +70,11 @@ endsnippet
 
 # pairs {{{
 
-snippet $$ "$$" iA
-\$${1:${VISUAL:content}}\$
-endsnippet
-
-snippet || "||" iA
-|${1:${VISUAL:content}}|
-endsnippet
-
-snippet () "()" iA
+snippet () "()" i
 (${1:${VISUAL:content}})
 endsnippet
 
-snippet {} "{}" iA
+snippet {} "{}" i
 {${1:${VISUAL:content}}}
 endsnippet
 
@@ -113,12 +105,12 @@ endsnippet
 # }}} pair #
 
 # arrow {{{ #
-snippet -> "\to" iA
+snippet -> "\to" i
 \to
 endsnippet
 
-snippet => "\to" iA
-\Rightarrow
+snippet => "\to" i
+\longrightarrow
 endsnippet
 # }}} arrow #
 
@@ -152,7 +144,7 @@ snippet mb "\mathbb{}" i
 \mathbb{${1:${VISUAL}}}
 endsnippet
 
-snippet ... "\dots" iA
+snippet ... "\dots" i
 \dots
 endsnippet
 
@@ -169,7 +161,7 @@ snippet sq "\sqrt{}" i
 endsnippet
 # }}}
 
-snippet "" "quote" iA
+snippet "" "quote" i
 \`\`${1:${VISUAL}}''
 endsnippet
 
