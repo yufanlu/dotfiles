@@ -296,13 +296,6 @@ let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count p
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
 " }}}
 
-" Syntastic {{{
-"let g:syntastic_python_python_exec = 'python3'
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_tex_checkers = 0
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_ocaml_checkers = ['merlin']
-" }}}
 
 " YCM and UltiSnips {{{
 let g:ycm_python_binary_path = '/usr/local/bin/python3'
@@ -313,7 +306,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_always_populate_location_list = 1
 
-au! UltiSnips_AutoTrigger
+" use python3 for UltiSnips
+let g:UltiSnipsUsePythonVersion = 3
 
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
