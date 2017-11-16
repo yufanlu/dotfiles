@@ -137,8 +137,14 @@ set t_Co=256
 set t_ut=
 
 let base16colorspace=256
-colorscheme base16-oceanicnext
-let g:airline_theme='oceanicnext'
+colorscheme base16-monokai
+let g:airline_theme='base16_monokai'
+" colorscheme base16-oceanicnext
+" let g:airline_theme='oceanicnext'
+
+let g:airline#extensions#ale#enabled = 1
+let airline#extensions#ale#error_symbol = 'E:'
+let airline#extensions#ale#warning_symbol = 'W:'
 
 " turn off scroll bar if using MacVim
 if has("gui_running")
@@ -295,7 +301,6 @@ let g:airline#extensions#quickfix#location_text = 'Location' " configure the tit
 let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count prefix
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
 " }}}
-
 
 " YCM and UltiSnips {{{
 let g:ycm_python_binary_path = '/usr/local/bin/python3'

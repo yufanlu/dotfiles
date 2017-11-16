@@ -1,4 +1,5 @@
 [flake8]
 max-line-length = 140
 # W391: blank line at end of file
-ignore = W391
+# E731: do not assign a lambda express, use a def
+ignore = W391, E731
