@@ -53,7 +53,7 @@ ZSH_THEME="jbergantine" # "af-magic"
 plugins=(git brew tmux python)
 
 # User configuration
-export PATH="/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
+export PATH="/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:$HOME/.cargo/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -66,6 +66,9 @@ export EDITOR='vim'
 
 # tmux
 export TERM=xterm-256color
+
+# itermplot
+export MPLBACKEND="module://itermplot"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -80,7 +83,7 @@ export TERM=xterm-256color
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-alias mvim="vim --servername VIM"
+alias vim="nvim"
 alias doc="cd ~/Documents"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"

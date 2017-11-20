@@ -48,8 +48,6 @@ Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
 Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
 " syntax check
-"Plug 'scrooloose/syntastic', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
-"Plug 'neomake/neomake'
 Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
 
 if has('nvim')
@@ -62,6 +60,7 @@ Plug 'honza/vim-snippets'
 
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
+Plug 'tenfyzhong/CompleteParameter.vim'
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -76,7 +75,6 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-"Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install', 'for': 'cpp'}
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -150,6 +148,7 @@ endif
 " Status Line configuration
 syntax enable
 set noshowmode
+set cmdheight=2
 set laststatus=2
 set encoding=utf-8
 set background=dark
@@ -297,7 +296,7 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " YCM and UltiSnips {{{
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = 'python3'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion  = 1
@@ -513,6 +512,9 @@ nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
 
 " }}}
+
+let g:complete_parameter_use_ultisnips_mapping = 1
+
 
 " Custom functions {{{
 
