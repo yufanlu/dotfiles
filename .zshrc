@@ -50,7 +50,7 @@ ZSH_THEME="jbergantine" # "af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew tmux python)
+plugins=(git brew tmux python iterm2)
 
 # User configuration
 export PATH="/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:$HOME/.cargo/bin"
