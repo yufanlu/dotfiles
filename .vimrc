@@ -15,6 +15,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Behavior
+Plug 'tpope/vim-eunuch'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
@@ -359,25 +360,18 @@ endif
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
-            \ 'center',
-            \ 'equation',
             \ 'proposition',
-            \ 'chapter',
             \ 'matrix',
-            \ 'note',
-            \ 'cases',
             \ 'claim',
             \ 'remark',
             \ 'lemma',
+            \ 'theorem',
             \ 'warning',
             \ 'proof',
             \ 'itemize',
-            \ 'theorem',
             \ 'example',
             \ 'corollary',
-            \ 'algorithm',
-            \ 'enumerate',
-            \ 'definition']
+            \ 'enumerate']
 
 au FileType tex nnoremap <leader>lv :VimtexView<cr>
 au FileType tex nnoremap <leader>lc :VimtexClean<cr>
@@ -394,16 +388,19 @@ if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 
-let g:ycm_semantic_triggers.tex = [
-            \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-            \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-            \ 're!\\hyperref\[[^]]*',
-            \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-            \ 're!\\(include(only)?|input){[^}]*',
-            \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-            \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-            \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-            \ ]
+
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-pdf',
+      \   '--shell-escape',
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ],
+      \}
+
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 let g:vimtex_quickfix_latexlog = {
             \ 'overfull' : 0,
@@ -587,8 +584,7 @@ endfunction
 " }}}
 
 au FileType cpp command! GetCMakeFile vs CMakeLists.txt
-au FileType cpp nnoremap <F5> :Make<cr>
 au FileType cpp nnoremap <c-b> :Make<cr>
-au FileType c,cpp nested :TagbarOpen
+"au FileType c,cpp nested :TagbarOpen
 
 " vim:foldmethod=marker:foldlevel=0
