@@ -387,6 +387,19 @@ au FileType tex let b:delimitMate_quotes="\" '"
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+    \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+    \ 're!\\hyperref\[[^]]*',
+    \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+    \ 're!\\(include(only)?|input){[^}]*',
+    \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+    \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ 're!\\[A-Za-z]*',
+    \ ]
 
 
 let g:vimtex_compiler_latexmk = {
@@ -399,8 +412,6 @@ let g:vimtex_compiler_latexmk = {
       \   '-interaction=nonstopmode',
       \ ],
       \}
-
-let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 let g:vimtex_quickfix_latexlog = {
             \ 'overfull' : 0,
