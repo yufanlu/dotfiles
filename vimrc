@@ -61,7 +61,10 @@ Plug 'honza/vim-snippets'
 
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
-Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['cpp', 'python', 'tex'] }
+
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -84,6 +87,7 @@ Plug 'matze/vim-tex-fold', {'for': 'tex'}
 " Python
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
+Plug 'tweekmonster/braceless.vim', {'for': 'python'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
@@ -99,7 +103,6 @@ Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
 
 " plugins to learn
-Plug 'szw/vim-g'
 Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
 call plug#end()
@@ -136,8 +139,8 @@ set t_Co=256
 set t_ut=
 
 let base16colorspace=256
-colorscheme base16-monokai
-let g:airline_theme='base16_monokai'
+colorscheme base16-solarized-dark
+let g:airline_theme='base16_solarized'
 " colorscheme base16-oceanicnext
 " let g:airline_theme='oceanicnext'
 
@@ -155,7 +158,6 @@ endif
 " Status Line configuration
 syntax enable
 set noshowmode
-set cmdheight=2
 set laststatus=2
 set encoding=utf-8
 set background=dark
@@ -263,6 +265,12 @@ endif
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
+" libclang
+let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
+if isdirectory(s:clang_library_path)
+    let g:clang_library_path=s:clang_library_path
+endif
+
 " vim-Plug {{{
 command! PU PlugUpdate | PlugUpgrade
 command! PS PlugStatus
@@ -302,21 +310,27 @@ let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count p
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
 " }}}
 
-" YCM and UltiSnips {{{
+" YCM {{{
 let g:ycm_python_binary_path = 'python3'
+let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion  = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_always_populate_location_list = 1
-
-" use python3 for UltiSnips
-let g:UltiSnipsUsePythonVersion = 3
 
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+
+let g:complete_parameter_use_ultisnips_mapping = 1
+imap <expr> ( complete_parameter#pre_complete("()")
+" }}}
+
+" UltiSnips {{{
+"
+" use python3 for UltiSnips
+let g:UltiSnipsUsePythonVersion = 3
 
 " key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<TAB>"
@@ -326,11 +340,35 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 let g:UltiSnipsEditSplit = "vertical"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 
-" libclang
-let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
-if isdirectory(s:clang_library_path)
-    let g:clang_library_path=s:clang_library_path
-endif
+" }}}
+
+" Deoplete {{{
+
+"let g:deoplete#enable_at_startup = 1
+
+"if !exists('g:deoplete#omni#input_patterns')
+  "let g:deoplete#omni#input_patterns = {}
+"endif
+
+"" from vimtex
+"let g:vimtex#re#deoplete = '\\(?:'
+      "\.'\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      "\.'|(text|block)cquote\*?(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      "\.'|(for|hy)\w*cquote\*?{[^}]*}(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      "\.'|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      "\.'|hyperref\s*\[[^]]*'
+      "\.'|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      "\.'|(?:include(?:only)?|input)\s*\{[^}]*'
+      "\.'|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      "\.'|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      "\.'|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      "\.'|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      "\.'|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      "\.'|\w*'
+      "\.')'
+
+"let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
 " }}}
 
 " delimitMate {{{
@@ -344,7 +382,7 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 
 " vimtex {{{
 let g:tex_flavor  = 'latex'
-let g:tex_conceal = 'dbmg'
+let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
 let g:vimtex_latexmk_continuous = 1
 
@@ -368,6 +406,7 @@ let g:tex_fold_additional_envs = [
             \ 'theorem',
             \ 'warning',
             \ 'proof',
+            \ 'minted',
             \ 'itemize',
             \ 'example',
             \ 'corollary',
@@ -387,6 +426,7 @@ au FileType tex let b:delimitMate_quotes="\" '"
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
+
 let g:ycm_semantic_triggers.tex = [
     \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
     \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
@@ -527,9 +567,6 @@ vnoremap <c-s> :TREPLSendSelection<cr>
 
 " }}}
 
-let g:complete_parameter_use_ultisnips_mapping = 1
-
-
 " Custom functions {{{
 
 " Create Build Dir {{{
@@ -542,43 +579,21 @@ function! CreateBuildDir()
     endif
 endfunction
 
-command! CreateBuildDir call CreateBuildDir()
-" }}}
+function! BuildCPP()
+    if (&ft=='cpp')
+       call CreateBuildDir()
+    endif
 
-" Change colorscheme {{{
-function! UseGotham()
-    colorscheme gotham256
-    AirlineTheme gotham256
-endfunction
-
-function! UseOceanic()
-    colorscheme base16-oceanicnext
-    AirlineTheme oceanicnext
-endfunction
-
-command! Gotham call UseGotham()
-command! Oceanic call UseOceanic()
-" }}}
-
-" Toggle Conceal Cursor {{{
-let g:conceal_cursor_toggled = 0
-
-function! ToggleConcealCursor()
-    if (&ft=='tex'||&ft=='pandoc')
-        if (g:conceal_cursor_toggled == 0)
-            set concealcursor=c
-            let g:conceal_cursor_toggled = 1
-        else
-            set concealcursor=inc
-            let g:conceal_cursor_toggled = 0
-        endif
+    if filereadable('CMakeLists.txt')
+      :CMake
+    else
+      vs CMakeLists.txt
     endif
 endfunction
 
-command! ToggleCursor call ToggleConcealCursor()
+command! CreateBuildDir call CreateBuildDir()
 " }}}
 
-" Send line to neoterm or clearn {{{
 function! SendLineOrClear()
   let current_line = getline('.')
   if (current_line == '')
@@ -590,11 +605,9 @@ endfunction
 
 " }}}
 
-" }}}
-
-" }}}
-
+au FileType cpp command! CPP call BuildCPP()
 au FileType cpp command! GetCMakeFile vs CMakeLists.txt
+au FileType cpp nnoremap <c-e><c-e> :vs CMakeLists.txt<cr>
 au FileType cpp nnoremap <c-b> :Make<cr>
 "au FileType c,cpp nested :TagbarOpen
 
