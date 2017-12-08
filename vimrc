@@ -60,7 +60,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer', 'for': ['cpp', 'python', 'tex'] }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
 Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['cpp', 'python', 'tex'] }
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -88,6 +88,7 @@ Plug 'matze/vim-tex-fold', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'tweekmonster/braceless.vim', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
@@ -323,8 +324,17 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
+" complete parameter
 let g:complete_parameter_use_ultisnips_mapping = 1
 imap <expr> ( complete_parameter#pre_complete("()")
+
+" vim-jedi
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_initialization = 0
+let g:jedi#show_call_signatures = 2
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#show_call_signatures_delay = 0
+
 " }}}
 
 " UltiSnips {{{
