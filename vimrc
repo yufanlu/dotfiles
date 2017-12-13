@@ -61,7 +61,6 @@ Plug 'honza/vim-snippets'
 
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
-Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['cpp', 'python', 'tex'] }
 
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'zchee/deoplete-jedi', {'for': 'python'}
