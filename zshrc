@@ -68,7 +68,7 @@ export EDITOR='vim'
 export TERM=xterm-256color
 
 # itermplot
-export MPLBACKEND="module://itermplot"
+#export MPLBACKEND="module://itermplot"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -105,7 +105,7 @@ alias am="cd ~/Documents/MSCF/M6/AM"
 alias nm="cd ~/Documents/MSCF/M6/NM"
 alias algo="cd ~/Documents/algo"
 alias risk="cd ~/Documents/MSCF/M6/RiskII"
-alias sa="cd ~/Documents/MSCF/M6/SA"
+alias sa="cd ~/Documents/SA-Project"
 alias ml="cd ~/Documents/MSCF/M6/ML"
 alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 

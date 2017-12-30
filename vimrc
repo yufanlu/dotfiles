@@ -35,7 +35,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Tag
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 'jsfaint/gen_tags.vim'
 
 " File system
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -60,10 +61,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
-
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'zchee/deoplete-jedi', {'for': 'python'}
+"Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
+Plug 'roxma/nvim-completion-manager'
+Plug 'fgrsnau/ncm-otherbuf'
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -78,6 +78,9 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+"Plug 'Rip-Rip/clang_complete', {'for': 'cpp'}
+Plug 'roxma/ncm-clang', {'for': 'cpp'}
+
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -232,8 +235,12 @@ nnoremap <space> za                                 " space open/closes folds
 " }}}
 
 " Behavior  {{{
+inoremap <c-c> <ESC>
+
+set shortmess+=c
 set clipboard+=unnamedplus
 
+" Move between windows
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 nnoremap <c-k> <c-w>k
@@ -252,7 +259,6 @@ vmap > >gv
 
 " Editing/Loading .vimrc
 nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
-"nnoremap <c-e><c-l> :so ~/.vimrc<cr>
 
 " Fold All but current
 nnoremap <leader>f zMzvzz
@@ -283,8 +289,6 @@ let NERDTreeNaturalSort=1
 
 " Tagbar {{{
 nnoremap <F8> :TagbarToggle<cr>
-"let g:tagbar_width = 40
-"let g:tagbar_show_linenumbers = 2   " show relativenumber in the tagbar
 let g:tagbar_previewwin_pos = "aboveleft"
 " }}}
 
@@ -323,17 +327,14 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
-" complete parameter
-let g:complete_parameter_use_ultisnips_mapping = 1
-imap <expr> ( complete_parameter#pre_complete("()")
+" }}}
 
-" vim-jedi
+" vim-jedi {{{
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_initialization = 0
 let g:jedi#show_call_signatures = 2
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#show_call_signatures_delay = 0
-
 " }}}
 
 " UltiSnips {{{
@@ -351,43 +352,21 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 
 " }}}
 
-" Deoplete {{{
-
-"let g:deoplete#enable_at_startup = 1
-
-"if !exists('g:deoplete#omni#input_patterns')
-  "let g:deoplete#omni#input_patterns = {}
-"endif
-
-"" from vimtex
-"let g:vimtex#re#deoplete = '\\(?:'
-      "\.'\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      "\.'|(text|block)cquote\*?(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      "\.'|(for|hy)\w*cquote\*?{[^}]*}(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      "\.'|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-      "\.'|hyperref\s*\[[^]]*'
-      "\.'|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      "\.'|(?:include(?:only)?|input)\s*\{[^}]*'
-      "\.'|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      "\.'|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-      "\.'|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-      "\.'|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-      "\.'|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-      "\.'|\w*'
-      "\.')'
-
-"let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
-" }}}
-
-" delimitMate {{{
-"au FileType tex let b:loaded_delimitMate = 0
+" NCM {{{
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 " }}}
 
 " python-syntax {{{
 let python_highlight_all = 1
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 " }}}
+
+" clang-complete {{{ "
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'ultisnips'
+let g:clang_auto_user_options = 'compile_commands.json, path'
+let g:clang_compilation_database = 'build'
+" }}} clang-complete "
 
 " vimtex {{{
 let g:tex_flavor  = 'latex'
@@ -407,19 +386,19 @@ endif
 
 let g:tex_fold_override_foldtext = 1
 let g:tex_fold_additional_envs = [
-            \ 'proposition',
-            \ 'matrix',
-            \ 'claim',
-            \ 'remark',
-            \ 'lemma',
-            \ 'theorem',
-            \ 'warning',
-            \ 'proof',
-            \ 'minted',
-            \ 'itemize',
-            \ 'example',
-            \ 'corollary',
-            \ 'enumerate']
+    \ 'proposition',
+    \ 'matrix',
+    \ 'claim',
+    \ 'remark',
+    \ 'lemma',
+    \ 'theorem',
+    \ 'warning',
+    \ 'proof',
+    \ 'minted',
+    \ 'itemize',
+    \ 'example',
+    \ 'corollary',
+    \ 'enumerate']
 
 au FileType tex nnoremap <leader>lv :VimtexView<cr>
 au FileType tex nnoremap <leader>lc :VimtexClean<cr>
@@ -432,24 +411,29 @@ au FileType tex setlocal spell linebreak "norelativenumber
 au FileType tex setlocal conceallevel=2
 au FileType tex let b:delimitMate_quotes="\" '"
 
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
+let g:vimtex#re#ncm = [
+    \ '\\[A-Za-z]*',
+    \ '\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+    \ '\\(text|block)cquote\*?(\[[^]]*\]){0,2}{[^}]*',
+    \ '\\(for|hy)[A-Za-z]*cquote\*?{[^}]*}(\[[^]]*\]){0,2}{[^}]*',
+    \ '\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+    \ '\\hyperref\[[^]]*',
+    \ '\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+    \ '\\(include(only)?|input){[^}]*',
+    \ '\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+    \ '\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ '\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ '\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
+    \ '\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+    \]
 
-let g:ycm_semantic_triggers.tex = [
-    \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-    \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-    \ 're!\\hyperref\[[^]]*',
-    \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-    \ 're!\\(include(only)?|input){[^}]*',
-    \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-    \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ 're!\\[A-Za-z]*',
-    \ ]
+"let g:vimtex#re#youcompleteme = map(copy(g:vimtex#re#ncm), "'re!' . v:val")
 
+"if !exists('g:ycm_semantic_triggers')
+  "let g:ycm_semantic_triggers = {}
+"endif
+
+"let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 let g:vimtex_compiler_latexmk = {
       \ 'options' : [
@@ -463,12 +447,12 @@ let g:vimtex_compiler_latexmk = {
       \}
 
 let g:vimtex_quickfix_latexlog = {
-            \ 'overfull' : 0,
-            \ 'underfull' : 0,
-            \ 'packages' : {
-            \   'hyperref' : 0,
-            \ },
-            \}
+      \ 'overfull' : 0,
+      \ 'underfull' : 0,
+      \ 'packages' : {
+      \   'hyperref' : 0,
+      \ },
+      \}
 
 augroup MyVimtex
   autocmd!
@@ -483,30 +467,30 @@ nnoremap <c-p> :Ag<cr>
 
 
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 " Insert mode completion
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " vim-autoformat {{{
@@ -518,14 +502,15 @@ let g:formatters_ocaml = ['ocp_indent_auto_formatter']
 " }}}  "
 
 " Ale {{{
-let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_linters = {
-\   'python': ['flake8'],
-\   'cpp': ['clang'],
-\}
+    \   'python': ['flake8'],
+    \   'cpp': ['clang'],
+    \}
 " }}}
 
 " {{{ FastFold
@@ -563,13 +548,16 @@ let g:projectionist_heuristics = {
       \ }
 " }}}
 
-" gutentags {{{
-let g:gutentags_project_root=['build']
-" }}}
+" gen_tags {{{
+let g:gen_tags#use_cache_dir = 1
+let g:gen_tags#ctags_auto_gen = 1
+let g:gen_tags#gtags_auto_gen = 1
+let g:gen_tags#blacklist = ['$HOME']
+" }}}"
 
 " neoterm {{{
 let g:neoterm_repl_python='ipython3'
-nnoremap <c-t> :Ttoggle<cr>
+nnoremap <c-e><c-t> :Ttoggle<cr>
 "nnoremap <c-s> :TREPLSendLine<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
@@ -580,24 +568,24 @@ vnoremap <c-s> :TREPLSendSelection<cr>
 
 " Create Build Dir {{{
 function! CreateBuildDir()
-    if !isdirectory('build')
-        call mkdir('build')
-        echo 'build directory created'
-    else
-        echo 'build directory already exists'
-    endif
+  if !isdirectory('build')
+    call mkdir('build')
+    echo 'build directory created'
+  else
+    echo 'build directory already exists'
+  endif
 endfunction
 
 function! BuildCPP()
-    if (&ft=='cpp')
-       call CreateBuildDir()
-    endif
+  if (&ft=='cpp')
+    call CreateBuildDir()
+  endif
 
-    if filereadable('CMakeLists.txt')
-      :CMake
-    else
-      vs CMakeLists.txt
-    endif
+  if filereadable('CMakeLists.txt')
+    :CMake
+  else
+    vs CMakeLists.txt
+  endif
 endfunction
 
 command! CreateBuildDir call CreateBuildDir()
@@ -618,6 +606,5 @@ au FileType cpp command! CPP call BuildCPP()
 au FileType cpp command! GetCMakeFile vs CMakeLists.txt
 au FileType cpp nnoremap <c-e><c-e> :vs CMakeLists.txt<cr>
 au FileType cpp nnoremap <c-b> :Make<cr>
-"au FileType c,cpp nested :TagbarOpen
 
 " vim:foldmethod=marker:foldlevel=0
