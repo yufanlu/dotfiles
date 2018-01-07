@@ -53,8 +53,8 @@ ZSH_THEME="jbergantine" # "af-magic"
 plugins=(git brew tmux python iterm2)
 
 # User configuration
-export PATH="/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:$HOME/.cargo/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:$HOME/.cargo/bin"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 

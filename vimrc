@@ -33,6 +33,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'Shougo/echodoc.vim'
 
 " Tag
 "Plug 'ludovicchabant/vim-gutentags'
@@ -62,8 +63,11 @@ Plug 'honza/vim-snippets'
 
 " Autocomplete
 "Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
-Plug 'roxma/nvim-completion-manager'
-Plug 'fgrsnau/ncm-otherbuf'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim', {'for': 'vim'}
 
 " Writing
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -79,7 +83,8 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 "Plug 'Rip-Rip/clang_complete', {'for': 'cpp'}
-Plug 'roxma/ncm-clang', {'for': 'cpp'}
+"Plug 'zchee/deoplete-clang', {'for': 'cpp'}
+"Plug 'tweekmonster/deoplete-clang2', {'for': 'cpp'}
 
 
 " Latex
@@ -90,7 +95,8 @@ Plug 'matze/vim-tex-fold', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'tweekmonster/braceless.vim', {'for': 'python'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+"Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
@@ -161,6 +167,7 @@ endif
 " Status Line configuration
 syntax enable
 set noshowmode
+"set cmdheight=2
 set laststatus=2
 set encoding=utf-8
 set background=dark
@@ -330,11 +337,10 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " }}}
 
 " vim-jedi {{{
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_initialization = 0
-let g:jedi#show_call_signatures = 2
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#show_call_signatures_delay = 0
+"let g:jedi#auto_initialization = 0
+"let g:jedi#auto_vim_configuration = 0
+"let g:jedi#show_call_signatures = 1
+"let g:jedi#force_py_version = 3
 " }}}
 
 " UltiSnips {{{
@@ -352,21 +358,52 @@ nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
 
 " }}}
 
-" NCM {{{
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+
+" from vimtex
+let g:vimtex#re#deoplete = '\\(?:'
+      \.'\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \.'|(text|block)cquote\*?(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \.'|(for|hy)\w*cquote\*?{[^}]*}(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \.'|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \.'|hyperref\s*\[[^]]*'
+      \.'|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \.'|(?:include(?:only)?|input)\s*\{[^}]*'
+      \.'|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \.'|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \.'|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \.'|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      \.'|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      \.'|\w*'
+      \.')'
+
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
+" deoplete-jedi
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" auto close preview window
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " }}}
 
 " python-syntax {{{
 let python_highlight_all = 1
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType python let NERDDefaultAlign="left"
 " }}}
 
-" clang-complete {{{ "
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
-let g:clang_auto_user_options = 'compile_commands.json, path'
-let g:clang_compilation_database = 'build'
-" }}} clang-complete "
+" clang_complete {{{
+"let g:clang_snippets = 1
+"let g:clang_snippets_engine = 'ultisnips'
+"let g:clang_close_preview = 1
+"let g:clang_auto_user_options = 'compile_commands.json, path'
+"let g:clang_compilation_database = 'build'
+" }}}
 
 " vimtex {{{
 let g:tex_flavor  = 'latex'
@@ -427,13 +464,13 @@ let g:vimtex#re#ncm = [
     \ '\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
     \]
 
-"let g:vimtex#re#youcompleteme = map(copy(g:vimtex#re#ncm), "'re!' . v:val")
+let g:vimtex#re#youcompleteme = map(copy(g:vimtex#re#ncm), "'re!' . v:val")
 
-"if !exists('g:ycm_semantic_triggers')
-  "let g:ycm_semantic_triggers = {}
-"endif
+if !exists('g:ycm_semantic_triggers')
+  let g:ycm_semantic_triggers = {}
+endif
 
-"let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 let g:vimtex_compiler_latexmk = {
       \ 'options' : [
@@ -562,6 +599,10 @@ nnoremap <c-e><c-t> :Ttoggle<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
 
+" }}}
+
+" echodoc {{{
+let g:echodoc_enable_at_startup = 1
 " }}}
 
 " Custom functions {{{
