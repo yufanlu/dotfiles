@@ -62,10 +62,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-"Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neoinclude.vim'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', {'for': 'vim'}
 
@@ -82,10 +81,6 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-"Plug 'Rip-Rip/clang_complete', {'for': 'cpp'}
-"Plug 'zchee/deoplete-clang', {'for': 'cpp'}
-"Plug 'tweekmonster/deoplete-clang2', {'for': 'cpp'}
-
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -95,14 +90,11 @@ Plug 'matze/vim-tex-fold', {'for': 'tex'}
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'tweekmonster/braceless.vim', {'for': 'python'}
-"Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
+"Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Typescript
-Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-
-Plug 'digitaltoad/vim-pug', {'for': ['jade', 'pug']}
+"Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+"Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 " Build System
 Plug 'tpope/vim-dispatch', {'for': 'cpp'}
@@ -110,9 +102,6 @@ Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
 " kdb/q
 Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
-
-" plugins to learn
-Plug 'ledger/vim-ledger', {'for': 'ledger'}
 
 call plug#end()
 
@@ -334,13 +323,14 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
-" }}}
+" YCM semantic trigger
+if !exists('g:ycm_semantic_triggers')
+  let g:ycm_semantic_triggers = {}
+endif
 
-" vim-jedi {{{
-"let g:jedi#auto_initialization = 0
-"let g:jedi#auto_vim_configuration = 0
-"let g:jedi#show_call_signatures = 1
-"let g:jedi#force_py_version = 3
+let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
+let g:ycm_semantic_triggers.vim = ['.', 're!\w{2}']
+
 " }}}
 
 " UltiSnips {{{
@@ -395,14 +385,6 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let python_highlight_all = 1
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
 autocmd FileType python let NERDDefaultAlign="left"
-" }}}
-
-" clang_complete {{{
-"let g:clang_snippets = 1
-"let g:clang_snippets_engine = 'ultisnips'
-"let g:clang_close_preview = 1
-"let g:clang_auto_user_options = 'compile_commands.json, path'
-"let g:clang_compilation_database = 'build'
 " }}}
 
 " vimtex {{{
@@ -465,10 +447,6 @@ let g:vimtex#re#ncm = [
     \]
 
 let g:vimtex#re#youcompleteme = map(copy(g:vimtex#re#ncm), "'re!' . v:val")
-
-if !exists('g:ycm_semantic_triggers')
-  let g:ycm_semantic_triggers = {}
-endif
 
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
@@ -568,21 +546,6 @@ au FileType pandoc setlocal nonumber norelativenumber
 
 " q {{{
 au BufRead,BufNewFile *.q set filetype=q
-" }}}
-
-" projectionist {{{
-let g:projectionist_heuristics = {
-      \ "build/": {
-      \     'Src/*.cpp': {
-      \       'alternate': '{}.hpp',
-      \       'type': 'source'
-      \     },
-      \     '*.hpp': {
-      \       'alternate': 'Src/{}.cpp',
-      \       'type': 'header'
-      \     },
-      \ }
-      \ }
 " }}}
 
 " gen_tags {{{

@@ -83,7 +83,7 @@ export TERM=xterm-256color
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-alias vim="nvim"
+#alias vim="nvim"
 alias doc="cd ~/Documents"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"
@@ -94,19 +94,6 @@ alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
 
 # files and folders
-alias pro="open ~/Documents/MSCF/M1/Prob/note/note.pdf"
-alias m1="cd ~/Documents/MSCF/M1"
-alias m2="cd ~/Documents/MSCF/M2"
-alias m3="cd ~/Documents/MSCF/M3"
-alias m4="cd ~/Documents/MSCF/M4"
-alias m5="cd ~/Documents/MSCF/M5"
-alias m6="cd ~/Documents/MSCF/M6"
-alias am="cd ~/Documents/MSCF/M6/AM"
-alias nm="cd ~/Documents/MSCF/M6/NM"
-alias algo="cd ~/Documents/algo"
-alias risk="cd ~/Documents/MSCF/M6/RiskII"
-alias sa="cd ~/Documents/SA-Project"
-alias ml="cd ~/Documents/MSCF/M6/ML"
 alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 
 # OPAM configuration
