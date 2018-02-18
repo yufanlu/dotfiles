@@ -328,8 +328,8 @@ if !exists('g:ycm_semantic_triggers')
   let g:ycm_semantic_triggers = {}
 endif
 
-let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
-let g:ycm_semantic_triggers.vim = ['.', 're!\w{2}']
+let g:ycm_semantic_triggers.python = ['.', 're!\w{5}']
+"let g:ycm_semantic_triggers.vim = ['.', 're!\w{2}']
 
 " }}}
 
