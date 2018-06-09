@@ -6,8 +6,14 @@ if !has('nvim')
     set nocompatible
 endif
 
+if has('win32') || has('win64')
+  let g:plugged_home = '~/AppData/Local/nvim/plugged'
+else
+  let g:plugged_home = '~/.vim/plugged'
+endif
+
 " Plugins {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin(g:plugged_home)
 
 " Eye-Candy
 Plug 'chriskempson/base16-vim'
@@ -52,8 +58,11 @@ Plug 'takac/vim-commandcaps'
 
 " Tag
 Plug 'majutsushi/tagbar'
-Plug 'jsfaint/gen_tags.vim'
-"Plug 'ludovicchabant/vim-gutentags'
+if has('win32') || has('win64')
+  Plug 'ludovicchabant/vim-gutentags'
+else
+  Plug 'jsfaint/gen_tags.vim'
+endif
 "
 " File system
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -260,7 +269,11 @@ vmap < <gv
 vmap > >gv
 
 " Editing/Loading .vimrc
-nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
+if has('win32') || has('win64')
+  nnoremap <c-e><c-v> :vs ~/AppData/Local/nvim/init.vim<cr>
+else
+  nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
+endif
 
 " Fold All but current
 nnoremap <leader>f zMzvzz
@@ -270,7 +283,11 @@ if has('nvim')
 endif
 " }}}
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+if has('win32') || has('win64')
+  let g:python3_host_prog = 'C:\ProgramData\Anaconda3\python'
+else
+  let g:python3_host_prog = '/usr/local/bin/python3'
+endif
 
 " vim-Plug {{{
 command! PU PlugUpdate | PlugUpgrade
