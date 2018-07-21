@@ -101,3 +101,7 @@ alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pyenv
+eval "$(pyenv init -)"
+set PYENV_ROOT="$HOME/.pyenv"

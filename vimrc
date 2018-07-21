@@ -10,22 +10,20 @@ call plug#begin('~/.vim/plugged')
 " UI
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
-Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine'
 
 " Behavior
 Plug 'tpope/vim-eunuch'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sleuth'
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/vim-slash'
 Plug 'mhinz/vim-startify'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/ListToggle'
-Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'takac/vim-commandcaps'
 Plug 'vim-scripts/matchit.zip'
@@ -33,10 +31,9 @@ Plug 'tpope/vim-projectionist'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'Shougo/echodoc.vim'
+Plug 'AndrewRadev/sideways.vim'
 
 " Tag
-"Plug 'ludovicchabant/vim-gutentags'
 Plug 'jsfaint/gen_tags.vim'
 
 " File system
@@ -51,29 +48,36 @@ Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
 Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
 
 " syntax check
-Plug 'w0rp/ale', { 'for': ['cpp', 'typescript', 'ocaml', 'python'] }
+Plug 'w0rp/ale'
 
-if has('nvim')
-    Plug 'kassio/neoterm'
-endif
+Plug 'kassio/neoterm'
 
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
+if has('nvim')
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh'}
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
 
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim', {'for': 'vim'}
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-pyclang', {'for': 'cpp'}
+  Plug 'ncm2/ncm2-jedi', {'for': 'python'}
+  Plug 'ncm2/ncm2-vim', {'for': 'vim'} | Plug 'Shougo/neco-vim', {'for': 'vim'}
+  Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neoinclude.vim'
+  Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
 
-" Writing
-Plug 'reedes/vim-pencil', { 'for': 'markdown' }
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'vim-pandoc/vim-pandoc', {'for': 'pandoc'}
-Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': 'pandoc'}
+  Plug 'ncm2/ncm2-ultisnips'
+  Plug 'ncm2/ncm2-tagprefix'
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
+endif
+
+Plug 'Shougo/echodoc.vim'
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
@@ -85,20 +89,6 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'matze/vim-tex-fold', {'for': 'tex'}
-
-" Python
-Plug 'tmhedberg/SimpylFold', {'for': 'python'}
-Plug 'vim-python/python-syntax', {'for': 'python'}
-Plug 'tweekmonster/braceless.vim', {'for': 'python'}
-"Plug 'zchee/deoplete-jedi', {'for': 'python'}
-
-" Typescript
-"Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
-"Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-
-" Build System
-Plug 'tpope/vim-dispatch', {'for': 'cpp'}
-Plug 'vhdirk/vim-cmake', {'for': 'cpp'}
 
 " kdb/q
 Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
@@ -120,7 +110,7 @@ set nolazyredraw                                " redraw only when we need to.
 set noshowmatch                               " np highlight matching [{()}]
 set relativenumber
 set wildmenu
-"set guifont=Sauce\ Code\ Powerline\ Light:h11
+
 set guifont=Sauce\ Code\ Powerline:h11        " font face/size
 if has('nvim')
     set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
@@ -138,29 +128,17 @@ set t_ut=
 
 let base16colorspace=256
 colorscheme base16-solarized-dark
-let g:airline_theme='base16_solarized'
-" colorscheme base16-oceanicnext
-" let g:airline_theme='oceanicnext'
 
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
 let airline#extensions#ale#warning_symbol = 'W:'
 
-" turn off scroll bar if using MacVim
-if has("gui_running")
-   set linespace=1
-   set guioptions=gm
-   set fuoptions=maxvert,maxhorz
-endif
-
 " Status Line configuration
 syntax enable
 set noshowmode
-"set cmdheight=2
 set laststatus=2
 set encoding=utf-8
 set background=dark
-"set fillchars+=stl:\ ,stlnc:\
 set list
 set listchars=tab:▸\ ,eol:¬
 
@@ -216,10 +194,7 @@ set cindent
 "set cinoptions+=L0
 set cinoptions+=g0
 
-" buffer
 set hidden
-"nnoremap <c-e><c-n> :bn<CR>
-"nnoremap <c-e><c-p> :bN<CR>
 
 " Folding
 set foldenable                                      " enable folding
@@ -264,23 +239,22 @@ if has('nvim')
 endif
 " }}}
 
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:loaded_ruby_provider = 1
+let g:loaded_python_provider = 1
+let g:python3_host_prog = 'python'
+"let g:python3_host_prog = '/Users/yufanlu/.pyenv/shims/python'
 
-" libclang
-let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
-if isdirectory(s:clang_library_path)
-    let g:clang_library_path=s:clang_library_path
-endif
-
-" vim-Plug {{{
+" vim-Plug
 command! PU PlugUpdate | PlugUpgrade
 command! PS PlugStatus
 command! PC PlugClean
+
+" NERD Tree {{{
+let NERDTreeNaturalSort=1
 " }}}
 
-" NERDTree {{{
-let NERDTreeNaturalSort=1
+" vim-autoformat {{{
+noremap <F3> :Autoformat<CR>
 " }}}
 
 " Tagbar {{{
@@ -311,8 +285,8 @@ let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count
 " }}}
 
 " YCM {{{
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_server_python_interpreter = 'python3'
+let g:ycm_python_binary_path = 'python'
+let g:ycm_server_python_interpreter = 'python'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_insertion  = 1
@@ -329,62 +303,99 @@ if !exists('g:ycm_semantic_triggers')
 endif
 
 let g:ycm_semantic_triggers.python = ['.', 're!\w{5}']
-"let g:ycm_semantic_triggers.vim = ['.', 're!\w{2}']
 
+" }}}
+
+" NCM2 {{{
+augroup MyNCM2
+    autocmd!
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+
+    " :help Ncm2PopupOpen for more information
+    set completeopt=noinsert,menuone,noselect
+
+    " When the <Enter> key is pressed while the popup menu is visible, it only
+    " hides the menu. Use this mapping to close the menu and also start a new line.
+    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+    " Use <TAB> to select the popup menu:
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+    " Press enter key to trigger snippet expansion
+    " The parameters are the same as `:help feedkeys()`
+    inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
+
+    " pyclang config {{{
+        " libclang
+        let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
+        if isdirectory(s:clang_library_path)
+            let g:clang_library_path=s:clang_library_path
+            let g:ncm2_pyclang#library_path = s:clang_library_path
+        endif
+
+        " a list of relative paths for compile_commands.json
+        let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
+        autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+    " }}}
+
+augroup END
 " }}}
 
 " UltiSnips {{{
-"
-" use python3 for UltiSnips
 let g:UltiSnipsUsePythonVersion = 3
-
-" key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<TAB>"
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-
 let g:UltiSnipsEditSplit = "vertical"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
-
 " }}}
 
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+" FZF {{{
+nnoremap <c-f> :Lines<cr>
+nnoremap <c-p> :Ag<cr>
 
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
-" from vimtex
-let g:vimtex#re#deoplete = '\\(?:'
-      \.'\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \.'|(text|block)cquote\*?(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \.'|(for|hy)\w*cquote\*?{[^}]*}(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \.'|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-      \.'|hyperref\s*\[[^]]*'
-      \.'|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \.'|(?:include(?:only)?|input)\s*\{[^}]*'
-      \.'|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \.'|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-      \.'|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-      \.'|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-      \.'|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-      \.'|\w*'
-      \.')'
+" Insert mode completion
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
 
-" deoplete-jedi
-let g:deoplete#sources#jedi#show_docstring = 1
-
-" auto close preview window
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
-" python-syntax {{{
-let python_highlight_all = 1
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
-autocmd FileType python let NERDDefaultAlign="left"
+" Ale {{{
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {'python': ['flake8'], 'cpp': ['clang'], 'vim': ['vint']}
+" }}}
+
+" {{{ FastFold
+let g:tex_fold_enabled = 1
+let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
+let g:fastfold_fdmhook = 1
 " }}}
 
 " vimtex {{{
@@ -426,7 +437,7 @@ au FileType tex nnoremap <leader>le :VimtexError<cr>
 au FileType tex nnoremap <leader>ll :VimtexCompile<cr>
 au FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
 
-au FileType tex setlocal spell linebreak "norelativenumber
+au FileType tex setlocal spell linebreak
 au FileType tex setlocal conceallevel=2
 au FileType tex let b:delimitMate_quotes="\" '"
 
@@ -461,104 +472,24 @@ let g:vimtex_compiler_latexmk = {
       \ ],
       \}
 
-let g:vimtex_quickfix_latexlog = {
-      \ 'overfull' : 0,
-      \ 'underfull' : 0,
-      \ 'packages' : {
-      \   'hyperref' : 0,
-      \ },
-      \}
+let g:vimtex_quickfix_latexlog = {'overfull':0,'underfull':0,'packages':{'hyperref':0}}
 
 augroup MyVimtex
   autocmd!
   autocmd User VimtexEventQuit VimtexClean
 augroup END
-
-" }}}
-
-" FZF {{{
-nnoremap <c-f> :Lines<cr>
-nnoremap <c-p> :Ag<cr>
-
-
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Insert mode completion
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-" }}}
-
-" vim-autoformat {{{
-noremap <F3> :Autoformat<CR>
-let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4, ColumnLimit: 100}''"'
-let g:formatters_cpp = ['google_style_cpp']
-let g:formatdef_ocp_indent_auto_formatter = '"ocp-indent"'
-let g:formatters_ocaml = ['ocp_indent_auto_formatter']
-" }}}  "
-
-" Ale {{{
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {
-    \   'python': ['flake8'],
-    \   'cpp': ['clang'],
-    \}
-" }}}
-
-" {{{ FastFold
-let g:tex_fold_enabled = 1
-let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
-let g:fastfold_fdmhook = 1
-" }}}
-
-" pandoc {{{
-"let g:pandoc#folding#fdc = 0
-let g:pandoc#formatting#equalprg = ''
-let g:pandoc#filetypes#pandoc_markdown = 0
-au BufRead,BufNewFile *.pdc set filetype=pandoc
-au FileType pandoc let b:delimitMate_quotes="\" '"
-au FileType pandoc setlocal nonumber norelativenumber
-"let g:pandoc#modules#disabled = ["folding"]
 " }}}
 
 " q {{{
-au BufRead,BufNewFile *.q set filetype=q
+augroup MyKDB
+  autocmd!
+  autocmd BufRead,BufNewFile *.q set filetype=q
+augroup END
 " }}}
 
-" gen_tags {{{
-let g:gen_tags#use_cache_dir = 1
-let g:gen_tags#ctags_auto_gen = 1
-let g:gen_tags#gtags_auto_gen = 1
-let g:gen_tags#blacklist = ['$HOME']
-" }}}"
-
 " neoterm {{{
-let g:neoterm_repl_python='ipython3'
+let g:neoterm_repl_python='ipython3 --no-autoindent --matplotlib=auto'
 nnoremap <c-e><c-t> :Ttoggle<cr>
-"nnoremap <c-s> :TREPLSendLine<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
 
@@ -568,47 +499,9 @@ vnoremap <c-s> :TREPLSendSelection<cr>
 let g:echodoc_enable_at_startup = 1
 " }}}
 
-" Custom functions {{{
-
-" Create Build Dir {{{
-function! CreateBuildDir()
-  if !isdirectory('build')
-    call mkdir('build')
-    echo 'build directory created'
-  else
-    echo 'build directory already exists'
-  endif
-endfunction
-
-function! BuildCPP()
-  if (&ft=='cpp')
-    call CreateBuildDir()
-  endif
-
-  if filereadable('CMakeLists.txt')
-    :CMake
-  else
-    vs CMakeLists.txt
-  endif
-endfunction
-
-command! CreateBuildDir call CreateBuildDir()
+" sideway {{{
+nnoremap H :SidewaysLeft<cr>
+nnoremap L :SidewaysRight<cr>
 " }}}
 
-function! SendLineOrClear()
-  let current_line = getline('.')
-  if (current_line == '')
-    call neoterm#clear()
-  else
-    TREPLSendLine
-  endif
-endfunction
-
-" }}}
-
-au FileType cpp command! CPP call BuildCPP()
-au FileType cpp command! GetCMakeFile vs CMakeLists.txt
-au FileType cpp nnoremap <c-e><c-e> :vs CMakeLists.txt<cr>
-au FileType cpp nnoremap <c-b> :Make<cr>
-
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:foldlevel=2
