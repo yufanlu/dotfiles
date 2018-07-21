@@ -2,54 +2,79 @@
 " vimrc
 " ==================================
 
-set nocompatible
+if !has('nvim')
+    set nocompatible
+endif
+
+if has('win32') || has('win64')
+  let g:plugged_home = '~/AppData/Local/nvim/plugged'
+else
+  let g:plugged_home = '~/.vim/plugged'
+endif
 
 " Plugins {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin(g:plugged_home)
 
-" UI
+" Eye-Candy
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/indentLine'
 
-" Behavior
-Plug 'tpope/vim-eunuch'
+"Plug 'mhartington/oceanic-next'
+"
+if !exists('g:gui_oni')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'mhinz/vim-startify'
+endif
+
+" Better behavior
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-Plug 'majutsushi/tagbar'
-Plug 'junegunn/vim-slash'
-Plug 'mhinz/vim-startify'
-Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/ListToggle'
-Plug 'Raimondi/delimitMate'
-Plug 'takac/vim-commandcaps'
 Plug 'vim-scripts/matchit.zip'
-Plug 'tpope/vim-projectionist'
+
+Plug 'junegunn/vim-slash'    " better search
+Plug 'tpope/vim-speeddating' " <C-A> works with dates now
+
+Plug 't9md/vim-choosewin'    " switch between windows
+Plug 'Valloric/ListToggle'   " toggle location/quickfix list
+Plug 'Raimondi/delimitMate'  " matching delimiters
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
+
+" Fuzzy Finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
+Plug 'junegunn/fzf.vim'
+
+" Better Visual Guide
+Plug 'Yggdroot/indentLine'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'AndrewRadev/sideways.vim'
+
+" Utilities & Commands
+Plug 'tpope/vim-eunuch'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'takac/vim-commandcaps'
 
 " Tag
-Plug 'jsfaint/gen_tags.vim'
-
+Plug 'majutsushi/tagbar'
+if has('win32') || has('win64')
+  Plug 'ludovicchabant/vim-gutentags'
+else
+  Plug 'jsfaint/gen_tags.vim'
+endif
+"
 " File system
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " Git
-Plug 'tpope/vim-fugitive', {'for': ['cpp', 'python']}
-Plug 'airblade/vim-gitgutter', {'for': ['cpp', 'python']}
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " syntax check
 Plug 'w0rp/ale'
 
+" terminal
 Plug 'kassio/neoterm'
 
 " Snippets
@@ -85,13 +110,57 @@ Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
 " C++
 Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+||||||| merged common ancestors
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
+
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim', {'for': 'vim'}
+
+" Writing
+Plug 'reedes/vim-pencil', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'vim-pandoc/vim-pandoc', {'for': 'pandoc'}
+Plug 'vim-pandoc/vim-pandoc-syntax' , {'for': 'pandoc'}
+
+" Debugger and formater
+Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
+
+" C++
+Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+=======
+if has('nvim')
+  Plug 'Shougo/echodoc.vim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/neco-syntax'
+  Plug 'Shougo/neco-vim', {'for': 'vim'}
+  Plug 'zchee/deoplete-jedi', {'for': 'python'}
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
+endif
+>>>>>>> c7c77f448b5d94132827258cb805cce0af695be6
 
 " Latex
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'matze/vim-tex-fold', {'for': 'tex'}
 
+" Python
+Plug 'tmhedberg/SimpylFold', {'for': 'python'}
+Plug 'vim-python/python-syntax', {'for': 'python'}
+Plug 'tweekmonster/braceless.vim', {'for': 'python'}
+
 " kdb/q
 Plug 'katusk/vim-qkdb-syntax', {'for': 'q'}
+
+" Debugger and formater
+" Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
+
+" Not used
+" Plug 'tpope/vim-projectionist'
+" Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
+" Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 call plug#end()
 
@@ -100,18 +169,41 @@ filetype plugin indent on
 " }}}
 
 " UI configuration {{{
-set wrap                                      " wrap lines
-set ruler                                     " show 'line #', 'col #', etc
-set number                                    " line number
-set mouse=a                                   " enable mouse action
-set history=200                               " command history
-set showcmd                                   " show command in bottom bar
-set nolazyredraw                                " redraw only when we need to.
-set noshowmatch                               " np highlight matching [{()}]
+syntax enable
+
+" colorscheme
+let base16colorspace=256
+colorscheme base16-solarized-dark
+set background=dark
+
+set list
+set listchars=tab:▸\ ,eol:¬
+
+set nowrap
+set number
+set mouse=a
+set nolazyredraw
+set noshowmatch
 set relativenumber
 set wildmenu
 
-set guifont=Sauce\ Code\ Powerline:h11        " font face/size
+set history=200
+
+set t_Co=256
+set t_ut=
+
+
+if exists('g:gui_oni')
+    set noruler
+    set noshowcmd
+    set laststatus=0
+else
+    set ruler
+    set showcmd
+    set laststatus=2
+endif
+
+set guifont=Sauce\ Code\ Powerline:h11
 if has('nvim')
     set guicursor=n-v-c-sm:block,i-ci-ve:block,r-cr-o:block
 endif
@@ -122,25 +214,20 @@ if (has("termguicolors"))
     let NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-" colorscheme
-set t_Co=256
-set t_ut=
-
-let base16colorspace=256
-colorscheme base16-solarized-dark
 
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
 let airline#extensions#ale#warning_symbol = 'W:'
 
-" Status Line configuration
-syntax enable
-set noshowmode
-set laststatus=2
+" turn off scroll bar if using MacVim
+if has("gui_running")
+   set linespace=1
+   set guioptions=gm
+   set fuoptions=maxvert,maxhorz
+endif
+
 set encoding=utf-8
-set background=dark
-set list
-set listchars=tab:▸\ ,eol:¬
+scriptencoding utf-8
 
 " }}}
 
@@ -229,7 +316,11 @@ vmap < <gv
 vmap > >gv
 
 " Editing/Loading .vimrc
-nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
+if has('win32') || has('win64')
+  nnoremap <c-e><c-v> :vs ~/AppData/Local/nvim/init.vim<cr>
+else
+  nnoremap <c-e><c-v> :vs ~/.vimrc<cr>
+endif
 
 " Fold All but current
 nnoremap <leader>f zMzvzz
@@ -239,10 +330,11 @@ if has('nvim')
 endif
 " }}}
 
-let g:loaded_ruby_provider = 1
-let g:loaded_python_provider = 1
-let g:python3_host_prog = 'python'
-"let g:python3_host_prog = '/Users/yufanlu/.pyenv/shims/python'
+if has('win32') || has('win64')
+  let g:python3_host_prog = 'C:\ProgramData\Anaconda3\python'
+else
+  let g:python3_host_prog = '/usr/local/bin/python3'
+endif
 
 " vim-Plug
 command! PU PlugUpdate | PlugUpgrade
@@ -264,15 +356,15 @@ let g:tagbar_previewwin_pos = "aboveleft"
 
 " vim-airline {{{
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep  = ''
-let g:airline_right_sep = ''
+"let g:airline_left_sep  = ''
+"let g:airline_right_sep = ''
 
 " tabline
 "let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep       = ''
-let g:airline#extensions#tabline#left_alt_sep   = ''
-let g:airline#extensions#tabline#right_sep      = ''
-let g:airline#extensions#tabline#right_alt_sep  = ''
+"let g:airline#extensions#tabline#left_sep       = ''
+"let g:airline#extensions#tabline#left_alt_sep   = ''
+"let g:airline#extensions#tabline#right_sep      = ''
+"let g:airline#extensions#tabline#right_alt_sep  = ''
 let g:airline#extensions#tabline#fnamemod       = ':t'       " Show just the filename
 
 " quickfix
@@ -302,43 +394,7 @@ if !exists('g:ycm_semantic_triggers')
   let g:ycm_semantic_triggers = {}
 endif
 
-let g:ycm_semantic_triggers.python = ['.', 're!\w{5}']
-
-" }}}
-
-" NCM2 {{{
-augroup MyNCM2
-    autocmd!
-    " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-
-    " :help Ncm2PopupOpen for more information
-    set completeopt=noinsert,menuone,noselect
-
-    " When the <Enter> key is pressed while the popup menu is visible, it only
-    " hides the menu. Use this mapping to close the menu and also start a new line.
-    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-    " Use <TAB> to select the popup menu:
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-    " Press enter key to trigger snippet expansion
-    " The parameters are the same as `:help feedkeys()`
-    inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
-
-    " pyclang config {{{
-        " libclang
-        let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
-        if isdirectory(s:clang_library_path)
-            let g:clang_library_path=s:clang_library_path
-            let g:ncm2_pyclang#library_path = s:clang_library_path
-        endif
-
-        " a list of relative paths for compile_commands.json
-        let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
-        autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-    " }}}
+let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
 
 augroup END
 " }}}
@@ -396,6 +452,20 @@ let g:ale_linters = {'python': ['flake8'], 'cpp': ['clang'], 'vim': ['vint']}
 let g:tex_fold_enabled = 1
 let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
 let g:fastfold_fdmhook = 1
+||||||| merged common ancestors
+" python-syntax {{{
+let python_highlight_all = 1
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+autocmd FileType python let NERDDefaultAlign="left"
+=======
+" python-syntax {{{
+let python_highlight_all = 1
+
+augroup MyPython
+    autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
+    autocmd FileType python let NERDDefaultAlign="left"
+augroup END
+>>>>>>> c7c77f448b5d94132827258cb805cce0af695be6
 " }}}
 
 " vimtex {{{
@@ -477,9 +547,147 @@ let g:vimtex_quickfix_latexlog = {'overfull':0,'underfull':0,'packages':{'hyperr
 augroup MyVimtex
   autocmd!
   autocmd User VimtexEventQuit VimtexClean
+  autocmd FileType tex nnoremap <leader>lv :VimtexView<cr>
+  autocmd FileType tex nnoremap <leader>lc :VimtexClean<cr>
+  autocmd FileType tex nnoremap <leader>lC :VimtexClean!<cr>
+  autocmd FileType tex nnoremap <leader>le :VimtexError<cr>
+  autocmd FileType tex nnoremap <leader>ll :VimtexCompile<cr>
+  autocmd FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
+
+  autocmd FileType tex setlocal spell linebreak "norelativenumber
+  autocmd FileType tex setlocal conceallevel=2
+  autocmd FileType tex let b:delimitMate_quotes="\" '"
 augroup END
 " }}}
 
+||||||| merged common ancestors
+
+" }}}
+
+" FZF {{{
+nnoremap <c-f> :Lines<cr>
+nnoremap <c-p> :Ag<cr>
+
+
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+" Insert mode completion
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" }}}
+
+" vim-autoformat {{{
+noremap <F3> :Autoformat<CR>
+let g:formatdef_google_style_cpp = '"clang-format --style=''{BasedOnStyle: Google, IndentWidth: 4, AccessModifierOffset: -4, ColumnLimit: 100}''"'
+let g:formatters_cpp = ['google_style_cpp']
+let g:formatdef_ocp_indent_auto_formatter = '"ocp-indent"'
+let g:formatters_ocaml = ['ocp_indent_auto_formatter']
+" }}}  "
+
+" Ale {{{
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {
+    \   'python': ['flake8'],
+    \   'cpp': ['clang'],
+    \}
+" }}}
+
+" {{{ FastFold
+let g:tex_fold_enabled = 1
+let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
+let g:fastfold_fdmhook = 1
+" }}}
+
+" pandoc {{{
+"let g:pandoc#folding#fdc = 0
+let g:pandoc#formatting#equalprg = ''
+let g:pandoc#filetypes#pandoc_markdown = 0
+au BufRead,BufNewFile *.pdc set filetype=pandoc
+au FileType pandoc let b:delimitMate_quotes="\" '"
+au FileType pandoc setlocal nonumber norelativenumber
+"let g:pandoc#modules#disabled = ["folding"]
+" }}}
+
+=======
+
+" }}}
+
+" FZF {{{
+nnoremap <c-f> :Lines<cr>
+nnoremap <c-p> :Ag<cr>
+
+
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+" Insert mode completion
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>,
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \                 <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" }}}
+
+" Ale {{{
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {
+    \   'python': ['flake8', 'pylint'],
+    \   'cpp': ['clang'],
+    \   'vim': ['vint'],
+    \}
+" }}}
+
+" {{{ FastFold
+let g:tex_fold_enabled = 1
+let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
+let g:fastfold_fdmhook = 1
+" }}}
+
+>>>>>>> c7c77f448b5d94132827258cb805cce0af695be6
 " q {{{
 augroup MyKDB
   autocmd!
@@ -492,7 +700,6 @@ let g:neoterm_repl_python='ipython3 --no-autoindent --matplotlib=auto'
 nnoremap <c-e><c-t> :Ttoggle<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
-
 " }}}
 
 " echodoc {{{
@@ -505,3 +712,60 @@ nnoremap L :SidewaysRight<cr>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=2
+||||||| merged common ancestors
+" Custom functions {{{
+
+" Create Build Dir {{{
+function! CreateBuildDir()
+  if !isdirectory('build')
+    call mkdir('build')
+    echo 'build directory created'
+  else
+    echo 'build directory already exists'
+  endif
+endfunction
+
+function! BuildCPP()
+  if (&ft=='cpp')
+    call CreateBuildDir()
+  endif
+
+  if filereadable('CMakeLists.txt')
+    :CMake
+  else
+    vs CMakeLists.txt
+  endif
+endfunction
+
+command! CreateBuildDir call CreateBuildDir()
+" }}}
+
+function! SendLineOrClear()
+  let current_line = getline('.')
+  if (current_line == '')
+    call neoterm#clear()
+  else
+    TREPLSendLine
+  endif
+endfunction
+
+" }}}
+
+au FileType cpp command! CPP call BuildCPP()
+au FileType cpp command! GetCMakeFile vs CMakeLists.txt
+au FileType cpp nnoremap <c-e><c-e> :vs CMakeLists.txt<cr>
+au FileType cpp nnoremap <c-b> :Make<cr>
+
+" vim:foldmethod=marker:foldlevel=0
+=======
+function! SendLineOrClear()
+  let current_line = getline('.')
+  if (current_line == '')
+    call neoterm#clear()
+  else
+    TREPLSendLine
+  endif
+endfunction
+
+" vim:foldmethod=marker:foldlevel=0
+>>>>>>> c7c77f448b5d94132827258cb805cce0af695be6
