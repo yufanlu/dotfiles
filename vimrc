@@ -354,51 +354,52 @@ let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count p
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
 " }}}
 
-" NCM2 {{{
-augroup NCM2
-  autocmd!
-  " enable ncm2 for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
+if has('nvim')
+    " NCM2 {{{
+    augroup NCM2
+      autocmd!
+      " enable ncm2 for all buffers
+      autocmd BufEnter * call ncm2#enable_for_buffer()
 
-  " :help Ncm2PopupOpen for more information
-  set completeopt=noinsert,menuone,noselect
+      " :help Ncm2PopupOpen for more information
+      set completeopt=noinsert,menuone,noselect
 
-  " When the <Enter> key is pressed while the popup menu is visible, it only
-  " hides the menu. Use this mapping to close the menu and also start a new line.
-  inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+      " When the <Enter> key is pressed while the popup menu is visible, it only
+      " hides the menu. Use this mapping to close the menu and also start a new line.
+      inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-  " Press enter key to trigger snippet expansion
-  inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
+      " Press enter key to trigger snippet expansion
+      inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
 
-  " pyclang
-  let g:ncm2_pyclang#library_path = s:clang_library_path
+      " pyclang
+      let g:ncm2_pyclang#library_path = s:clang_library_path
 
-  let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
-  autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-augroup END
+      let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
+      autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+    augroup END
+    " }}}
+else
+    " YCM {{{
+    let g:ycm_python_binary_path = 'python'
+    let g:ycm_server_python_interpreter = 'python'
+    let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+    let g:ycm_complete_in_comments_and_strings = 1
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_autoclose_preview_window_after_insertion  = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
 
-" }}}
+    " make YCM compatible with UltiSnips
+    let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
-" YCM {{{
-let g:ycm_python_binary_path = 'python'
-let g:ycm_server_python_interpreter = 'python'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_insertion  = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+    " YCM semantic trigger
+    if !exists('g:ycm_semantic_triggers')
+      let g:ycm_semantic_triggers = {}
+    endif
 
-" make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-
-" YCM semantic trigger
-if !exists('g:ycm_semantic_triggers')
-  let g:ycm_semantic_triggers = {}
+    let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
+    " }}}
 endif
-
-let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
-" }}}
 
 " UltiSnips {{{
 let g:UltiSnipsUsePythonVersion = 3
