@@ -3,7 +3,7 @@
 " ==================================
 
 if !has('nvim')
-    set nocompatible
+  set nocompatible
 endif
 
 if has('win32') || has('win64')
@@ -91,12 +91,14 @@ if has('nvim')
   Plug 'ncm2/ncm2-pyclang', {'for': 'cpp'}
   Plug 'ncm2/ncm2-jedi', {'for': 'python'}
   Plug 'ncm2/ncm2-vim', {'for': 'vim'} | Plug 'Shougo/neco-vim', {'for': 'vim'}
-  Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+  Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
+  "Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+  Plug 'Shougo/neco-syntax'
 
   Plug 'ncm2/ncm2-ultisnips'
   Plug 'ncm2/ncm2-tagprefix'
 else
-  Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
+  Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
 endif
 
 Plug 'Shougo/echodoc.vim'
@@ -116,7 +118,7 @@ Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Latex
-Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lervag/vimtex'
 Plug 'matze/vim-tex-fold', {'for': 'tex'}
 
 " Python
@@ -183,7 +185,6 @@ if (has("termguicolors"))
     set termguicolors
     let NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-
 
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
@@ -303,8 +304,11 @@ endif
 if has('win32') || has('win64')
   let g:python3_host_prog = 'C:\ProgramData\Anaconda3\python'
 else
-  let g:python3_host_prog = 'python3'
+  let g:python3_host_prog = 'python'
 endif
+
+let g:loaded_ruby_provider = 1
+let g:loaded_python_provider = 1
 
 " libclang
 let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
@@ -333,26 +337,63 @@ let g:tagbar_previewwin_pos = "aboveleft"
 " }}}
 
 " vim-airline {{{
-let g:airline_powerline_fonts = 1
-"let g:airline_left_sep  = ''
-"let g:airline_right_sep = ''
-
-" tabline
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep       = ''
-"let g:airline#extensions#tabline#left_alt_sep   = ''
-"let g:airline#extensions#tabline#right_sep      = ''
-"let g:airline#extensions#tabline#right_alt_sep  = ''
+"let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod       = ':t'       " Show just the filename
-
-" quickfix
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix' " configure the title text for quickfix buffers
 let g:airline#extensions#quickfix#location_text = 'Location' " configure the title text for location list buffers
-
-" ycm
 let g:airline#extensions#ycm#error_symbol   = 'E:'           " set error count prefix
 let g:airline#extensions#ycm#warning_symbol = 'W:'           " set warning count prefix
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
 " }}}
+
+" vimtex {{{
+let g:tex_flavor  = 'latex'
+let g:tex_conceal = ''
+let g:vimtex_fold_manual = 1
+let g:vimtex_latexmk_continuous = 1
+
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_automatic = 1
+
+let g:vimtex_toc_fold = 1
+let g:vimtex_format_enabled = 1
+
+if has('nvim')
+  let g:vimtex_compiler_progname = 'nvr'
+endif
+
+let g:tex_fold_override_foldtext = 1
+let g:tex_fold_additional_envs = ['minted', 'itemize', 'enumerate']
+
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : ['-pdf', '--shell-escape', '-verbose', '-file-line-error',
+    \              '-synctex=1', '-interaction=nonstopmode'],
+    \}
+
+let g:vimtex_quickfix_latexlog = {
+    \ 'overfull': 0,
+    \ 'underfull': 0,
+    \ 'packages': {'hyperref': 0}
+    \ }
+
+augroup MyVimtex
+  autocmd!
+  autocmd User VimtexEventQuit VimtexClean
+  autocmd FileType tex nnoremap <leader>lv :VimtexView<cr>
+  autocmd FileType tex nnoremap <leader>lc :VimtexClean<cr>
+  autocmd FileType tex nnoremap <leader>lC :VimtexClean!<cr>
+  autocmd FileType tex nnoremap <leader>le :VimtexError<cr>
+  autocmd FileType tex nnoremap <leader>ll :VimtexCompile<cr>
+  autocmd FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
+
+  autocmd FileType tex setlocal spell linebreak "norelativenumber
+  autocmd FileType tex setlocal conceallevel=2
+  autocmd FileType tex let b:delimitMate_quotes="\" '"
+augroup END
+" }}}
+
+let g:echodoc_enable_at_startup = 1
 
 if has('nvim')
     " NCM2 {{{
@@ -397,6 +438,7 @@ else
       let g:ycm_semantic_triggers = {}
     endif
 
+    let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
     let g:ycm_semantic_triggers.python = ['.', 're!\w{2}']
     " }}}
 endif
@@ -465,98 +507,6 @@ augroup MyPython
 augroup END
 " }}}
 
-" vimtex {{{
-let g:tex_flavor  = 'latex'
-let g:tex_conceal = ''
-let g:vimtex_fold_manual = 1
-let g:vimtex_latexmk_continuous = 1
-
-let g:vimtex_view_method = 'skim'
-let g:vimtex_view_automatic = 1
-
-let g:vimtex_toc_fold = 1
-let g:vimtex_format_enabled = 1
-
-if has('nvim')
-  let g:vimtex_compiler_progname = 'nvr'
-endif
-
-let g:tex_fold_override_foldtext = 1
-let g:tex_fold_additional_envs = [
-    \ 'proposition',
-    \ 'matrix',
-    \ 'claim',
-    \ 'remark',
-    \ 'lemma',
-    \ 'theorem',
-    \ 'warning',
-    \ 'proof',
-    \ 'minted',
-    \ 'itemize',
-    \ 'example',
-    \ 'corollary',
-    \ 'enumerate']
-
-au FileType tex nnoremap <leader>lv :VimtexView<cr>
-au FileType tex nnoremap <leader>lc :VimtexClean<cr>
-au FileType tex nnoremap <leader>lC :VimtexClean!<cr>
-au FileType tex nnoremap <leader>le :VimtexError<cr>
-au FileType tex nnoremap <leader>ll :VimtexCompile<cr>
-au FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
-
-au FileType tex setlocal spell linebreak
-au FileType tex setlocal conceallevel=2
-au FileType tex let b:delimitMate_quotes="\" '"
-
-let g:vimtex#re#ncm = [
-    \ '\\[A-Za-z]*',
-    \ '\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-    \ '\\(text|block)cquote\*?(\[[^]]*\]){0,2}{[^}]*',
-    \ '\\(for|hy)[A-Za-z]*cquote\*?{[^}]*}(\[[^]]*\]){0,2}{[^}]*',
-    \ '\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-    \ '\\hyperref\[[^]]*',
-    \ '\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-    \ '\\(include(only)?|input){[^}]*',
-    \ '\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-    \ '\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ '\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ '\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
-    \ '\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
-    \]
-
-let g:vimtex#re#youcompleteme = map(copy(g:vimtex#re#ncm), "'re!' . v:val")
-
-let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
-
-let g:vimtex_compiler_latexmk = {
-      \ 'options' : [
-      \   '-pdf',
-      \   '--shell-escape',
-      \   '-verbose',
-      \   '-file-line-error',
-      \   '-synctex=1',
-      \   '-interaction=nonstopmode',
-      \ ],
-      \}
-
-let g:vimtex_quickfix_latexlog = {'overfull':0,'underfull':0,'packages':{'hyperref':0}}
-
-augroup MyVimtex
-  autocmd!
-  autocmd User VimtexEventQuit VimtexClean
-  autocmd FileType tex nnoremap <leader>lv :VimtexView<cr>
-  autocmd FileType tex nnoremap <leader>lc :VimtexClean<cr>
-  autocmd FileType tex nnoremap <leader>lC :VimtexClean!<cr>
-  autocmd FileType tex nnoremap <leader>le :VimtexError<cr>
-  autocmd FileType tex nnoremap <leader>ll :VimtexCompile<cr>
-  autocmd FileType tex nnoremap <leader>lt :VimtexTocToggle<cr>
-
-  autocmd FileType tex setlocal spell linebreak "norelativenumber
-  autocmd FileType tex setlocal conceallevel=2
-  autocmd FileType tex let b:delimitMate_quotes="\" '"
-augroup END
-" }}}
-
 " FZF {{{
 nnoremap <c-f> :Lines<cr>
 nnoremap <c-p> :Ag<cr>
@@ -589,16 +539,6 @@ command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
-" pandoc {{{
-"let g:pandoc#folding#fdc = 0
-let g:pandoc#formatting#equalprg = ''
-let g:pandoc#filetypes#pandoc_markdown = 0
-au BufRead,BufNewFile *.pdc set filetype=pandoc
-au FileType pandoc let b:delimitMate_quotes="\" '"
-au FileType pandoc setlocal nonumber norelativenumber
-"let g:pandoc#modules#disabled = ["folding"]
-" }}}
-
 " q {{{
 augroup MyKDB
   autocmd!
@@ -611,10 +551,6 @@ let g:neoterm_repl_python='ipython3 --no-autoindent --matplotlib=auto'
 nnoremap <c-e><c-t> :Ttoggle<cr>
 nnoremap <c-s> :call SendLineOrClear()<cr>
 vnoremap <c-s> :TREPLSendSelection<cr>
-" }}}
-
-" echodoc {{{
-let g:echodoc_enable_at_startup = 1
 " }}}
 
 " sideway {{{
