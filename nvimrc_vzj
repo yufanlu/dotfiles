@@ -1,0 +1,8 @@
+set nocompatible
+set number
+
+filetype plugin indent on
+syntax enable
+
+" open vimrc for quick edit
+nnoremap <c-e><c-v> :vs ~/dotfiles/vimrc_vzj<cr>

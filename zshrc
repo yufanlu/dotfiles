@@ -96,6 +96,7 @@ alias buc="brew update; brew upgrade; brew cleanup"
 # files and folders
 alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
 alias vzj='vim -u ~/dotfiles/vimrc_vzj'
+alias nvzj='nvim -u ~/dotfiles/nvimrc_vzj'
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
