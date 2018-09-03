@@ -1,8 +1,8 @@
-set nocompatible
-set number
+" set number
+" set relativenumber
 
-filetype plugin indent on
-syntax enable
+" filetype plugin indent on
+" syntax enable
 
 " open vimrc for quick edit
-nnoremap <c-e><c-v> :vs ~/dotfiles/vimrc_vzj<cr>
+nnoremap <c-e><c-v> :vs $MYVIMRC<cr>

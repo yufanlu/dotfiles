@@ -156,6 +156,7 @@ set nowrap
 set number
 set mouse=a
 set nolazyredraw
+set noshowmode
 set noshowmatch
 set relativenumber
 set wildmenu
@@ -165,8 +166,6 @@ set history=200
 set t_Co=256
 set t_ut=
 
-
-set noshowmode
 if exists('g:gui_oni')
     set noruler
     set laststatus=0
