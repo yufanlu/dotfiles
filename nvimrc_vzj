@@ -32,6 +32,11 @@ call plug#begin(g:plugged_home)
   " Formater
   Plug 'Chiel92/vim-autoformat'
 
+  " LaTex
+  Plug 'lervag/vimtex'
+  Plug 'Konfekt/FastFold'
+  Plug 'matze/vim-tex-fold'
+
 call plug#end()
 
 filetype plugin indent on
@@ -85,7 +90,7 @@ noremap <F3> :Autoformat<CR>
 augroup NCM2
   autocmd!
   " enable ncm2 for all buffers
-  autocmd BufEnter * try | call ncm2#enable_for_buffer() | endtry
+  autocmd BufEnter * call ncm2#enable_for_buffer()
 
   " :help Ncm2PopupOpen for more information
   set completeopt=noinsert,menuone,noselect
@@ -94,17 +99,24 @@ augroup NCM2
   " hides the menu. Use this mapping to close the menu and also start a new line.
   inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
+  autocmd Filetype tex call ncm2#register_source({
+          \ 'name': 'vimtex',
+          \ 'priority': 8,
+          \ 'scope': ['tex'],
+          \ 'mark': 'tex',
+          \ 'word_pattern': '\w+',
+          \ 'complete_pattern': g:vimtex#re#ncm2,
+          \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+          \ })
 augroup END
 
 " Ale
-if exists(':ALELint') == 2
-  let g:ale_lint_on_enter = 0
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_echo_msg_error_str = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-  let g:ale_linters = {'python': ['flake8']}
-endif
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {'python': ['flake8']}
 
 " Airline
 let g:airline_left_sep  = ''
@@ -112,3 +124,15 @@ let g:airline_right_sep = ''
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
 let airline#extensions#ale#warning_symbol = 'W:'
+
+
+" Vimtex
+let g:tex_flavor  = 'latex'
+let g:tex_conceal = ''
+let g:vimtex_fold_manual = 1
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_automatic = 1
+let g:vimtex_toc_fold = 1
+let g:vimtex_format_enabled = 1
+let g:vimtex_compiler_progname = 'nvr'
