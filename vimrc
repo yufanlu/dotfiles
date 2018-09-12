@@ -19,8 +19,6 @@ call plug#begin(g:plugged_home)
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
 
-"Plug 'mhartington/oceanic-next'
-"
 if !exists('g:gui_oni')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -34,7 +32,6 @@ Plug 'tpope/vim-surround'
 Plug 'vim-scripts/matchit.zip'
 
 Plug 'junegunn/vim-slash'    " better search
-Plug 'tpope/vim-speeddating' " <C-A> works with dates now
 
 Plug 't9md/vim-choosewin'    " switch between windows
 Plug 'Valloric/ListToggle'   " toggle location/quickfix list
@@ -44,8 +41,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 
 " Fuzzy Finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
-Plug 'junegunn/fzf.vim'
+Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
 
 " Better Visual Guide
 Plug 'Yggdroot/indentLine'
@@ -65,7 +61,7 @@ else
 endif
 "
 " File system
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -83,32 +79,29 @@ Plug 'honza/vim-snippets'
 
 " Autocomplete
 if has('nvim')
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
+   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+   Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+   Plug 'Shougo/neco-vim', {'for': 'vim'}
 
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-pyclang', {'for': 'cpp'}
-  Plug 'ncm2/ncm2-jedi', {'for': 'python'}
-  Plug 'ncm2/ncm2-vim', {'for': 'vim'} | Plug 'Shougo/neco-vim', {'for': 'vim'}
-  Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
-  "Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
-  Plug 'Shougo/neco-syntax'
+  "Plug 'ncm2/ncm2'
+  "Plug 'roxma/nvim-yarp'
 
-  Plug 'ncm2/ncm2-ultisnips'
-  Plug 'ncm2/ncm2-tagprefix'
+  "Plug 'ncm2/ncm2-bufword'
+  "Plug 'ncm2/ncm2-path'
+  "Plug 'ncm2/ncm2-pyclang', {'for': 'cpp'}
+  "Plug 'ncm2/ncm2-jedi', {'for': 'python'}
+  "Plug 'ncm2/ncm2-vim', {'for': 'vim'} | Plug 'Shougo/neco-vim', {'for': 'vim'}
+  "Plug 'ncm2/ncm2-neoinclude' | Plug 'Shougo/neoinclude.vim'
+  ""Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+  "Plug 'Shougo/neco-syntax'
+
+  "Plug 'ncm2/ncm2-ultisnips'
+  "Plug 'ncm2/ncm2-tagprefix'
 else
   Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py', 'for': ['python', 'cpp', 'tex', 'vim'] }
 endif
 
 Plug 'Shougo/echodoc.vim'
-
-" Debugger and formater
-Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
-
-" C++
-Plug 'vim-jp/vim-cpp', {'for': 'cpp'}
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 " Debugger and formater
 Plug 'Chiel92/vim-autoformat', { 'for': ['cpp', 'python', 'typescript'] }
@@ -396,28 +389,34 @@ let g:echodoc_enable_at_startup = 1
 
 if has('nvim')
     " NCM2 {{{
-    augroup NCM2
-      autocmd!
-      " enable ncm2 for all buffers
-      autocmd BufEnter * call ncm2#enable_for_buffer()
+    "augroup NCM2
+      "autocmd!
+      "" enable ncm2 for all buffers
+      "autocmd BufEnter * call ncm2#enable_for_buffer()
 
-      " :help Ncm2PopupOpen for more information
-      set completeopt=noinsert,menuone,noselect
+      "" :help Ncm2PopupOpen for more information
+      "set completeopt=noinsert,menuone,noselect
 
-      " When the <Enter> key is pressed while the popup menu is visible, it only
-      " hides the menu. Use this mapping to close the menu and also start a new line.
-      inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+      "" When the <Enter> key is pressed while the popup menu is visible, it only
+      "" hides the menu. Use this mapping to close the menu and also start a new line.
+      "inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-      " Press enter key to trigger snippet expansion
-      inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
+      "" Press enter key to trigger snippet expansion
+      "inoremap <silent> <expr> <Tab> ncm2_ultisnips#expand_or("\<Tab>", 'n')
 
-      " pyclang
-      let g:ncm2_pyclang#library_path = s:clang_library_path
+      "" pyclang
+      "let g:ncm2_pyclang#library_path = s:clang_library_path
 
-      let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
-      autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-    augroup END
+      "let g:ncm2_pyclang#database_path = ['compile_commands.json', 'build/compile_commands.json']
+      "autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+    "augroup END
     " }}}
+    let g:deoplete#enable_at_startup = 1
+    let g:LanguageClient_serverCommands = {
+        \ 'python': ['pyls', '-vv'],
+        \ }
+    let g:LanguageClient_diagnosticsEnable = 0
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 else
     " YCM {{{
     let g:ycm_python_binary_path = 'python'
@@ -442,6 +441,11 @@ else
     " }}}
 endif
 
+" denite {{{ "
+call denite#custom#var('file/rec', 'command',
+    \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+" }}} denite "
+
 " UltiSnips {{{
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger = "<TAB>"
@@ -449,37 +453,6 @@ let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 let g:UltiSnipsEditSplit = "vertical"
 nnoremap <c-e><c-u> :UltiSnipsEdit<cr>
-" }}}
-
-" FZF {{{
-nnoremap <c-f> :Lines<cr>
-nnoremap <c-p> :Ag<cr>
-
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Insert mode completion
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " Ale {{{
@@ -493,49 +466,16 @@ let g:ale_linters = {'python': ['flake8'], 'cpp': ['clang'], 'vim': ['vint']}
 
 " {{{ FastFold
 let g:tex_fold_enabled = 1
-let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
 let g:fastfold_fdmhook = 1
+let g:fastfold_skip_filetypes = ['taglist', 'Tagbar', 'NERD']
 "}}}
 
 " python-syntax {{{
 let python_highlight_all = 1
 augroup MyPython
   autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=8
   autocmd FileType python let NERDDefaultAlign="left"
 augroup END
-" }}}
-
-" FZF {{{
-nnoremap <c-f> :Lines<cr>
-nnoremap <c-p> :Ag<cr>
-
-
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Insert mode completion
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-command! -bang -nargs=* Ag
-      \ call fzf#vim#ag(<q-args>,
-      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-      \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \                 <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " q {{{
