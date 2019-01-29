@@ -1,8 +1,0 @@
-" set number
-" set relativenumber
-
-" filetype plugin indent on
-" syntax enable
-
-" open vimrc for quick edit
-nnoremap <c-e><c-v> :vs $MYVIMRC<cr>

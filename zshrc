@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/yufanlu/.oh-my-zsh
 export MONO_GAC_PREFIX="/usr/local"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home"
+export PYENV_ROOT="$HOME/.pyenv"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,6 +57,7 @@ plugins=(git brew tmux python iterm2)
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:$HOME/.cargo/bin"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="$QHOME:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -65,7 +68,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # tmux
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # itermplot
 #export MPLBACKEND="module://itermplot"
@@ -76,6 +79,9 @@ export TERM=xterm-256color
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# kdb
+export QHOME="~/q"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -83,7 +89,7 @@ export TERM=xterm-256color
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
-#alias vim="nvim"
+
 alias doc="cd ~/Documents"
 alias dot="cd ~/dotfiles"
 alias wp="~/dotfiles/workspace"
@@ -94,9 +100,11 @@ alias hs="hexo clean; hexo g; hexo s"
 alias buc="brew update; brew upgrade; brew cleanup"
 
 # files and folders
-alias q='QHOME=~/q rlwrap -r ~/q/m32/q -P 12'
+alias q='QHOME=~/q rlwrap -r ~/q/m32/q'
 alias vzj='vim -u ~/dotfiles/vimrc_vzj'
 alias nvzj='nvim -u ~/dotfiles/nvimrc_vzj'
+
+
 # OPAM configuration
 . /Users/yufanlu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
@@ -105,4 +113,8 @@ alias nvzj='nvim -u ~/dotfiles/nvimrc_vzj'
 
 # pyenv
 eval "$(pyenv init -)"
-set PYENV_ROOT="$HOME/.pyenv"
+
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
