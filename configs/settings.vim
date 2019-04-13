@@ -16,8 +16,8 @@ set nolazyredraw
 set laststatus=2
 set shortmess+=c
 
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 
 set fileformat=unix
 set fileformats=unix,dos
@@ -29,6 +29,7 @@ set noswapfile
 set nowritebackup
 
 set splitright
+set clipboard+=unnamedplus
 
 " tab and indent configuration
 set tabstop=8

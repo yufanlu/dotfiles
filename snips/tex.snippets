@@ -48,18 +48,12 @@ snippet art "\documentclass[10pt]{article}" b
 \title{${2:title}}
 \author{${3:Yufan Lu}}
 \setlength\parindent{0pt}
-% {{{ theorem
-\newtheorem{theorem}{Theorem}[section]
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{claim}[theorem]{Claim}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{property}[theorem]{Property}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-% }}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Yufan Lu (Pittsburgh)}
+\lhead{Stochastic Calculus for Finance II}
+\rfoot{Page \thepage}
 % }}}
 \begin{document}
 \maketitle
@@ -67,6 +61,32 @@ $4
 \end{document}
 endsnippet
 # }}}
+
+snippet extart "extarticle" b
+% {{{ Header
+\documentclass[10pt,letterpaper,twocolumn]{extarticle}
+\usepackage{amsthm}
+\usepackage{esvect}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[inline,shortlabels]{enumitem}
+\usepackage{graphicx}
+\usepackage[margin=1in,landscape]{geometry}
+\title{${1:title}}
+\author{${2:Yufan Lu}}
+\setlength\parindent{0pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Yufan Lu (Pittsburgh)}
+\lhead{Stochastic Calculus for Finance II}
+\rfoot{Page \thepage}
+% }}}
+\begin{document}
+\maketitle
+$3
+\end{document}
+endsnippet
 
 # pairs {{{
 

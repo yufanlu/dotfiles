@@ -12,3 +12,6 @@ if has('win32')
     let g:neoterm_shell = '"c:\Program Files\Git\Bin\sh.exe" -f'
 endif
 
+nnoremap <leader>t :Ttoggle<cr>
+nnoremap <leader>s :TREPLSendLine<cr>
+xnoremap <leader>s :TREPLSendSelection<cr>

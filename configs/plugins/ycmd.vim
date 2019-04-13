@@ -25,7 +25,7 @@ endif
 " set semantic triggers
 let g:ycm_semantic_triggers.vim = ['.', 're!\w{2}']
 let g:ycm_semantic_triggers.python = ['.', 're!\w{3}']
-" let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 " YCM goto command
 let g:ycm_goto_buffer_command = 'split'
