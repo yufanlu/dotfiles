@@ -79,6 +79,8 @@ Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 Plug 'RobRoseKnows/lark-vim'
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'posva/vim-vue', {'for': 'vue'}
 
 call plug#end()
 
