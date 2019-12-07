@@ -16,8 +16,8 @@ set nolazyredraw
 set laststatus=2
 set shortmess+=c
 
-set number
-set relativenumber
+" set number
+" set relativenumber
 
 set fileformat=unix
 set fileformats=unix,dos
