@@ -16,8 +16,8 @@ set nolazyredraw
 set laststatus=2
 set shortmess+=c
 
-" set number
-" set relativenumber
+set number
+set relativenumber
 
 set fileformat=unix
 set fileformats=unix,dos
@@ -37,9 +37,14 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+augroup MyShiftWidth
+    autocmd filetype javascript,typescript setlocal shiftwidth=2
+augroup END
+
 
 if has('termguicolors')
   set termguicolors
 endif
+
 
 let g:mapleader = ','
