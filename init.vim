@@ -49,9 +49,13 @@ Plug 'kassio/neoterm'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+" python
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}
 Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
+
+" javascript
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 
 
 call plug#end()
