@@ -4,12 +4,7 @@ endif
 
 let b:lsp_config_loaded = 1
 
-lua << EOF
-
-require'nvim_lsp'.pyls_ms.setup{}
-require'nvim_lsp'.bashls.setup{}
-
-EOF
+" lua << EOF require'nvim_lsp'.pyls_ms.setup{} require'nvim_lsp'.bashls.setup{} EOF
 
 augroup LSPConfig
   autocmd Filetype python,sh setlocal omnifunc=v:lua.vim.lsp.omnifunc
