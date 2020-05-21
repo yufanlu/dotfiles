@@ -12,6 +12,7 @@ set nowrap
 set mouse=a
 set ignorecase
 set noshowmode
+set cursorline
 set nolazyredraw
 set laststatus=2
 set shortmess+=c
@@ -32,13 +33,13 @@ set splitright
 set clipboard+=unnamedplus
 
 " tab and indent configuration
+set expandtab
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 
 augroup MyShiftWidth
-    autocmd filetype javascript,typescript setlocal shiftwidth=2
+  autocmd filetype javascript,typescript,vim,lua setlocal shiftwidth=2
 augroup END
 
 
