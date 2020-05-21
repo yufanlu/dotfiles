@@ -1,17 +1,11 @@
-+TITLE: Emacs Configuration
+#+TITLE: Emacs Configuration
 
-* General Configuration
+* General
   
 #+begin_src emacs-lisp
 ;; fancy lambdas
 (global-prettify-symbols-mode t)
-
-
-(use-package base16-theme
-  :config
-  (load-theme 'base16-gruvbox-dark-medium t))
 #+end_src
-
 
 
 * Configure =use-package=
@@ -24,6 +18,14 @@
   :config (auto-compile-on-load-mode))
 
 (setq load-prefer-newer t)
+#+end_src
+
+* Configure =UI=
+
+#+begin_src emacs-lisp
+(use-package base16-theme
+  :config
+  (load-theme 'base16-gruvbox-dark-medium t))
 #+end_src
 
 

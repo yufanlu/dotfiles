@@ -1,11 +1,6 @@
 ;; fancy lambdas
 (global-prettify-symbols-mode t)
 
-
-(use-package base16-theme
-  :config
-  (load-theme 'base16-gruvbox-dark-medium t))
-
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
@@ -13,6 +8,10 @@
   :config (auto-compile-on-load-mode))
 
 (setq load-prefer-newer t)
+
+(use-package base16-theme
+  :config
+  (load-theme 'base16-gruvbox-dark-medium t))
 
 (use-package company)
 (add-hook 'after-init-hook 'global-company-mode)
