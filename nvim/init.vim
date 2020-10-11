@@ -36,7 +36,7 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/vim-slash'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -48,7 +48,8 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'takac/vim-commandcaps'
 " Plug 'ludovicchabant/vim-gutentags'
 
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
 " Plug 'airblade/vim-gitgutter'
 " Plug 'justinmk/vim-dirvish'
 
@@ -58,9 +59,9 @@ Plug 'tpope/vim-fugitive'
 " Plug 'honza/vim-snippets'
 
 " " python
-Plug 'kalekundert/vim-coiled-snake', {'for': 'python'}
-Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
-Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
+" Plug 'kalekundert/vim-coiled-snake', {'for': 'python'}
+" Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
+" Plug 'numirias/semshi', {'for': 'python', 'do': ':UpdateRemotePlugins'}
 
 " " javascript
 " Plug 'pangloss/vim-javascript', {'for': 'javascript'}
