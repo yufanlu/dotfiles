@@ -48,4 +48,4 @@ if has('termguicolors')
 endif
 
 
-let g:mapleader = ','
+let g:mapleader = ' '

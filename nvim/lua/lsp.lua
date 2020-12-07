@@ -1,15 +1,27 @@
+local lspconfig = require'lspconfig'
+local completion = require'completion'
 
-local api = vim.api
-local nvim_lsp = require'nvim_lsp'
-
-nvim_lsp.pyls_ms.setup{
-  -- on_attach = on_attach,
-  settings = {
-    python = {
-      jediEnabled = False,
-    }
-  }
+lspconfig.pyls_ms.setup{
+  on_attach = completion.on_attach
 }
 
-nvim_lsp.vimls.setup{}
-nvim_lsp.bashls.setup{}
+lspconfig.vimls.setup{
+  on_attach=completion.on_attach
+}
+
+lspconfig.bashls.setup{
+  on_attach=completion.on_attach
+}
+
+-- lspconfig.sumneko_lua.setup{
+require'nlua.lsp.nvim'.setup(
+  require('lspconfig'), {
+    on_attach=completion.on_attach,
+    -- Include globals you want to tell the LSP are real :)
+    globals = {
+      -- Colorbuddy
+      "vim", "c", "Group", "g", "s",
+    }
+  }
+)
+

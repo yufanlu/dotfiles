@@ -17,7 +17,9 @@ let g:python3_host_prog = 'python3'
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'neovim/nvim-lsp'
+Plug 'tjdevries/nlua.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 " Plug 'mhinz/vim-startify'
 Plug 'chriskempson/base16-vim'
@@ -27,6 +29,7 @@ Plug 'chriskempson/base16-vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'Konfekt/FastFold'
+Plug 'justinmk/vim-dirvish'
 " Plug 'tpope/vim-repeat'
 " Plug 'qpkorr/vim-bufkill'
 " Plug 'tpope/vim-surround'
@@ -38,8 +41,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
 " Plug 'terryma/vim-multiple-cursors'
 
-Plug 'junegunn/fzf', { 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': './install --bin' }
+" Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -49,7 +52,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'ludovicchabant/vim-gutentags'
 
 " Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 " Plug 'airblade/vim-gitgutter'
 " Plug 'justinmk/vim-dirvish'
 
