@@ -5,6 +5,7 @@ vim.cmd [[packadd packer.nvim]]
 local packer = require('packer')
 
 packer.startup(function()
+  use {'wbthomason/packer.nvim', opt = true}
 
   -- UI
   use { 'chriskempson/base16-vim' }
